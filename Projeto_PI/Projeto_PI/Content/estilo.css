@@ -1,4 +1,75 @@
-﻿section#ongs img, section#projetos img {
+﻿/*Estilos Gerais*/
+/*limita o tilulo do painel a seu conteiner*/
+.panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/*Estilo pagina Default*/
+section#ongs img, section#projetos img {
+    width: 100%;
+    height: 250px;
+}
+/*Estilo Buscas*/
+section#resultados-ong img, section#resultados-projetos img {
+    width: 100%;
+    height: 250px;
+}
+
+section#resultados-ong .panel-body, section#resultados-projetos .panel-body {
+    height: 132px;
+}
+
+/*Estilo Cadastro*/
+#form-ong .control-label, #form-doador .control-label {
+    text-align: left;
+}
+
+#form-doador {
+    display: none;
+}
+/*Estilo NovoProjeto*/
+#form-novo-projeto .control-label {
+    text-align: left;
+}
+/*jumbotron pagina-doador/ong*/
+#destaque-usuario img {
+    height: 300px;
+    width: 100%;
+}
+/*Estilo pagina doador*/
+#historico img {
+    width: 100%;
+    height: 200px;
+}
+
+#historico .panel-body {
+    height: 79px;
+}
+/*estilo pagina-ong*/
+#projetos img {
+    width: 100%;
+    height: 250px;
+}
+
+#projetos .panel-body {
+    height: 132px;
+}
+
+#voluntarios img {
+    width: 100px;
+    height: 100px;
+}
+
+#pessoal img {
+    width: 200px;
+    height: 200px;
+}
+/*estilo pagina-projeto*/
+#destaque-projeto img {
     width: 100%;
     height: 250px;
 }

@@ -10,6 +10,7 @@
     <script src="Scripts/jquery-3.2.1.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <link href="Content/estilo.css" rel="stylesheet" />
+    <script src="Scripts/ScriptPagina.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
@@ -23,6 +24,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="">Ongs</a></li>
                         <li><a href="">Projetos</a></li>
+                        <asp:ContentPlaceHolder ID="BotaoCriarProjeto" runat="server"></asp:ContentPlaceHolder>
                     </ul>
                     <form action="" class="navbar-form navbar-left">
                         <div class="input-group">
@@ -34,39 +36,41 @@
                             </div>
                         </div>
                     </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" data-toggle="modal" data-target="#modalLogin">Entrar</a></li>
-                        <li><a href="">Cadastrar</a></li>
-                    </ul>
-                    <div id="modalLogin" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <header class="modal-header">
-                                    <button class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title text-center">Login</h4>
-                                </header>
-                                <div class="modal-body">
-                                    <form action="" class="form-horizontal">
-                                        <div class="form-group">
-                                            <label for="login" class="control-label col-md-2">Login</label>
-                                            <div class="col-md-10">
-                                                <input type="text" class="form-control" id="login" name="login">
+                    <asp:ContentPlaceHolder ID="MenuDireitaLogado" runat="server">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" data-toggle="modal" data-target="#modalLogin">Entrar</a></li>
+                            <li><a href="">Cadastrar</a></li>
+                        </ul>
+                        <div id="modalLogin" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <header class="modal-header">
+                                        <button class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title text-center">Login</h4>
+                                    </header>
+                                    <div class="modal-body">
+                                        <form action="" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="login" class="control-label col-md-2">Login</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control" id="login" name="login">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="login" class="control-label col-md-2">Senha</label>
-                                            <div class="col-md-10">
-                                                <input type="password" class="form-control" id="senha" name="senha">
+                                            <div class="form-group">
+                                                <label for="login" class="control-label col-md-2">Senha</label>
+                                                <div class="col-md-10">
+                                                    <input type="password" class="form-control" id="senha" name="senha">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-block">Entrar</button>
-                                        </div>
-                                    </form>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-block">Entrar</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </asp:ContentPlaceHolder>
                 </div>
             </nav>
         </header>
