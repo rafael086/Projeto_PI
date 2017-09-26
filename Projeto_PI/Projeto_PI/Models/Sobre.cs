@@ -20,7 +20,7 @@ namespace Projeto_PI.Models
         public int idUsuario { get; set; }
         public Nullable<int> idImagem { get; set; }
     
-        public virtual Imagens Imagens { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
+        public virtual Imagen Imagen { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

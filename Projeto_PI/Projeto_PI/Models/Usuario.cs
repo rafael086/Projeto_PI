@@ -12,14 +12,14 @@ namespace Projeto_PI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuarios
+    public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuarios()
+        public Usuario()
         {
-            this.Projetos = new HashSet<Projetos>();
-            this.Sobre = new HashSet<Sobre>();
-            this.Projetos1 = new HashSet<Projetos>();
+            this.Projetos = new HashSet<Projeto>();
+            this.Sobres = new HashSet<Sobre>();
+            this.Projetos1 = new HashSet<Projeto>();
         }
     
         public int id { get; set; }
@@ -30,15 +30,15 @@ namespace Projeto_PI.Models
         public Nullable<int> idImagem { get; set; }
         public string frase { get; set; }
     
-        public virtual Doadores Doadores { get; set; }
-        public virtual Enderecos Enderecos { get; set; }
-        public virtual Imagens Imagens { get; set; }
-        public virtual Ongs Ongs { get; set; }
+        public virtual Doadore Doadore { get; set; }
+        public virtual Endereco Endereco { get; set; }
+        public virtual Imagen Imagen { get; set; }
+        public virtual Ong Ong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projetos> Projetos { get; set; }
+        public virtual ICollection<Projeto> Projetos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sobre> Sobre { get; set; }
+        public virtual ICollection<Sobre> Sobres { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projetos> Projetos1 { get; set; }
+        public virtual ICollection<Projeto> Projetos1 { get; set; }
     }
 }

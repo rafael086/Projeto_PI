@@ -12,23 +12,24 @@ namespace Projeto_PI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Enderecos
+    public partial class Imagen
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Enderecos()
+        public Imagen()
         {
-            this.Usuarios = new HashSet<Usuarios>();
+            this.Projetos = new HashSet<Projeto>();
+            this.Sobres = new HashSet<Sobre>();
+            this.Usuarios = new HashSet<Usuario>();
         }
     
         public int id { get; set; }
-        public string cep { get; set; }
-        public string numero { get; set; }
-        public string bairro { get; set; }
-        public string rua { get; set; }
-        public string cidade { get; set; }
-        public string estado { get; set; }
+        public string nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuarios> Usuarios { get; set; }
+        public virtual ICollection<Projeto> Projetos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sobre> Sobres { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }
