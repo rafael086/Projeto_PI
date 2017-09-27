@@ -13,236 +13,234 @@
                         <input type="radio" onchange="trocaForm(this)" name="tipo" id="doador" value="doador">Doador</label>
                 </div>
             </div>
-            <form action="" name="form-ong" id="form-ong" class="form-horizontal col-md-4 col-md-offset-4">
+            <div id="formOng" class="form-horizontal col-md-4 col-md-offset-4">
                 <div class="form-group">
-                    <label for="nome" class="control-label col-md-4">Nome*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNomeOng">Nome:</asp:Label>
                     <div class="col-md-8">
-                        <input type="text" required="" class="form-control" name="nome" id="nome">
+                        <asp:TextBox ID="txtNomeOng" CssClass="form-control" runat="server" required="required"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="razao-social" class="control-label col-md-4">Razão social*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtRazaoSocial">Razão social</asp:Label>
                     <div class="col-md-8">
-                        <input type="text" required="" class="form-control" name="razao-social" id="razao-social">
+                        <asp:TextBox ID="txtRazaoSocial" CssClass="form-control" runat="server" required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cnpj" class="control-label col-md-4">CNPJ*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCNPJ">CNPJ</asp:Label>
                     <div class="col-md-8">
-                        <input type="text" required="" class="form-control" name="cnpj" id="cnpj">
+                        <asp:TextBox ID="txtCNPJ" CssClass="form-control" runat="server" required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="telefone" class="control-label col-md-4">Telefone</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtTelefone">Telefone</asp:Label>
                     <div class="col-md-8">
-                        <input type="tel" class="form-control" name="telefone" id="telefone">
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label for="cep" class="control-label col-md-4">CEP*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="cep" id="cep">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="estado" class="control-label col-md-4">Estado*</label>
-                    <div class="col-md-8">
-                        <select name="estado" id="estado" class="form-control">
-                            <option value="">Selecione</option>
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espirito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="cidade" class="control-label col-md-4">Cidade*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="cidade" id="cidade">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="endereco" class="control-label col-md-4">Endereço*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="endereco" id="endereco">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="numero" class="control-label col-md-4">Numero*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="numero" id="numero">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="bairro" class="control-label col-md-4">Bairro*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="bairro" id="bairro">
+                        <asp:TextBox runat="server" ID="txtTelefone" CssClass="form-control" TextMode="Phone" required="required"/>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="email" class="control-label col-md-4">Email*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCEPOng">CEP</asp:Label>
                     <div class="col-md-8">
-                        <input type="email" class="form-control" name="email" id="email">
+                        <asp:TextBox runat="server" ID="txtCEPOng" CssClass="form-control" required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="senha" class="control-label col-md-4">Senha*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="ddlEstadoOng">Estado</asp:Label>
                     <div class="col-md-8">
-                        <input type="password" class="form-control" name="senha" id="senha">
+                        <asp:DropDownList runat="server" ID="ddlEstadoOng" CssClass="form-control">
+                            <asp:ListItem Value="AC" Text="Acre" />
+                            <asp:ListItem Value="AL" Text="Alagoas" />
+                            <asp:ListItem Value="AM" Text="Amazonas" />
+                            <asp:ListItem Value="AP" Text="Acre" />
+                            <asp:ListItem Value="BA" Text="Bahia" />
+                            <asp:ListItem Value="CE" Text="Ceará" />
+                            <asp:ListItem Value="DF" Text="Distrito Federal" />
+                            <asp:ListItem Value="ES" Text="Espírito Santo" />
+                            <asp:ListItem Value="GO" Text="Goiás" />
+                            <asp:ListItem Value="MA" Text="Maranhão" />
+                            <asp:ListItem Value="MG" Text="Minas Gerais" />
+                            <asp:ListItem Value="MS" Text="Mato Grosso do Sul" />
+                            <asp:ListItem Value="MT" Text="Mato Grosso" />
+                            <asp:ListItem Value="PA" Text="Pará" />
+                            <asp:ListItem Value="PB" Text="Paraíba" />
+                            <asp:ListItem Value="PE" Text="Pernambuco" />
+                            <asp:ListItem Value="PI" Text="Piauí" />
+                            <asp:ListItem Value="PR" Text="Paraná" />
+                            <asp:ListItem Value="RJ" Text="Rio de Janeiro" />
+                            <asp:ListItem Value="RN" Text="Rio Grande do Norte" />
+                            <asp:ListItem Value="RO" Text="Rondônia" />
+                            <asp:ListItem Value="RR" Text="Rorraima" />
+                            <asp:ListItem Value="RS" Text="Rio Grande do Sul" />
+                            <asp:ListItem Value="SC" Text="Santa Catarina" />
+                            <asp:ListItem Value="SE" Text="Sergipe" />
+                            <asp:ListItem Value="SP" Text="São Paulo" />
+                            <asp:ListItem Value="TO" Text="Tocantins" />
+                        </asp:DropDownList>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="repetir-senha" class="control-label col-md-4">Repetir senha*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCidadeOng">Cidade</asp:Label>
                     <div class="col-md-8">
-                        <input type="password" class="form-control" name="repetir-senha" id="repetir-senha">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCidadeOng" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEnderecoOng">Endereço</asp:Label>
+                    <div class="col-md-8">    
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoOng" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNumeroOng">Numero</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNumeroOng" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtBairroOng">Bairro</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroOng" required="required"></asp:TextBox>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="representante" class="control-label col-md-4">Representante*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEmailOng">Email</asp:Label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="representante" id="representante">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEmailOng" TextMode="Email" required="required"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cargo" class="control-label col-md-4">Cargo*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtSenhaOng">Senha</asp:Label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="cargo" id="cargo">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtSenhaOng" TextMode="Password" required="required"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Cadastrar" class="btn btn-block">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaOng">Repetir Senha</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaOng" TextMode="Password" required="required"></asp:TextBox>
+                    </div>
                 </div>
-            </form>
+                <hr>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtRepresentante">Representante</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtRepresentante" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCargo">Cargo</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCargo" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Button runat="server" Text="Cadastrar" CssClass="btn btn-block" ID="btnCadastroOng"/>
+                </div>
+            </div>
             <!--Form de usuarios doadores-->
-            <form action="" name="form-doador" id="form-doador" class="form-horizontal col-md-4 col-md-offset-4">
+            <div id="formDoador" class="form-horizontal col-md-4 col-md-offset-4">
                 <div class="form-group">
-                    <label for="nome" class="control-label col-md-4">Nome*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNomeDoador">Nome:</asp:Label>
                     <div class="col-md-8">
-                        <input type="text" required="" class="form-control" name="nome" id="nome">
+                        <asp:TextBox ID="txtNomeDoador" CssClass="form-control" runat="server" required="required"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cpf" class="control-label col-md-4">CPF*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCPFDoador">CPF</asp:Label>
                     <div class="col-md-8">
-                        <input type="text" required="" class="form-control" name="cnpj" id="cnpj">
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <label for="cep" class="control-label col-md-4">CEP*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="cep" id="cep">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="estado" class="control-label col-md-4">Estado*</label>
-                    <div class="col-md-8">
-                        <select name="estado" id="estado" class="form-control">
-                            <option value="">Selecione</option>
-                            <option value="AC">Acre</option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espirito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PR">Paraná</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PI">Piauí</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="TO">Tocantins</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="cidade" class="control-label col-md-4">Cidade*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="cidade" id="cidade">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="endereco" class="control-label col-md-4">Endereço*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="endereco" id="endereco">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="numero" class="control-label col-md-4">Numero*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="numero" id="numero">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="bairro" class="control-label col-md-4">Bairro*</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" name="bairro" id="bairro">
+                        <asp:TextBox ID="txtCPFDoador" CssClass="form-control" runat="server" required="required"></asp:TextBox>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="email" class="control-label col-md-4">Email*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCEPDoador">CEP</asp:Label>
                     <div class="col-md-8">
-                        <input type="email" class="form-control" name="email" id="email">
+                        <asp:TextBox runat="server" ID="txtCEPDoador" CssClass="form-control" required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="senha" class="control-label col-md-4">Senha*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="ddlEstadoDoador">Estado</asp:Label>
                     <div class="col-md-8">
-                        <input type="password" class="form-control" name="senha" id="senha">
+                        <asp:DropDownList runat="server" ID="ddlEstadoDoador" CssClass="form-control">
+                            <asp:ListItem Value="AC" Text="Acre" />
+                            <asp:ListItem Value="AL" Text="Alagoas" />
+                            <asp:ListItem Value="AM" Text="Amazonas" />
+                            <asp:ListItem Value="AP" Text="Acre" />
+                            <asp:ListItem Value="BA" Text="Bahia" />
+                            <asp:ListItem Value="CE" Text="Ceará" />
+                            <asp:ListItem Value="DF" Text="Distrito Federal" />
+                            <asp:ListItem Value="ES" Text="Espírito Santo" />
+                            <asp:ListItem Value="GO" Text="Goiás" />
+                            <asp:ListItem Value="MA" Text="Maranhão" />
+                            <asp:ListItem Value="MG" Text="Minas Gerais" />
+                            <asp:ListItem Value="MS" Text="Mato Grosso do Sul" />
+                            <asp:ListItem Value="MT" Text="Mato Grosso" />
+                            <asp:ListItem Value="PA" Text="Pará" />
+                            <asp:ListItem Value="PB" Text="Paraíba" />
+                            <asp:ListItem Value="PE" Text="Pernambuco" />
+                            <asp:ListItem Value="PI" Text="Piauí" />
+                            <asp:ListItem Value="PR" Text="Paraná" />
+                            <asp:ListItem Value="RJ" Text="Rio de Janeiro" />
+                            <asp:ListItem Value="RN" Text="Rio Grande do Norte" />
+                            <asp:ListItem Value="RO" Text="Rondônia" />
+                            <asp:ListItem Value="RR" Text="Rorraima" />
+                            <asp:ListItem Value="RS" Text="Rio Grande do Sul" />
+                            <asp:ListItem Value="SC" Text="Santa Catarina" />
+                            <asp:ListItem Value="SE" Text="Sergipe" />
+                            <asp:ListItem Value="SP" Text="São Paulo" />
+                            <asp:ListItem Value="TO" Text="Tocantins" />
+                        </asp:DropDownList>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="repetir-senha" class="control-label col-md-4">Repetir senha*</label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCidadeDoador">Cidade</asp:Label>
                     <div class="col-md-8">
-                        <input type="password" class="form-control" name="repetir-senha" id="repetir-senha">
+                        <asp:TextBox runat="server" ID="txtCidadeDoador" CssClass="form-control" required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Cadastrar" class="btn btn-block">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEnderecoDoador">Endereço</asp:Label>
+                    <div class="col-md-8">    
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoDoador" required="required"></asp:TextBox>
+                    </div>
                 </div>
-            </form>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNumeroDoador">Numero</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNumeroDoador" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtBairroDoador">Bairro</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroDoador" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEmailDoador">Email</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEmailDoador" TextMode="Email" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtSenhaDoador">Senha</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtSenhaDoador" TextMode="Password" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaDoador">Repetir Senha</asp:Label>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaDoador" TextMode="Password" required="required"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <asp:Button runat="server" Text="Cadastrar" CssClass="btn btn-block" ID="btnCadastraDoador"/>
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

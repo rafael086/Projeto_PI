@@ -12,24 +12,19 @@ namespace Projeto_PI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Projeto
+    public partial class Doadores
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Projeto()
+        public Doadores()
         {
-            this.Usuarios = new HashSet<Usuario>();
+            this.Voluntarios = new HashSet<Voluntarios>();
         }
     
         public int id { get; set; }
-        public string nome { get; set; }
-        public string descricao { get; set; }
-        public int banner { get; set; }
-        public string meta { get; set; }
-        public int idUsuario { get; set; }
+        public string cpf { get; set; }
     
-        public virtual Imagen Imagen { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Voluntarios> Voluntarios { get; set; }
     }
 }

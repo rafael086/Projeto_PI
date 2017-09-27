@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ModeloProjeto_PI.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ModeloProjeto_PI.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Apoios">
           <Key>
             <PropertyRef Name="idProjeto" />
@@ -305,21 +305,20 @@
             <End Role="Sobre" EntitySet="Sobre" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ModeloProjeto_PI" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Doadore">
+        <EntityType Name="Doadores">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="cpf" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.Id_Doadores_IdUsuarios" FromRole="Doadores" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.Id_Doadores_IdUsuarios" FromRole="Doadores" ToRole="Usuarios" />
           <NavigationProperty Name="Voluntarios" Relationship="Self.idDoador_Voluntarios_id_Doador" FromRole="Doadores" ToRole="Voluntarios" />
         </EntityType>
-        <EntityType Name="Endereco">
+        <EntityType Name="Enderecos">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -332,17 +331,17 @@
           <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="Self.idEndereco_Usuarios_id_Enderecos" FromRole="Enderecos" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="Imagen">
+        <EntityType Name="Imagens">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Projetos" Relationship="Self.banner_Projetos_id_Imagens" FromRole="Imagens" ToRole="Projetos" />
-          <NavigationProperty Name="Sobres" Relationship="Self.idImagem_Sobre_id_Imagens" FromRole="Imagens" ToRole="Sobre" />
+          <NavigationProperty Name="Sobre" Relationship="Self.idImagem_Sobre_id_Imagens" FromRole="Imagens" ToRole="Sobre" />
           <NavigationProperty Name="Usuarios" Relationship="Self.idImagem_Usuarios_id_Imagens" FromRole="Imagens" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="Ong">
+        <EntityType Name="Ongs">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -352,10 +351,10 @@
           <Property Name="telefone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="representante" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="cargo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.Id_Ongs_Id_Usuarios" FromRole="Ongs" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.Id_Ongs_Id_Usuarios" FromRole="Ongs" ToRole="Usuarios" />
           <NavigationProperty Name="Voluntarios" Relationship="Self.idOng_Voluntarios_id_Ong" FromRole="Ongs" ToRole="Voluntarios" />
         </EntityType>
-        <EntityType Name="Projeto">
+        <EntityType Name="Projetos">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -365,9 +364,9 @@
           <Property Name="banner" Type="Int32" Nullable="false" />
           <Property Name="meta" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Imagen" Relationship="Self.banner_Projetos_id_Imagens" FromRole="Projetos" ToRole="Imagens" />
-          <NavigationProperty Name="Usuario" Relationship="Self.idUsuario_Projetos_id_Usuarios" FromRole="Projetos" ToRole="Usuarios" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.Apoios" FromRole="Projetos" ToRole="Usuarios" />
+          <NavigationProperty Name="Imagens" Relationship="Self.banner_Projetos_id_Imagens" FromRole="Projetos" ToRole="Imagens" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.idUsuario_Projetos_id_Usuarios" FromRole="Projetos" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios1" Relationship="Self.Apoios" FromRole="Projetos" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Sobre">
           <Key>
@@ -378,10 +377,10 @@
           <Property Name="texto" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="idImagem" Type="Int32" />
-          <NavigationProperty Name="Imagen" Relationship="Self.idImagem_Sobre_id_Imagens" FromRole="Sobre" ToRole="Imagens" />
-          <NavigationProperty Name="Usuario" Relationship="Self.idUsuario_Sobre_id_Usuario" FromRole="Sobre" ToRole="Usuarios" />
+          <NavigationProperty Name="Imagens" Relationship="Self.idImagem_Sobre_id_Imagens" FromRole="Sobre" ToRole="Imagens" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.idUsuario_Sobre_id_Usuario" FromRole="Sobre" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="Usuario">
+        <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -392,15 +391,15 @@
           <Property Name="idEndereco" Type="Int32" Nullable="false" />
           <Property Name="idImagem" Type="Int32" />
           <Property Name="frase" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Doadore" Relationship="Self.Id_Doadores_IdUsuarios" FromRole="Usuarios" ToRole="Doadores" />
-          <NavigationProperty Name="Endereco" Relationship="Self.idEndereco_Usuarios_id_Enderecos" FromRole="Usuarios" ToRole="Enderecos" />
-          <NavigationProperty Name="Imagen" Relationship="Self.idImagem_Usuarios_id_Imagens" FromRole="Usuarios" ToRole="Imagens" />
-          <NavigationProperty Name="Ong" Relationship="Self.Id_Ongs_Id_Usuarios" FromRole="Usuarios" ToRole="Ongs" />
+          <NavigationProperty Name="Doadores" Relationship="Self.Id_Doadores_IdUsuarios" FromRole="Usuarios" ToRole="Doadores" />
+          <NavigationProperty Name="Enderecos" Relationship="Self.idEndereco_Usuarios_id_Enderecos" FromRole="Usuarios" ToRole="Enderecos" />
+          <NavigationProperty Name="Imagens" Relationship="Self.idImagem_Usuarios_id_Imagens" FromRole="Usuarios" ToRole="Imagens" />
+          <NavigationProperty Name="Ongs" Relationship="Self.Id_Ongs_Id_Usuarios" FromRole="Usuarios" ToRole="Ongs" />
           <NavigationProperty Name="Projetos" Relationship="Self.idUsuario_Projetos_id_Usuarios" FromRole="Usuarios" ToRole="Projetos" />
-          <NavigationProperty Name="Sobres" Relationship="Self.idUsuario_Sobre_id_Usuario" FromRole="Usuarios" ToRole="Sobre" />
+          <NavigationProperty Name="Sobre" Relationship="Self.idUsuario_Sobre_id_Usuario" FromRole="Usuarios" ToRole="Sobre" />
           <NavigationProperty Name="Projetos1" Relationship="Self.Apoios" FromRole="Usuarios" ToRole="Projetos" />
         </EntityType>
-        <EntityType Name="Voluntario">
+        <EntityType Name="Voluntarios">
           <Key>
             <PropertyRef Name="idOng" />
             <PropertyRef Name="idDoador" />
@@ -408,12 +407,12 @@
           <Property Name="idOng" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idDoador" Type="Int32" Nullable="false" />
           <Property Name="Situacao" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Doadore" Relationship="Self.idDoador_Voluntarios_id_Doador" FromRole="Voluntarios" ToRole="Doadores" />
-          <NavigationProperty Name="Ong" Relationship="Self.idOng_Voluntarios_id_Ong" FromRole="Voluntarios" ToRole="Ongs" />
+          <NavigationProperty Name="Doadores" Relationship="Self.idDoador_Voluntarios_id_Doador" FromRole="Voluntarios" ToRole="Doadores" />
+          <NavigationProperty Name="Ongs" Relationship="Self.idOng_Voluntarios_id_Ong" FromRole="Voluntarios" ToRole="Ongs" />
         </EntityType>
         <Association Name="Id_Doadores_IdUsuarios">
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Doadores" Type="Self.Doadore" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Doadores" Type="Self.Doadores" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
               <PropertyRef Name="id" />
@@ -424,8 +423,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="idDoador_Voluntarios_id_Doador">
-          <End Role="Doadores" Type="Self.Doadore" Multiplicity="1" />
-          <End Role="Voluntarios" Type="Self.Voluntario" Multiplicity="*" />
+          <End Role="Doadores" Type="Self.Doadores" Multiplicity="1" />
+          <End Role="Voluntarios" Type="Self.Voluntarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Doadores">
               <PropertyRef Name="id" />
@@ -436,8 +435,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="idEndereco_Usuarios_id_Enderecos">
-          <End Role="Enderecos" Type="Self.Endereco" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="Enderecos" Type="Self.Enderecos" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Enderecos">
               <PropertyRef Name="id" />
@@ -448,8 +447,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="banner_Projetos_id_Imagens">
-          <End Role="Imagens" Type="Self.Imagen" Multiplicity="1" />
-          <End Role="Projetos" Type="Self.Projeto" Multiplicity="*" />
+          <End Role="Imagens" Type="Self.Imagens" Multiplicity="1" />
+          <End Role="Projetos" Type="Self.Projetos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Imagens">
               <PropertyRef Name="id" />
@@ -460,7 +459,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="idImagem_Sobre_id_Imagens">
-          <End Role="Imagens" Type="Self.Imagen" Multiplicity="0..1" />
+          <End Role="Imagens" Type="Self.Imagens" Multiplicity="0..1" />
           <End Role="Sobre" Type="Self.Sobre" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Imagens">
@@ -472,8 +471,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="idImagem_Usuarios_id_Imagens">
-          <End Role="Imagens" Type="Self.Imagen" Multiplicity="0..1" />
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="Imagens" Type="Self.Imagens" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Imagens">
               <PropertyRef Name="id" />
@@ -484,8 +483,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Id_Ongs_Id_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Ongs" Type="Self.Ong" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Ongs" Type="Self.Ongs" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
               <PropertyRef Name="id" />
@@ -496,8 +495,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="idOng_Voluntarios_id_Ong">
-          <End Role="Ongs" Type="Self.Ong" Multiplicity="1" />
-          <End Role="Voluntarios" Type="Self.Voluntario" Multiplicity="*" />
+          <End Role="Ongs" Type="Self.Ongs" Multiplicity="1" />
+          <End Role="Voluntarios" Type="Self.Voluntarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ongs">
               <PropertyRef Name="id" />
@@ -508,8 +507,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="idUsuario_Projetos_id_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Projetos" Type="Self.Projeto" Multiplicity="*" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Projetos" Type="Self.Projetos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
               <PropertyRef Name="id" />
@@ -520,7 +519,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="idUsuario_Sobre_id_Usuario">
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="Sobre" Type="Self.Sobre" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -532,18 +531,18 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Apoios">
-          <End Role="Projetos" Type="Self.Projeto" Multiplicity="*" />
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="Projetos" Type="Self.Projetos" Multiplicity="*" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
         </Association>
         <EntityContainer Name="EntidadesProjeto_PI" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Doadores" EntityType="Self.Doadore" />
-          <EntitySet Name="Enderecos" EntityType="Self.Endereco" />
-          <EntitySet Name="Imagens" EntityType="Self.Imagen" />
-          <EntitySet Name="Ongs" EntityType="Self.Ong" />
-          <EntitySet Name="Projetos" EntityType="Self.Projeto" />
-          <EntitySet Name="Sobres" EntityType="Self.Sobre" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
-          <EntitySet Name="Voluntarios" EntityType="Self.Voluntario" />
+          <EntitySet Name="Doadores" EntityType="Self.Doadores" />
+          <EntitySet Name="Enderecos" EntityType="Self.Enderecos" />
+          <EntitySet Name="Imagens" EntityType="Self.Imagens" />
+          <EntitySet Name="Ongs" EntityType="Self.Ongs" />
+          <EntitySet Name="Projetos" EntityType="Self.Projetos" />
+          <EntitySet Name="Sobre" EntityType="Self.Sobre" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Voluntarios" EntityType="Self.Voluntarios" />
           <AssociationSet Name="Id_Doadores_IdUsuarios" Association="Self.Id_Doadores_IdUsuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Doadores" EntitySet="Doadores" />
@@ -562,7 +561,7 @@
           </AssociationSet>
           <AssociationSet Name="idImagem_Sobre_id_Imagens" Association="Self.idImagem_Sobre_id_Imagens">
             <End Role="Imagens" EntitySet="Imagens" />
-            <End Role="Sobre" EntitySet="Sobres" />
+            <End Role="Sobre" EntitySet="Sobre" />
           </AssociationSet>
           <AssociationSet Name="idImagem_Usuarios_id_Imagens" Association="Self.idImagem_Usuarios_id_Imagens">
             <End Role="Imagens" EntitySet="Imagens" />
@@ -582,12 +581,22 @@
           </AssociationSet>
           <AssociationSet Name="idUsuario_Sobre_id_Usuario" Association="Self.idUsuario_Sobre_id_Usuario">
             <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Sobre" EntitySet="Sobres" />
+            <End Role="Sobre" EntitySet="Sobre" />
           </AssociationSet>
           <AssociationSet Name="Apoios" Association="Self.Apoios">
             <End Role="Projetos" EntitySet="Projetos" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
+          <FunctionImport Name="setOngs">
+            <Parameter Name="nome" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="senha" Mode="In" Type="String" />
+            <Parameter Name="razaoSocial" Mode="In" Type="String" />
+            <Parameter Name="cnpj" Mode="In" Type="String" />
+            <Parameter Name="telefone" Mode="In" Type="String" />
+            <Parameter Name="representante" Mode="In" Type="String" />
+            <Parameter Name="cargo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -596,7 +605,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModeloProjeto_PIStoreContainer" CdmEntityContainer="EntidadesProjeto_PI">
           <EntitySetMapping Name="Doadores">
-            <EntityTypeMapping TypeName="ModeloProjeto_PI.Doadore">
+            <EntityTypeMapping TypeName="ModeloProjeto_PI.Doadores">
               <MappingFragment StoreEntitySet="Doadores">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cpf" ColumnName="cpf" />
@@ -604,7 +613,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Enderecos">
-            <EntityTypeMapping TypeName="ModeloProjeto_PI.Endereco">
+            <EntityTypeMapping TypeName="ModeloProjeto_PI.Enderecos">
               <MappingFragment StoreEntitySet="Enderecos">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cep" ColumnName="cep" />
@@ -617,7 +626,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Imagens">
-            <EntityTypeMapping TypeName="ModeloProjeto_PI.Imagen">
+            <EntityTypeMapping TypeName="ModeloProjeto_PI.Imagens">
               <MappingFragment StoreEntitySet="Imagens">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
@@ -625,7 +634,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ongs">
-            <EntityTypeMapping TypeName="ModeloProjeto_PI.Ong">
+            <EntityTypeMapping TypeName="ModeloProjeto_PI.Ongs">
               <MappingFragment StoreEntitySet="Ongs">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
@@ -637,7 +646,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projetos">
-            <EntityTypeMapping TypeName="ModeloProjeto_PI.Projeto">
+            <EntityTypeMapping TypeName="ModeloProjeto_PI.Projetos">
               <MappingFragment StoreEntitySet="Projetos">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
@@ -648,7 +657,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sobres">
+          <EntitySetMapping Name="Sobre">
             <EntityTypeMapping TypeName="ModeloProjeto_PI.Sobre">
               <MappingFragment StoreEntitySet="Sobre">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -660,7 +669,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="ModeloProjeto_PI.Usuario">
+            <EntityTypeMapping TypeName="ModeloProjeto_PI.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
@@ -673,7 +682,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Voluntarios">
-            <EntityTypeMapping TypeName="ModeloProjeto_PI.Voluntario">
+            <EntityTypeMapping TypeName="ModeloProjeto_PI.Voluntarios">
               <MappingFragment StoreEntitySet="Voluntarios">
                 <ScalarProperty Name="idOng" ColumnName="idOng" />
                 <ScalarProperty Name="idDoador" ColumnName="idDoador" />
@@ -689,6 +698,7 @@
               <ScalarProperty Name="id" ColumnName="idUsuario" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="setOngs" FunctionName="ModeloProjeto_PI.Store.setOngs" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -703,7 +713,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

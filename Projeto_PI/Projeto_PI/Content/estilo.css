@@ -24,11 +24,11 @@ section#resultados-ong .panel-body, section#resultados-projetos .panel-body {
 }
 
 /*Estilo Cadastro*/
-#form-ong .control-label, #form-doador .control-label {
+#formOng .control-label, #formDoador .control-label {
     text-align: left;
 }
 
-#form-doador {
+#formDoador {
     display: none;
 }
 /*Estilo NovoProjeto*/

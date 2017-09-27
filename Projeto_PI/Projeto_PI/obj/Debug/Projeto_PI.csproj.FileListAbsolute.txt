@@ -6,3 +6,10 @@ C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\Microsoft.C
 C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\obj\Debug\Projeto_PI.csprojResolveAssemblyReference.cache
 C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\obj\Debug\Projeto_PI.dll
 C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\obj\Debug\Projeto_PI.pdb
+C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\EntityFramework.dll
+C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\EntityFramework.SqlServer.dll
+C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\MySql.Data.dll
+C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\mysql.data.entity.EF6.dll
+C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\MySql.Web.dll
+C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\EntityFramework.xml
+C:\Users\admin\Documents\GitHub\Projeto_PI\Projeto_PI\Projeto_PI\bin\EntityFramework.SqlServer.xml

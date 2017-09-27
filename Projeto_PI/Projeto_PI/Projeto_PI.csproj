@@ -68,6 +68,8 @@
       <HintPath>..\packages\MySql.Web.6.9.9\lib\net45\MySql.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -86,10 +88,28 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Models\ModeloProjeto_PI.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloProjeto_PI.edmx</DependentUpon>
+      <LastGenOutput>ModeloProjeto_PI.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModeloProjeto_PI.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloProjeto_PI.edmx</DependentUpon>
+      <LastGenOutput>ModeloProjeto_PI.cs</LastGenOutput>
+    </Content>
     <Content Include="packages.config" />
+    <Content Include="Scripts\ScriptPagina.js" />
     <Content Include="Site.Master" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <EntityDeploy Include="Models\ModeloProjeto_PI.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloProjeto_PI.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModeloProjeto_PI.edmx.diagram">
+      <DependentUpon>ModeloProjeto_PI.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -128,7 +148,6 @@
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
-    <Content Include="Scripts\ScriptPagina.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +181,45 @@
     </Compile>
     <Compile Include="MenuLogado.master.designer.cs">
       <DependentUpon>MenuLogado.master</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Doadores.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enderecos.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Imagens.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloProjeto_PI.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloProjeto_PI.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloProjeto_PI.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloProjeto_PI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloProjeto_PI.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ongs.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Projetos.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sobre.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuarios.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Voluntarios.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
     </Compile>
     <Compile Include="NovoProjeto.aspx.cs">
       <DependentUpon>NovoProjeto.aspx</DependentUpon>
@@ -203,7 +261,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Imagens\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

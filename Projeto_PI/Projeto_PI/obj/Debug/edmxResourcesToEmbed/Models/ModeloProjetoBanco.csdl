@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModeloProjeto_PI" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Doadore">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="cpf" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.Id_Doadores_IdUsuarios" FromRole="Doadores" ToRole="Usuarios" />
+    <NavigationProperty Name="Voluntarios" Relationship="Self.idDoador_Voluntarios_id_Doador" FromRole="Doadores" ToRole="Voluntarios" />
+  </EntityType>
+  <EntityType Name="Endereco">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cep" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bairro" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rua" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cidade" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.idEndereco_Usuarios_id_Enderecos" FromRole="Enderecos" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Imagen">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Projetos" Relationship="Self.banner_Projetos_id_Imagens" FromRole="Imagens" ToRole="Projetos" />
+    <NavigationProperty Name="Sobres" Relationship="Self.idImagem_Sobre_id_Imagens" FromRole="Imagens" ToRole="Sobre" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.idImagem_Usuarios_id_Imagens" FromRole="Imagens" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Ong">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="razaoSocial" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cnpj" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="representante" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="cargo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.Id_Ongs_Id_Usuarios" FromRole="Ongs" ToRole="Usuarios" />
+    <NavigationProperty Name="Voluntarios" Relationship="Self.idOng_Voluntarios_id_Ong" FromRole="Ongs" ToRole="Voluntarios" />
+  </EntityType>
+  <EntityType Name="Projeto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descricao" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="banner" Type="Int32" Nullable="false" />
+    <Property Name="meta" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Imagen" Relationship="Self.banner_Projetos_id_Imagens" FromRole="Projetos" ToRole="Imagens" />
+    <NavigationProperty Name="Usuario" Relationship="Self.idUsuario_Projetos_id_Usuarios" FromRole="Projetos" ToRole="Usuarios" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.Apoios" FromRole="Projetos" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Sobre">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="texto" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idImagem" Type="Int32" />
+    <NavigationProperty Name="Imagen" Relationship="Self.idImagem_Sobre_id_Imagens" FromRole="Sobre" ToRole="Imagens" />
+    <NavigationProperty Name="Usuario" Relationship="Self.idUsuario_Sobre_id_Usuario" FromRole="Sobre" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="senha" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idEndereco" Type="Int32" Nullable="false" />
+    <Property Name="idImagem" Type="Int32" />
+    <Property Name="frase" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Doadore" Relationship="Self.Id_Doadores_IdUsuarios" FromRole="Usuarios" ToRole="Doadores" />
+    <NavigationProperty Name="Endereco" Relationship="Self.idEndereco_Usuarios_id_Enderecos" FromRole="Usuarios" ToRole="Enderecos" />
+    <NavigationProperty Name="Imagen" Relationship="Self.idImagem_Usuarios_id_Imagens" FromRole="Usuarios" ToRole="Imagens" />
+    <NavigationProperty Name="Ong" Relationship="Self.Id_Ongs_Id_Usuarios" FromRole="Usuarios" ToRole="Ongs" />
+    <NavigationProperty Name="Projetos" Relationship="Self.idUsuario_Projetos_id_Usuarios" FromRole="Usuarios" ToRole="Projetos" />
+    <NavigationProperty Name="Sobres" Relationship="Self.idUsuario_Sobre_id_Usuario" FromRole="Usuarios" ToRole="Sobre" />
+    <NavigationProperty Name="Projetos1" Relationship="Self.Apoios" FromRole="Usuarios" ToRole="Projetos" />
+  </EntityType>
+  <EntityType Name="Voluntario">
+    <Key>
+      <PropertyRef Name="idOng" />
+      <PropertyRef Name="idDoador" />
+    </Key>
+    <Property Name="idOng" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idDoador" Type="Int32" Nullable="false" />
+    <Property Name="Situacao" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Doadore" Relationship="Self.idDoador_Voluntarios_id_Doador" FromRole="Voluntarios" ToRole="Doadores" />
+    <NavigationProperty Name="Ong" Relationship="Self.idOng_Voluntarios_id_Ong" FromRole="Voluntarios" ToRole="Ongs" />
+  </EntityType>
+  <Association Name="Id_Doadores_IdUsuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Doadores" Type="Self.Doadore" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Doadores">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idDoador_Voluntarios_id_Doador">
+    <End Role="Doadores" Type="Self.Doadore" Multiplicity="1" />
+    <End Role="Voluntarios" Type="Self.Voluntario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doadores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Voluntarios">
+        <PropertyRef Name="idDoador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idEndereco_Usuarios_id_Enderecos">
+    <End Role="Enderecos" Type="Self.Endereco" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enderecos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="idEndereco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="banner_Projetos_id_Imagens">
+    <End Role="Imagens" Type="Self.Imagen" Multiplicity="1" />
+    <End Role="Projetos" Type="Self.Projeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imagens">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Projetos">
+        <PropertyRef Name="banner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idImagem_Sobre_id_Imagens">
+    <End Role="Imagens" Type="Self.Imagen" Multiplicity="0..1" />
+    <End Role="Sobre" Type="Self.Sobre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imagens">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sobre">
+        <PropertyRef Name="idImagem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idImagem_Usuarios_id_Imagens">
+    <End Role="Imagens" Type="Self.Imagen" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imagens">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="idImagem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Id_Ongs_Id_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Ongs" Type="Self.Ong" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Ongs">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idOng_Voluntarios_id_Ong">
+    <End Role="Ongs" Type="Self.Ong" Multiplicity="1" />
+    <End Role="Voluntarios" Type="Self.Voluntario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ongs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Voluntarios">
+        <PropertyRef Name="idOng" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idUsuario_Projetos_id_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Projetos" Type="Self.Projeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Projetos">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idUsuario_Sobre_id_Usuario">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Sobre" Type="Self.Sobre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sobre">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Apoios">
+    <End Role="Projetos" Type="Self.Projeto" Multiplicity="*" />
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="EntidadeProjeto_PI" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Doadores" EntityType="Self.Doadore" />
+    <EntitySet Name="Enderecos" EntityType="Self.Endereco" />
+    <EntitySet Name="Imagens" EntityType="Self.Imagen" />
+    <EntitySet Name="Ongs" EntityType="Self.Ong" />
+    <EntitySet Name="Projetos" EntityType="Self.Projeto" />
+    <EntitySet Name="Sobres" EntityType="Self.Sobre" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <EntitySet Name="Voluntarios" EntityType="Self.Voluntario" />
+    <AssociationSet Name="Id_Doadores_IdUsuarios" Association="Self.Id_Doadores_IdUsuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Doadores" EntitySet="Doadores" />
+    </AssociationSet>
+    <AssociationSet Name="idDoador_Voluntarios_id_Doador" Association="Self.idDoador_Voluntarios_id_Doador">
+      <End Role="Doadores" EntitySet="Doadores" />
+      <End Role="Voluntarios" EntitySet="Voluntarios" />
+    </AssociationSet>
+    <AssociationSet Name="idEndereco_Usuarios_id_Enderecos" Association="Self.idEndereco_Usuarios_id_Enderecos">
+      <End Role="Enderecos" EntitySet="Enderecos" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="banner_Projetos_id_Imagens" Association="Self.banner_Projetos_id_Imagens">
+      <End Role="Imagens" EntitySet="Imagens" />
+      <End Role="Projetos" EntitySet="Projetos" />
+    </AssociationSet>
+    <AssociationSet Name="idImagem_Sobre_id_Imagens" Association="Self.idImagem_Sobre_id_Imagens">
+      <End Role="Imagens" EntitySet="Imagens" />
+      <End Role="Sobre" EntitySet="Sobres" />
+    </AssociationSet>
+    <AssociationSet Name="idImagem_Usuarios_id_Imagens" Association="Self.idImagem_Usuarios_id_Imagens">
+      <End Role="Imagens" EntitySet="Imagens" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="Id_Ongs_Id_Usuarios" Association="Self.Id_Ongs_Id_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Ongs" EntitySet="Ongs" />
+    </AssociationSet>
+    <AssociationSet Name="idOng_Voluntarios_id_Ong" Association="Self.idOng_Voluntarios_id_Ong">
+      <End Role="Ongs" EntitySet="Ongs" />
+      <End Role="Voluntarios" EntitySet="Voluntarios" />
+    </AssociationSet>
+    <AssociationSet Name="idUsuario_Projetos_id_Usuarios" Association="Self.idUsuario_Projetos_id_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Projetos" EntitySet="Projetos" />
+    </AssociationSet>
+    <AssociationSet Name="idUsuario_Sobre_id_Usuario" Association="Self.idUsuario_Sobre_id_Usuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Sobre" EntitySet="Sobres" />
+    </AssociationSet>
+    <AssociationSet Name="Apoios" Association="Self.Apoios">
+      <End Role="Projetos" EntitySet="Projetos" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -12,12 +12,12 @@ namespace Projeto_PI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ong
+    public partial class Ongs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ong()
+        public Ongs()
         {
-            this.Voluntarios = new HashSet<Voluntario>();
+            this.Voluntarios = new HashSet<Voluntarios>();
         }
     
         public int id { get; set; }
@@ -27,8 +27,8 @@ namespace Projeto_PI.Models
         public string representante { get; set; }
         public string cargo { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Voluntario> Voluntarios { get; set; }
+        public virtual ICollection<Voluntarios> Voluntarios { get; set; }
     }
 }
