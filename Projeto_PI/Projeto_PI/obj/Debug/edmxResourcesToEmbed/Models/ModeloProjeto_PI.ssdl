@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ModeloProjeto_PI.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Projeto_PIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Apoios">
     <Key>
       <PropertyRef Name="idProjeto" />
@@ -51,7 +51,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nome" Type="varchar" MaxLength="45" Nullable="false" />
-    <Property Name="descricao" Type="longtext" Nullable="false" />
+    <Property Name="descricao" Type="varchar(max)" Nullable="false" />
     <Property Name="banner" Type="int" Nullable="false" />
     <Property Name="meta" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
@@ -62,7 +62,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="titulo" Type="varchar" MaxLength="45" Nullable="false" />
-    <Property Name="texto" Type="longtext" Nullable="false" />
+    <Property Name="texto" Type="varchar(max)" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
     <Property Name="idImagem" Type="int" />
   </EntityType>
@@ -231,7 +231,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="setOngs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="projeto_pi">
+  <Function Name="setDoadores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nome" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="senha" Type="varchar" Mode="In" />
+    <Parameter Name="cpf" Type="varchar" Mode="In" />
+    <Parameter Name="cep" Type="varchar" Mode="In" />
+    <Parameter Name="numero" Type="varchar" Mode="In" />
+    <Parameter Name="bairro" Type="varchar" Mode="In" />
+    <Parameter Name="rua" Type="varchar" Mode="In" />
+    <Parameter Name="cidade" Type="varchar" Mode="In" />
+    <Parameter Name="estado" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="setOngs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="nome" Type="varchar" Mode="In" />
     <Parameter Name="email" Type="varchar" Mode="In" />
     <Parameter Name="senha" Type="varchar" Mode="In" />
@@ -240,17 +252,23 @@
     <Parameter Name="telefone" Type="varchar" Mode="In" />
     <Parameter Name="representante" Type="varchar" Mode="In" />
     <Parameter Name="cargo" Type="varchar" Mode="In" />
+    <Parameter Name="cep" Type="varchar" Mode="In" />
+    <Parameter Name="numero" Type="varchar" Mode="In" />
+    <Parameter Name="bairro" Type="varchar" Mode="In" />
+    <Parameter Name="rua" Type="varchar" Mode="In" />
+    <Parameter Name="cidade" Type="varchar" Mode="In" />
+    <Parameter Name="estado" Type="varchar" Mode="In" />
   </Function>
-  <EntityContainer Name="ModeloProjeto_PIStoreContainer">
-    <EntitySet Name="Apoios" EntityType="Self.Apoios" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Doadores" EntityType="Self.Doadores" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Enderecos" EntityType="Self.Enderecos" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Imagens" EntityType="Self.Imagens" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Ongs" EntityType="Self.Ongs" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Projetos" EntityType="Self.Projetos" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Sobre" EntityType="Self.Sobre" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="projeto_pi" store:Type="Tables" />
-    <EntitySet Name="Voluntarios" EntityType="Self.Voluntarios" Schema="projeto_pi" store:Type="Tables" />
+  <EntityContainer Name="Projeto_PIModelStoreContainer">
+    <EntitySet Name="Apoios" EntityType="Self.Apoios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Doadores" EntityType="Self.Doadores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enderecos" EntityType="Self.Enderecos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Imagens" EntityType="Self.Imagens" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ongs" EntityType="Self.Ongs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projetos" EntityType="Self.Projetos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sobre" EntityType="Self.Sobre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Voluntarios" EntityType="Self.Voluntarios" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="banner_Projetos_id_Imagens" Association="Self.banner_Projetos_id_Imagens">
       <End Role="Imagens" EntitySet="Imagens" />
       <End Role="Projetos" EntitySet="Projetos" />

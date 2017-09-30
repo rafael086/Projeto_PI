@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ModeloProjeto_PI" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="Projeto_PIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Doadores">
     <Key>
       <PropertyRef Name="id" />
@@ -51,7 +51,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="descricao" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="banner" Type="Int32" Nullable="false" />
     <Property Name="meta" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="idUsuario" Type="Int32" Nullable="false" />
@@ -65,7 +65,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="titulo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="texto" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="texto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="idUsuario" Type="Int32" Nullable="false" />
     <Property Name="idImagem" Type="Int32" />
     <NavigationProperty Name="Imagens" Relationship="Self.idImagem_Sobre_id_Imagens" FromRole="Sobre" ToRole="Imagens" />
@@ -225,7 +225,7 @@
     <End Role="Projetos" Type="Self.Projetos" Multiplicity="*" />
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="EntidadesProjeto_PI" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="EntidadesProjetoPI" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Doadores" EntityType="Self.Doadores" />
     <EntitySet Name="Enderecos" EntityType="Self.Enderecos" />
     <EntitySet Name="Imagens" EntityType="Self.Imagens" />
@@ -287,6 +287,24 @@
       <Parameter Name="telefone" Mode="In" Type="String" />
       <Parameter Name="representante" Mode="In" Type="String" />
       <Parameter Name="cargo" Mode="In" Type="String" />
+      <Parameter Name="cep" Mode="In" Type="String" />
+      <Parameter Name="numero" Mode="In" Type="String" />
+      <Parameter Name="bairro" Mode="In" Type="String" />
+      <Parameter Name="rua" Mode="In" Type="String" />
+      <Parameter Name="cidade" Mode="In" Type="String" />
+      <Parameter Name="estado" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="setDoadores">
+      <Parameter Name="nome" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="senha" Mode="In" Type="String" />
+      <Parameter Name="cpf" Mode="In" Type="String" />
+      <Parameter Name="cep" Mode="In" Type="String" />
+      <Parameter Name="numero" Mode="In" Type="String" />
+      <Parameter Name="bairro" Mode="In" Type="String" />
+      <Parameter Name="rua" Mode="In" Type="String" />
+      <Parameter Name="cidade" Mode="In" Type="String" />
+      <Parameter Name="estado" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

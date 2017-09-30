@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModeloProjeto_PIStoreContainer" CdmEntityContainer="EntidadesProjeto_PI">
+  <EntityContainerMapping StorageEntityContainer="Projeto_PIModelStoreContainer" CdmEntityContainer="EntidadesProjetoPI">
     <EntitySetMapping Name="Doadores">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Doadores">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Doadores">
         <MappingFragment StoreEntitySet="Doadores">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="cpf" ColumnName="cpf" />
@@ -10,7 +10,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Enderecos">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Enderecos">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Enderecos">
         <MappingFragment StoreEntitySet="Enderecos">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="cep" ColumnName="cep" />
@@ -23,7 +23,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Imagens">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Imagens">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Imagens">
         <MappingFragment StoreEntitySet="Imagens">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nome" ColumnName="nome" />
@@ -31,7 +31,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Ongs">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Ongs">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Ongs">
         <MappingFragment StoreEntitySet="Ongs">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
@@ -43,7 +43,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Projetos">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Projetos">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Projetos">
         <MappingFragment StoreEntitySet="Projetos">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nome" ColumnName="nome" />
@@ -55,7 +55,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Sobre">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Sobre">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Sobre">
         <MappingFragment StoreEntitySet="Sobre">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="titulo" ColumnName="titulo" />
@@ -66,7 +66,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Usuarios">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nome" ColumnName="nome" />
@@ -79,7 +79,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Voluntarios">
-      <EntityTypeMapping TypeName="ModeloProjeto_PI.Voluntarios">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Voluntarios">
         <MappingFragment StoreEntitySet="Voluntarios">
           <ScalarProperty Name="idOng" ColumnName="idOng" />
           <ScalarProperty Name="idDoador" ColumnName="idDoador" />
@@ -87,7 +87,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Apoios" TypeName="ModeloProjeto_PI.Apoios" StoreEntitySet="Apoios">
+    <AssociationSetMapping Name="Apoios" TypeName="Projeto_PIModel.Apoios" StoreEntitySet="Apoios">
       <EndProperty Name="Projetos">
         <ScalarProperty Name="id" ColumnName="idProjeto" />
       </EndProperty>
@@ -95,6 +95,7 @@
         <ScalarProperty Name="id" ColumnName="idUsuario" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="setOngs" FunctionName="ModeloProjeto_PI.Store.setOngs" />
+    <FunctionImportMapping FunctionImportName="setOngs" FunctionName="Projeto_PIModel.Store.setOngs" />
+    <FunctionImportMapping FunctionImportName="setDoadores" FunctionName="Projeto_PIModel.Store.setDoadores" />
   </EntityContainerMapping>
 </Mapping>

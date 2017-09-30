@@ -15,10 +15,10 @@ namespace Projeto_PI.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class EntidadesProjeto_PI : DbContext
+    public partial class EntidadesProjetoPI : DbContext
     {
-        public EntidadesProjeto_PI()
-            : base("name=EntidadesProjeto_PI")
+        public EntidadesProjetoPI()
+            : base("name=EntidadesProjetoPI")
         {
         }
     
@@ -36,7 +36,7 @@ namespace Projeto_PI.Models
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Voluntarios> Voluntarios { get; set; }
     
-        public virtual int setOngs(string nome, string email, string senha, string razaoSocial, string cnpj, string telefone, string representante, string cargo)
+        public virtual int setOngs(string nome, string email, string senha, string razaoSocial, string cnpj, string telefone, string representante, string cargo, string cep, string numero, string bairro, string rua, string cidade, string estado)
         {
             var nomeParameter = nome != null ?
                 new ObjectParameter("nome", nome) :
@@ -70,7 +70,76 @@ namespace Projeto_PI.Models
                 new ObjectParameter("cargo", cargo) :
                 new ObjectParameter("cargo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("setOngs", nomeParameter, emailParameter, senhaParameter, razaoSocialParameter, cnpjParameter, telefoneParameter, representanteParameter, cargoParameter);
+            var cepParameter = cep != null ?
+                new ObjectParameter("cep", cep) :
+                new ObjectParameter("cep", typeof(string));
+    
+            var numeroParameter = numero != null ?
+                new ObjectParameter("numero", numero) :
+                new ObjectParameter("numero", typeof(string));
+    
+            var bairroParameter = bairro != null ?
+                new ObjectParameter("bairro", bairro) :
+                new ObjectParameter("bairro", typeof(string));
+    
+            var ruaParameter = rua != null ?
+                new ObjectParameter("rua", rua) :
+                new ObjectParameter("rua", typeof(string));
+    
+            var cidadeParameter = cidade != null ?
+                new ObjectParameter("cidade", cidade) :
+                new ObjectParameter("cidade", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("setOngs", nomeParameter, emailParameter, senhaParameter, razaoSocialParameter, cnpjParameter, telefoneParameter, representanteParameter, cargoParameter, cepParameter, numeroParameter, bairroParameter, ruaParameter, cidadeParameter, estadoParameter);
+        }
+    
+        public virtual int setDoadores(string nome, string email, string senha, string cpf, string cep, string numero, string bairro, string rua, string cidade, string estado)
+        {
+            var nomeParameter = nome != null ?
+                new ObjectParameter("nome", nome) :
+                new ObjectParameter("nome", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var senhaParameter = senha != null ?
+                new ObjectParameter("senha", senha) :
+                new ObjectParameter("senha", typeof(string));
+    
+            var cpfParameter = cpf != null ?
+                new ObjectParameter("cpf", cpf) :
+                new ObjectParameter("cpf", typeof(string));
+    
+            var cepParameter = cep != null ?
+                new ObjectParameter("cep", cep) :
+                new ObjectParameter("cep", typeof(string));
+    
+            var numeroParameter = numero != null ?
+                new ObjectParameter("numero", numero) :
+                new ObjectParameter("numero", typeof(string));
+    
+            var bairroParameter = bairro != null ?
+                new ObjectParameter("bairro", bairro) :
+                new ObjectParameter("bairro", typeof(string));
+    
+            var ruaParameter = rua != null ?
+                new ObjectParameter("rua", rua) :
+                new ObjectParameter("rua", typeof(string));
+    
+            var cidadeParameter = cidade != null ?
+                new ObjectParameter("cidade", cidade) :
+                new ObjectParameter("cidade", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("setDoadores", nomeParameter, emailParameter, senhaParameter, cpfParameter, cepParameter, numeroParameter, bairroParameter, ruaParameter, cidadeParameter, estadoParameter);
         }
     }
 }

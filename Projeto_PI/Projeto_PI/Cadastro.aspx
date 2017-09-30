@@ -17,38 +17,38 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNomeOng">Nome:</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtNomeOng" CssClass="form-control" runat="server" required="required"></asp:TextBox>
+                        <asp:TextBox ID="txtNomeOng" CssClass="form-control" runat="server" required="required" pattern="[a-zA-Z]+" title="Digite apenas letras" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtRazaoSocial">Razão social</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtRazaoSocial" CssClass="form-control" runat="server" required="required"/>
+                        <asp:TextBox ID="txtRazaoSocial" CssClass="form-control" runat="server" required="required" pattern="[a-zA-Z]+" title="Digite apenas letras" ValidationGroup="FormgOng" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCNPJ">CNPJ</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtCNPJ" CssClass="form-control" runat="server" required="required"/>
+                        <asp:TextBox ID="txtCNPJ" CssClass="form-control" runat="server" required="required" pattern="\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}" title="Digite no formato nn.nnn.nnn/nnnn-nn" ValidationGroup="FormgOng" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtTelefone">Telefone</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" ID="txtTelefone" CssClass="form-control" TextMode="Phone" required="required"/>
+                        <asp:TextBox runat="server" ID="txtTelefone" CssClass="form-control" TextMode="Phone" required="required" pattern="\(\d{2}\)\d{4}-\d{4}" title="Digite no formato (nn)nnnn-nnnn" ValidationGroup="FormgOng" />
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCEPOng">CEP</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" ID="txtCEPOng" CssClass="form-control" required="required"/>
+                        <asp:TextBox runat="server" ID="txtCEPOng" CssClass="form-control" required="required" pattern="\d{5}-\d{3}" title="nnnnn-nnn" ValidationGroup="FormgOng" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="ddlEstadoOng">Estado</asp:Label>
                     <div class="col-md-8">
-                        <asp:DropDownList runat="server" ID="ddlEstadoOng" CssClass="form-control">
+                        <asp:DropDownList runat="server" ID="ddlEstadoOng" CssClass="form-control" ValidationGroup="FormgOng">
                             <asp:ListItem Value="AC" Text="Acre" />
                             <asp:ListItem Value="AL" Text="Alagoas" />
                             <asp:ListItem Value="AM" Text="Amazonas" />
@@ -82,61 +82,61 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCidadeOng">Cidade</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCidadeOng" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCidadeOng" required="required" pattern="[a-zA-Z]+" title="Digite apenas letras" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEnderecoOng">Endereço</asp:Label>
-                    <div class="col-md-8">    
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoOng" required="required"></asp:TextBox>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoOng" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNumeroOng">Numero</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNumeroOng" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNumeroOng" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtBairroOng">Bairro</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroOng" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroOng" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEmailOng">Email</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEmailOng" TextMode="Email" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEmailOng" TextMode="Email" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtSenhaOng">Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtSenhaOng" TextMode="Password" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaOng">Repetir Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaOng" TextMode="Password" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtRepresentante">Representante</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtRepresentante" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtRepresentante" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCargo">Cargo</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCargo" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCargo" required="required" ValidationGroup="FormgOng"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Button runat="server" Text="Cadastrar" CssClass="btn btn-block" ID="btnCadastroOng"/>
+                    <asp:Button runat="server" Text="Cadastrar" CssClass="btn btn-block" ID="btnCadastroOng" ValidationGroup="FormgOng" OnClick="btnCadastroOng_Click" />
                 </div>
             </div>
             <!--Form de usuarios doadores-->
@@ -144,26 +144,26 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNomeDoador">Nome:</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtNomeDoador" CssClass="form-control" runat="server" required="required"></asp:TextBox>
+                        <asp:TextBox ID="txtNomeDoador" CssClass="form-control" runat="server" required="required" ValidationGroup="FormgDoador"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCPFDoador">CPF</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtCPFDoador" CssClass="form-control" runat="server" required="required"></asp:TextBox>
+                        <asp:TextBox ID="txtCPFDoador" CssClass="form-control" runat="server" required="required" ValidationGroup="FormgDoador"></asp:TextBox>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCEPDoador">CEP</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" ID="txtCEPDoador" CssClass="form-control" required="required"/>
+                        <asp:TextBox runat="server" ID="txtCEPDoador" CssClass="form-control" required="required" ValidationGroup="FormgDoador" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="ddlEstadoDoador">Estado</asp:Label>
                     <div class="col-md-8">
-                        <asp:DropDownList runat="server" ID="ddlEstadoDoador" CssClass="form-control">
+                        <asp:DropDownList runat="server" ID="ddlEstadoDoador" CssClass="form-control" ValidationGroup="FormgDoador">
                             <asp:ListItem Value="AC" Text="Acre" />
                             <asp:ListItem Value="AL" Text="Alagoas" />
                             <asp:ListItem Value="AM" Text="Amazonas" />
@@ -197,36 +197,36 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCidadeDoador">Cidade</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" ID="txtCidadeDoador" CssClass="form-control" required="required"/>
+                        <asp:TextBox runat="server" ID="txtCidadeDoador" CssClass="form-control" required="required" ValidationGroup="FormgDoador" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEnderecoDoador">Endereço</asp:Label>
-                    <div class="col-md-8">    
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoDoador" required="required"></asp:TextBox>
+                    <div class="col-md-8">
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoDoador" required="required" ValidationGroup="FormgDoador"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNumeroDoador">Numero</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNumeroDoador" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNumeroDoador" required="required" ValidationGroup="FormgDoador"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtBairroDoador">Bairro</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroDoador" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroDoador" required="required" ValidationGroup="FormgDoador"></asp:TextBox>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEmailDoador">Email</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEmailDoador" TextMode="Email" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEmailDoador" TextMode="Email" required="required" ValidationGroup="FormgDoador"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtSenhaDoador">Senha</asp:Label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtSenhaDoador" ValidationGroup="FormgDoador">Senha</asp:Label>
                     <div class="col-md-8">
                         <asp:TextBox runat="server" CssClass="form-control" ID="txtSenhaDoador" TextMode="Password" required="required"></asp:TextBox>
                     </div>
@@ -234,13 +234,16 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaDoador">Repetir Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaDoador" TextMode="Password" required="required"></asp:TextBox>
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaDoador" TextMode="Password" required="required" ValidationGroup="FormgDoador"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Button runat="server" Text="Cadastrar" CssClass="btn btn-block" ID="btnCadastraDoador"/>
+                    <asp:Button runat="server" Text="Cadastrar" CssClass="btn btn-block" ID="btnCadastraDoador" ValidationGroup="FormgDoador" OnClick="btnCadastraDoador_Click" />
                 </div>
             </div>
         </div>
+        <script>
+            $("#formDoador :input").attr("disabled", "true");
+        </script>
     </div>
 </asp:Content>
