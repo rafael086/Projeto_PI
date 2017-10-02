@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Projeto_PI.Models;
+using Projeto_PI.Apoio;
 namespace Projeto_PI
 {
     public partial class Cadastro : System.Web.UI.Page
@@ -16,13 +17,13 @@ namespace Projeto_PI
         protected void btnCadastroOng_Click(object sender, EventArgs e)
         {
             EntidadesProjetoPI banco = new EntidadesProjetoPI();
-            banco.setOngs(txtNomeOng.Text, txtEmailOng.Text, txtSenhaOng.Text, txtRazaoSocial.Text, txtCNPJ.Text, txtTelefone.Text, txtRepresentante.Text, txtCargo.Text, txtCEPOng.Text, txtNumeroOng.Text, txtNumeroOng.Text, txtEnderecoOng.Text, txtCidadeOng.Text, ddlEstadoOng.SelectedValue);
+            banco.setOngs(txtNomeOng.Text.Trim(), txtEmailOng.Text.Trim(), txtSenhaOng.Text.Trim(), txtRazaoSocial.Text.Trim(), txtCNPJ.Text.TiraMascara(), txtTelefone.Text.TiraMascara(), txtRepresentante.Text.Trim(), txtCargo.Text.Trim(), txtCEPOng.Text.TiraMascara(), txtNumeroOng.Text.Trim(), txtNumeroOng.Text.Trim(), txtEnderecoOng.Text.Trim(), txtCidadeOng.Text.Trim(), ddlEstadoOng.SelectedValue.Trim());
         }
 
         protected void btnCadastraDoador_Click(object sender, EventArgs e)
         {
             EntidadesProjetoPI banco = new EntidadesProjetoPI();
-            banco.setDoadores(txtNomeDoador.Text, txtEmailDoador.Text, txtSenhaDoador.Text, txtCPFDoador.Text, txtCEPDoador.Text, txtNumeroDoador.Text, txtBairroDoador.Text, txtEnderecoDoador.Text, txtCidadeDoador.Text, ddlEstadoDoador.SelectedValue);
+            banco.setDoadores(txtNomeDoador.Text.Trim(), txtEmailDoador.Text.Trim(), txtSenhaDoador.Text.Trim(), txtCPFDoador.Text.TiraMascara(), txtCEPDoador.Text.TiraMascara(), txtNumeroDoador.Text.Trim(), txtBairroDoador.Text.Trim(), txtEnderecoDoador.Text.Trim(), txtCidadeDoador.Text.Trim(), ddlEstadoDoador.SelectedValue.Trim());
         }
     }
 }

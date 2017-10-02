@@ -11,7 +11,7 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <link href="Content/estilo.css" rel="stylesheet" />
     <script src="Scripts/ScriptPagina.js"></script>
-    <script src="Scripts/jquery.maskedinput.js"></script>
+    <script src="Scripts/jquery.mask.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="The description of my page" />
 </head>
