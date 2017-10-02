@@ -20,5 +20,10 @@ namespace Projeto_PI.Apoio
         {
             return Regex.Replace(input, "[^a-zA-z0-9]","");
         }
+
+        public static string tiraEspacoExcedente(this string input)
+        {
+            return Regex.Replace(input, "\\s{2,}", " ");
+        }
     }
 }
