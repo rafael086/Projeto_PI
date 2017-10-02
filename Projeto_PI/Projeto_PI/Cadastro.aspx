@@ -17,13 +17,13 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNomeOng">Nome:</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtNomeOng" CssClass="form-control" runat="server" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgOng" ClientIDMode="Static"></asp:TextBox>
+                        <asp:TextBox ID="txtNomeOng" onblur="tiraEspacoExcedente(this)" CssClass="form-control" runat="server" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgOng" ClientIDMode="Static"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtRazaoSocial">Razão social</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtRazaoSocial" CssClass="form-control" runat="server" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox ID="txtRazaoSocial" onblur="tiraEspacoExcedente(this)" CssClass="form-control" runat="server" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -82,25 +82,25 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCidadeOng">Cidade</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCidadeOng" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtCidadeOng" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEnderecoOng">Endereço</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoOng" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas letras e pontos" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtEnderecoOng" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas letras e pontos" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNumeroOng">Numero</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtNumeroOng" required="required" pattern="^[0-9]+$" title="Apenas numeros" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server"  CssClass="form-control" ID="txtNumeroOng" required="required" pattern="^[0-9]+$" title="Apenas numeros" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtBairroOng">Bairro</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroOng" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas Letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtBairroOng" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas Letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <hr>
@@ -111,28 +111,28 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtSenhaOng">Senha</asp:Label>
+                    <asp:Label runat="server"  CssClass="control-label col-md-4" AssociatedControlID="txtSenhaOng">Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaOng">Repetir Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtConfirmaSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtRepresentante">Representante</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtRepresentante" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas Letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtRepresentante" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas Letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCargo">Cargo</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtCargo" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas Letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtCargo" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Apenas Letras" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -144,7 +144,7 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNomeDoador">Nome:</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtNomeDoador" CssClass="form-control" runat="server" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static" />
+                        <asp:TextBox ID="txtNomeDoador" CssClass="form-control" runat="server" onblur="tiraEspacoExcedente(this)" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -197,13 +197,13 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCidadeDoador">Cidade</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" ID="txtCidadeDoador" CssClass="form-control" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" ID="txtCidadeDoador" onblur="tiraEspacoExcedente(this)" CssClass="form-control" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtEnderecoDoador">Endereço</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtEnderecoDoador" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtEnderecoDoador" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\. ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -215,7 +215,7 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtBairroDoador">Bairro</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtBairroDoador" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtBairroDoador" required="required" pattern="^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" title="Digite apenas letras" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <hr>
@@ -228,13 +228,13 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtSenhaDoador" ValidationGroup="FormgDoador">Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtSenhaDoador" TextMode="Password" required="required" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtSenhaDoador" TextMode="Password" required="required" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaDoador">Repetir Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaSenhaDoador" TextMode="Password" required="required" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtConfirmaSenhaDoador" TextMode="Password" required="required" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">

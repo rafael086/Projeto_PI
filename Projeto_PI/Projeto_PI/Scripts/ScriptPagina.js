@@ -27,6 +27,13 @@ jQuery(function ($) {
     $("#txtCEPOng, #txtCEPDoador").mask("99999-999");
     $("#txtCPFDoador").mask("999.999.999-99");
 });
+//remove os espacos excedentes dos inputs
+function tiraEspacoExcedente(input) {
+    input.value = input.value.trim();
+    input.value = input.value.replace(/\s{2,}/g, " ");
+}
+
+//os metodos abaixo chamam os metodos que verificam se o cpf/cnpj é valido e configura a msg que é exibida para o usuario no input 
 function msgValidacaoCNPJ(cnpj){
     if (!validarCNPJ(cnpj.value)) {
         cnpj.setCustomValidity("O CNPJ informado não é valido");
