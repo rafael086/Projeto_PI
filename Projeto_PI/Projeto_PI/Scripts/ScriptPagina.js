@@ -73,7 +73,7 @@ function validarCNPJ(cnpj) {
         return false;
 
     // Valida DVs
-    tamanho = cnpj.length - 2
+    tamanho = cnpj.length - 2;
     numeros = cnpj.substring(0, tamanho);
     digitos = cnpj.substring(tamanho);
     soma = 0;
