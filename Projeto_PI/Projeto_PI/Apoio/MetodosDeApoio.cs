@@ -26,11 +26,30 @@ namespace Projeto_PI.Apoio
         /// </summary>
         /// <param name="input">string a ser formatada</param>
         /// <returns>string com um espaco entre as palavras</returns>
-        public static string tiraEspacoExcedente(this string input)
+        public static string TiraEspacoExcedente(this string input)
         {
             return Regex.Replace(input, "\\s{2,}", " ");
         }
 
+        /// <summary>
+        /// remove o tudo que não for uma letra
+        /// </summary>
+        /// <param name="input">string a ser formatada</param>
+        /// <returns>apenas as letras da string</returns>
+        public static string RemoveNaoLetras(this string input)
+        {
+            return Regex.Replace(input, "[^a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]", "");
+        }
+        
+        /// <summary>
+        /// Verifica se a entrada é um email valido
+        /// </summary>
+        /// <param name="input">string a ser verificada</param>
+        /// <returns>true se for um email valido, false se não for</returns>
+        public static bool Email(this string input)
+        {
+            return Regex.IsMatch(input, "^[a-zA-Z][0-9a-zA-Z\\._-]+@([a-zA-Z0-9\\.]+\\.)[a-zA-A-09]+$");
+        }
         /// <summary>
         /// Valida um cnpj, referencia: http://www.geradorcnpj.com/javascript-validar-cnpj.htm
         /// </summary>

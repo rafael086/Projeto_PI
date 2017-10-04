@@ -12,7 +12,7 @@ namespace TestsProjeto_PI
         {
             string atual = "rafael             santos";
             string esperado = "rafael santos";
-            atual = atual.tiraEspacoExcedente();
+            atual = atual.TiraEspacoExcedente();
             Assert.AreEqual(esperado, atual,"Espaco não removido");
         }
         [TestMethod]
@@ -35,6 +35,21 @@ namespace TestsProjeto_PI
         {
             string cpf = "48437020808";
             Assert.IsTrue(cpf.ValidaCPF());
+        }
+
+        [TestMethod]
+        public void RemoveNaoLetrasTest()
+        {
+            string atual = "rafae8l sántos09_*¨*";
+            string esperado = "rafael sántos";
+            Assert.AreEqual(esperado, atual.RemoveNaoLetras(), "Não foram removidos os caracteres não letras"); 
+        }
+
+        [TestMethod]
+        public void EmailTest()
+        {
+            string email = "rafael@email.com";
+            Assert.IsTrue(email.Email());
         }
     }
 }

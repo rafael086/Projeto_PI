@@ -13,6 +13,7 @@
                         <input type="radio" onchange="trocaForm(this)" name="tipo" id="doador" value="doador">Doador</label>
                 </div>
             </div>
+            <asp:Label ID="lblErros" runat="server" Text="" Visible="False"></asp:Label>
             <div id="formOng" class="form-horizontal col-md-4 col-md-offset-4">
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtNomeOng">Nome:</asp:Label>

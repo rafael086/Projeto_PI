@@ -16,8 +16,15 @@ namespace Projeto_PI
 
         protected void btnCadastroOng_Click(object sender, EventArgs e)
         {
-            EntidadesProjetoPI banco = new EntidadesProjetoPI();
-            banco.setOngs(txtNomeOng.Text.Trim(), txtEmailOng.Text.Trim(), txtSenhaOng.Text.Trim(), txtRazaoSocial.Text.Trim(), txtCNPJ.Text.TiraMascara(), txtTelefone.Text.TiraMascara(), txtRepresentante.Text.Trim(), txtCargo.Text.Trim(), txtCEPOng.Text.TiraMascara(), txtNumeroOng.Text.Trim(), txtNumeroOng.Text.Trim(), txtEnderecoOng.Text.Trim(), txtCidadeOng.Text.Trim(), ddlEstadoOng.SelectedValue.Trim());
+            try
+            {
+                Verificadores.VerificaParametrosSetOngs(txtNomeOng.Text, txtEmailOng.Text, txtSenhaOng.Text, txtRazaoSocial.Text, txtCNPJ.Text, txtTelefone.Text, txtRepresentante.Text, txtCargo.Text, txtCEPOng.Text, txtNumeroOng.Text.Trim(), txtNumeroOng.Text, txtEnderecoOng.Text, txtCidadeOng.Text, ddlEstadoOng.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                lblErros.Text = ex.Message;
+                lblErros.Visible = true; 
+            }
         }
 
         protected void btnCadastraDoador_Click(object sender, EventArgs e)

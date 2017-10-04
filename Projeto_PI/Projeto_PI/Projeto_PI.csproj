@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Apoio\MetodosDeApoio.cs" />
+    <Compile Include="Apoio\Verificadores.cs" />
     <Compile Include="Busca.aspx.cs">
       <DependentUpon>Busca.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
