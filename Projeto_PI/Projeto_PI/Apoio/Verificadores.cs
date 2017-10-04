@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Projeto_PI.Models;
+using System.Text.RegularExpressions;
 namespace Projeto_PI.Apoio
 {
     /// <summary>
@@ -13,9 +14,18 @@ namespace Projeto_PI.Apoio
         /// <summary>
         /// Verifica se os parametros passados são consistentes de acordo com as regras do sistema e chama insere via stored procedure no banco de dados
         /// </summary>
+        /// <exception cref="System.Exception">Se algum parametro for invalido</exception>
         public static void VerificaParametrosSetOngs(string nome, string email, string senha, string razaoSocial, string cnpj, string telefone, string representante, string cargo, string cep, string numero, string bairro, string rua, string cidade, string estado)
         {
-            ValidaParametrosUsuario(nome, email, senha);
+            try
+            {
+                ValidaParametrosUsuario(nome = nome.TiraEspacoExcedente().RemoveNaoLetras(), email, senha = senha.TiraEspacoExcedente());
+                ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             if ((razaoSocial = razaoSocial.TiraEspacoExcedente().RemoveNaoLetras()).Length == 0)
             {
                 throw new Exception("Digite uma razao social valida");
@@ -26,13 +36,13 @@ namespace Projeto_PI.Apoio
             }
             if ((representante = representante.TiraEspacoExcedente().RemoveNaoLetras()).Length == 0)
             {
-                throw new Exception("informe um no de representante valido");
+                throw new Exception("informe um nome de representante valido");
             }
             if ((cargo = cargo.TiraEspacoExcedente().RemoveNaoLetras()).Length == 0)
             {
-                throw new Exception("informe um no de representante valido");
+                throw new Exception("informe um cargo valido");
             }
-            //CONTRUIR VALIDACAO PARA TELEFONE,CEP,NUMERO,BAIRRO,TELEFONE,CIDADE E ESTADO
+
             EntidadesProjetoPI bd = new EntidadesProjetoPI();
             var query = bd.Ongs.Count(ong => ong.razaoSocial == razaoSocial);
             if (query != 0)
@@ -44,17 +54,50 @@ namespace Projeto_PI.Apoio
             {
                 throw new Exception("CNPJ já cadastrado");
             }
-            //CONTRUIR VALIDACAO PARA TELEFONE,CEP,NUMERO,BAIRRO,TELEFONE,CIDADE E ESTADO
+            telefone = telefone.TiraMascara();
+            if (!telefone.Telefone())
+            {
+                throw new Exception("Informe um telefone valido");
+            }
             EntidadesProjetoPI banco = new EntidadesProjetoPI();
             banco.setOngs(nome, email, senha, razaoSocial, cnpj, telefone, representante, cargo, cep, numero, bairro, rua, cidade, estado);
 
         }
+
+        /// <summary>
+        /// Verifica se os parametros passados são consistentes de acordo com as regras do sistema e chama insere via stored procedure no banco de dados 
+        /// </summary>
+        /// 
+        public static void ValidaParametrosSetDoadores(string nome, string email, string senha, string cpf, string cep, string numero, string bairro, string rua, string cidade, string estado)
+        {
+            try
+            {
+                ValidaParametrosUsuario(nome = nome.TiraEspacoExcedente().RemoveNaoLetras(), email, senha = senha.TiraEspacoExcedente());
+                ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            if (!(cpf = cpf.TiraMascara()).ValidaCPF())
+            {
+                throw new Exception("Informe um cpf valido");
+            }
+            EntidadesProjetoPI banco = new EntidadesProjetoPI();
+            var tot = banco.Doadores.Count(d => d.cpf == cpf);
+            if (tot != 0)
+            {
+                throw new Exception("CPF ja cadastrado");
+            }
+            banco.setDoadores(nome, email, senha, cpf, cep, numero, bairro, rua, cidade, estado);
+        }
         /// <summary>
         /// valida os parametros passados que são da entidade Usuarios
         /// </summary>
+        /// <exception cref="System.Exception">Se algum parametro não for valido</exception>
         private static void ValidaParametrosUsuario(string nome, string email, string senha)
         {
-            if ((nome = nome.TiraEspacoExcedente().RemoveNaoLetras()).Length == 0)
+            if (nome.Length == 0)
             {
                 throw new Exception("Digite um nome valido");
             }
@@ -62,7 +105,7 @@ namespace Projeto_PI.Apoio
             {
                 throw new Exception("Digite um email valido");
             }
-            if (senha.TiraEspacoExcedente().Length == 0)
+            if (senha.Length == 0)
             {
                 throw new Exception("Digite uma senha valida");
             }
@@ -74,11 +117,41 @@ namespace Projeto_PI.Apoio
             }
         }
         /// <summary>
-        /// Fazer
+        /// Valida os parametros passados da entidade Enderecos
         /// </summary>
-        private static void ValidaParametrosEndereco()
+        /// <exception cref="System.Exception">Se algum parametro não for valido</exception>
+        private static void ValidaParametrosEndereco(string cep, string numero, string bairro, string rua, string cidade, string estado)
         {
-
+            if (!cep.CEP())
+            {
+                throw new Exception("Informe um cep valido");
+            }
+            if (!Regex.IsMatch(numero,"\\d+"))
+            {
+                throw new Exception("informe um numero valido");
+            }
+            if (bairro.Length == 0)
+            {
+                throw new Exception("Informe um bairro valido");
+            }
+            if (rua.Length == 0)
+            {
+                throw new Exception("informe uma rua valida");
+            }
+            if (cidade.Length == 0)
+            {
+                throw new Exception("informe uma cidade valida");
+            }
+            if (estado.Length == 0)
+            {
+                throw new Exception("informe um estado valido");
+            }
+            EntidadesProjetoPI banco = new EntidadesProjetoPI();
+            var tot = banco.Enderecos.Count(e => e.cep == cep && e.bairro == bairro && e.cidade == cidade && e.estado == estado && e.numero == numero && e.rua == rua);
+            if (tot != 0)
+            {
+                throw new Exception("Ja existe um cadastro neste endereco");
+            }        
         }
     }
 }

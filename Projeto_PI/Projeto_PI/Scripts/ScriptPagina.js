@@ -33,6 +33,30 @@ function tiraEspacoExcedente(input) {
     input.value = input.value.replace(/\s{2,}/g, " ");
 }
 
+function getEndereco(cep) {
+    $.ajax({
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        url: 'Cadastro.aspx/BuscaCep',
+        data: "{'cep':'" + cep + "'}",
+        assync: false,
+        success: function (resposta) {
+            setEndereco(resposta);
+        }, error: function () {
+            $("#txtCEPOng").val("erro");
+        }
+    });
+}
+function setEndereco(endereco) {
+    var rua = endereco.d[0];
+    var bairro = endereco.d[1]
+    var cidade = endereco.d[2];
+    var estado = endereco.d[4];
+    $("#txtEnderecoOng").val(rua);
+    $("#txtBairroOng").val(bairro);
+    $("#txtCidadeOng").val(cidade);
+}
+
 //os metodos abaixo chamam os metodos que verificam se o cpf/cnpj é valido e configura a msg que é exibida para o usuario no input 
 function msgValidacaoCNPJ(cnpj){
     if (!validarCNPJ(cnpj.value)) {

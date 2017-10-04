@@ -50,6 +50,25 @@ namespace Projeto_PI.Apoio
         {
             return Regex.IsMatch(input, "^[a-zA-Z][0-9a-zA-Z\\._-]+@([a-zA-Z0-9\\.]+\\.)[a-zA-A-09]+$");
         }
+
+        /// <summary>
+        /// verifica se a entrada é um telefone valido(dez caracteres numericos, não verifica se é um telefone existente)
+        /// </summary>
+        /// <param name="input">string a ser verificada</param>
+        /// <returns>true se o telefone for valido, false se for invalido</returns>
+        public static bool Telefone(this string input)
+        {
+            return Regex.IsMatch(input, "^\\d{10}$");
+        }
+
+        /// <summary>
+        /// verifica se a entrada é um CEP valido(oito caracteres numericos, não verifica se é um CEP existente)
+        /// </summary>
+        /// <param name="input">string a ser validada</param>
+        /// <returns>true se for um cep valido, false se nao for</returns>
+        public static bool CEP(this string input) {
+            return Regex.IsMatch(input, "^\\d{8}$");
+        }
         /// <summary>
         /// Valida um cnpj, referencia: http://www.geradorcnpj.com/javascript-validar-cnpj.htm
         /// </summary>
