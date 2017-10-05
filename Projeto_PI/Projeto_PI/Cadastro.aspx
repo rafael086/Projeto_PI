@@ -158,7 +158,7 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCEPDoador">CEP</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" ID="txtCEPDoador" CssClass="form-control" required="required" pattern="\d{5}-\d{3}" title="Digite um cep no formato nnnnn-nnn" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" ID="txtCEPDoador" CssClass="form-control" required="required" onblur="getEndereco(this.value)" pattern="\d{5}-\d{3}" title="Digite um cep no formato nnnnn-nnn" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">

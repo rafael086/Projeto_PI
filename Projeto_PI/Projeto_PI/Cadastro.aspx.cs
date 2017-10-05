@@ -42,6 +42,11 @@ namespace Projeto_PI
             }
         }
 
+        /// <summary>
+        /// busca um endereco com base no cep informado
+        /// </summary>
+        /// <param name="cep">cep de base para busca</param>
+        /// <returns>um array de string com os dados do endereco ou null se nada for encontrado(ou seja lançada uma exception)</returns>
         [WebMethod]
         public static string[] BuscaCep(string cep)
         {

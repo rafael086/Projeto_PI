@@ -33,28 +33,44 @@ function tiraEspacoExcedente(input) {
     input.value = input.value.replace(/\s{2,}/g, " ");
 }
 
+//faz uma requisicao ajax ao metodo estatico BuscaCep da pagina de cadastro
 function getEndereco(cep) {
     $.ajax({
-        type: 'POST',
+        type: 'POST',//tipo de passagem
         contentType: "application/json; charset=utf-8",
-        url: 'Cadastro.aspx/BuscaCep',
-        data: "{'cep':'" + cep + "'}",
+        url: 'Cadastro.aspx/BuscaCep',//endereco do metodo
+        data: "{'cep':'" + cep + "'}",//parametro passado
         assync: false,
-        success: function (resposta) {
-            setEndereco(resposta);
-        }, error: function () {
-            $("#txtCEPOng").val("erro");
+        success: function (resposta) {//se sucesso
+            setEndereco(resposta.d);//chama setEndereco
+        }, error: function () {//se falso
+            $("#txtCEPOng").val("erro");//printa erro
         }
     });
 }
+
+//coloca os dados do endereco nos input
 function setEndereco(endereco) {
-    var rua = endereco.d[0];
-    var bairro = endereco.d[1]
-    var cidade = endereco.d[2];
-    var estado = endereco.d[4];
-    $("#txtEnderecoOng").val(rua);
-    $("#txtBairroOng").val(bairro);
-    $("#txtCidadeOng").val(cidade);
+    var rua = endereco[0];
+    var bairro = endereco[1]
+    var cidade = endereco[2];
+    var estado = endereco[3];
+    if($("#txtCEPOng").is(":enabled")){
+        $("#txtEnderecoOng").val(rua);
+        $("#txtBairroOng").val(bairro);
+        $("#txtCidadeOng").val(cidade);
+        selecionaEstado("#ddlEstadoOng", estado);
+    }
+    if ($("#txtCEPDoador").is(":enabled")) {
+        $("#txtEnderecoDoador").val(rua);
+        $("#txtBairroDoador").val(bairro);
+        $("#txtCidadeDoador").val(cidade);
+        selecionaEstado("#ddlEstadoDoador", estado);
+    }
+}
+
+function selecionaEstado(select,estado) {
+    $(select).val(estado).prop("selected", true);
 }
 
 //os metodos abaixo chamam os metodos que verificam se o cpf/cnpj é valido e configura a msg que é exibida para o usuario no input 
