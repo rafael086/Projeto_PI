@@ -6,7 +6,7 @@
 <asp:Content ID="MenuDireitaLogado" ContentPlaceHolderID="MenuDireitaLogado" runat="server">
     <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Editar cadastro</a></li>
-        <li><a href="">Sair</a></li>
+        <li><a href="#">Sair</a></li>
     </ul>
 </asp:Content>
 <asp:Content ID="ConteudoPrincipalMaster" ContentPlaceHolderID="ConteudoPrincipal" runat="server">

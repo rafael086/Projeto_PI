@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Projeto_PI.Site" %>
-
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -47,26 +46,27 @@
                             <div id="modalLogin" class="modal fade" role="dialog">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
-                                        <header class="modal-header">
+                                        <div class="modal-header">
                                             <button class="close" data-dismiss="modal">&times;</button>
                                             <h4 class="modal-title text-center">Login</h4>
-                                        </header>
+                                        </div>
                                         <div class="modal-body">
                                             <div class="form-horizontal">
                                                 <div class="form-group">
-                                                    <label for="login" class="control-label col-md-2">Login</label>
+                                                    <asp:Label ID="lblEmail" AssociatedControlID="txtEmail" CssClass="control-label col-md-2" runat="server">Email</asp:Label>
                                                     <div class="col-md-10">
-                                                        <input type="text" class="form-control" id="login" name="login">
+                                                        <asp:TextBox ID="txtEmail" ValidationGroup="FormLogin" TextMode="Email" CssClass="form-control" runat="server"></asp:TextBox>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="login" class="control-label col-md-2">Senha</label>
+                                                    <asp:Label ID="lblSenha" AssociatedControlID="txtSenha" CssClass="control-label col-md-2" runat="server">Senha</asp:Label>
                                                     <div class="col-md-10">
-                                                        <input type="password" class="form-control" id="senha" name="senha">
+                                                        <asp:TextBox ID="txtSenha" TextMode="Password" ValidationGroup="FormLogin" CssClass="form-control" runat="server"></asp:TextBox>
                                                     </div>
                                                 </div>
+                                                <asp:Label ID="lblErro" runat="server"  Visible="false" Text="Usuario ou senha invalidos"></asp:Label>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-block">Entrar</button>
+                                                    <asp:Button ID="btnEntrar" ValidationGroup="FormLogin" OnClick="btnEntrar_Click" runat="server" CssClass="btn btn-block" Text="Entrar"></asp:Button>
                                                 </div>
                                             </div>
                                         </div>

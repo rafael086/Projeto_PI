@@ -179,3 +179,39 @@ function validarCPF(cpf) {
         return false;
     return true;
 }
+
+//************************Scripts da pagina da ONG***************************//
+function configuraAlteracoesSobre(idAlterar,titulo,frase) {
+    $("#fg1").css("display", "none");
+    $("#hiddenAcao").val("AlterarSobre");
+    $("#hiddenAlteracao").val(idAlterar);
+    $("#txtNome").val(titulo)
+    $("#txtFrase").val(frase);
+}
+
+function configuraAlteracoesPerfil() {
+    $("#fg1").css("display", "block");
+    $("#hiddenAcao").val("AlterarPerfil");
+}
+
+function configuraAlteracoesAddSobre() {
+    $("#fg1").css("display", "none");
+    $("#hiddenAcao").val("AdicionarSobre")
+    $("#txtNome").val("")
+    $("#txtFrase").val("");
+}
+
+function configuraAlteracoesAddPessoal() {
+    $("#fg1").css("display", "block");
+    $("#hiddenAcao").val("AdicionarPessoal");
+    $("#txtNome").val("")
+    $("#txtFrase").val("");
+}
+
+function configuraAlteracoesPessoal(idAlterar, titulo, frase) {
+    $("#fg1").css("display", "block");
+    $("#hiddenAcao").val("AlterarPessoal");
+    $("#hiddenAlteracao").val(idAlterar);
+    $("#txtNome").val(titulo);
+    $("#txtFrase").val(frase);
+}
