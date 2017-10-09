@@ -50,12 +50,12 @@ section#resultados-ong .panel-body, section#resultados-projetos .panel-body {
     height: 79px;
 }
 /*estilo pagina-ong*/
-#projetos img {
+#sectionProjetos img {
     width: 100%;
     height: 250px;
 }
 
-#projetos .panel-body {
+#sectionProjetos .panel-body {
     height: 132px;
 }
 
@@ -64,7 +64,7 @@ section#resultados-ong .panel-body, section#resultados-projetos .panel-body {
     height: 100px;
 }
 
-#pessoal img {
+#sectionPessoal img {
     width: 200px;
     height: 200px;
 }

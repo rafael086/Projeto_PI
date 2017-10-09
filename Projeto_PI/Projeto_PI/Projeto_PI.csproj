@@ -294,7 +294,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="NovoProjeto.aspx" />
     <Content Include="PaginaDoador.aspx" />
-    <Content Include="PaginaOng.aspx" />
+    <Content Include="PaginaUsuario.aspx" />
     <Content Include="PaginaProjeto.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -393,12 +393,12 @@
     <Compile Include="PaginaDoador.aspx.designer.cs">
       <DependentUpon>PaginaDoador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PaginaOng.aspx.cs">
-      <DependentUpon>PaginaOng.aspx</DependentUpon>
+    <Compile Include="PaginaUsuario.aspx.cs">
+      <DependentUpon>PaginaUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PaginaOng.aspx.designer.cs">
-      <DependentUpon>PaginaOng.aspx</DependentUpon>
+    <Compile Include="PaginaUsuario.aspx.designer.cs">
+      <DependentUpon>PaginaUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="PaginaProjeto.aspx.cs">
       <DependentUpon>PaginaProjeto.aspx</DependentUpon>

@@ -1,6 +1,7 @@
-﻿<%@ Page Title="Nome Ong" Language="C#" MasterPageFile="~/MenuLogado.master" AutoEventWireup="true" CodeBehind="PaginaOng.aspx.cs" Inherits="Projeto_PI.PaginaOng" %>
-
+﻿<%@ Page Title="Nome Ong" Language="C#" MasterPageFile="~/MenuLogado.master" AutoEventWireup="true" CodeBehind="PaginaUsuario.aspx.cs" Inherits="Projeto_PI.PaginaOng" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ConteudoPrincipal" runat="server">
+    <!-- Esta pagina foi configurada para que possa ser usada tanto para os usuarios ONGS quanto para os DOADORES-->
+    <!--a div destaque-usuario vai ser usada para os dois tipos de usuarios-->
     <div id="destaque-usuario" class="jumbotron row">
         <div class="col-md-3">
             <asp:Image ID="imgPerfil" CssClass="img-thumbnail" runat="server"></asp:Image>
@@ -12,11 +13,12 @@
         <a href="#" runat="server" onclick="configuraAlteracoesPerfil()" id="aEditarPerfil" data-toggle="modal" data-target="#modalAlteracoes">Editar</a>
     </div>
     <div class="container-fluid" role="main">
+        <!--a section sobre tambem vai ser usada tanto para ongs quanto sobre doadores-->
         <section id="sobre">
-            <h2 class="text-center page-header">Sobre a ong</h2>
+            <h2 class="text-center page-header">Sobre </h2>
             <div class="row">
                 <%
-                    foreach (var item in ong.Usuarios.Sobre.Where(s => s.idImagem == null))
+                    foreach (var item in usuario.Sobre.Where(s => s.idImagem == null))
                     {
                 %>
                 <div class="panel panel-default">
@@ -27,7 +29,6 @@
                         <p>
                             <% Response.Write(item.texto); %>
                         </p>
-                        <!--<input type="hidden" id="sobreID<%// Response.Write(item.id); %>" value="<% //Response.Write(item.id); %>" />-->
                         <%if (Session["usuario"] != null && Session["usuario"].ToString() == Request["usuario"].ToString())
                             { %>
                         <a onclick="configuraAlteracoesSobre(<% Response.Write(string.Format("{0},'{1}','{2}'", item.id, item.titulo, item.texto)); %>)" href="#" class="btn btn-default pull-right" data-toggle="modal" data-target="#modalAlteracoes">Editar</a>
@@ -41,10 +42,10 @@
                 </button>
             </div>
         </section>
-        <section id="pessoal">
+        <section runat="server" id="sectionPessoal">
             <h2 class="text-center page-header">Pessoal</h2>
             <div class="row">
-                <%foreach (var item in ong.Usuarios.Sobre.Where(s => s.idImagem != null))
+                <%foreach (var item in usuario.Sobre.Where(s => s.idImagem != null))
                     {
                 %>
                 <div class="col-md-10 col-md-offset-1">
@@ -68,10 +69,10 @@
                 </button>
             </div>
         </section>
-        <section id="projetos">
+        <section runat="server" id="sectionProjetos">
             <h2 class="text-center page-header">Seus projetos</h2>
             <div class="row">
-                <%foreach (var item in ong.Usuarios.Projetos)
+                <%foreach (var item in usuario.Projetos)
                     {
                 %>
                 <div class="col-md-6">

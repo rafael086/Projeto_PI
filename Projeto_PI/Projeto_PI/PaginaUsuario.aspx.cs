@@ -13,6 +13,8 @@ namespace Projeto_PI
 {
     public partial class PaginaOng : System.Web.UI.Page
     {
+        enum TipoUsuario { Ong, Doador};
+
         /// <summary>
         /// Define o tipo de ação que esta sendo tomada pelo usuario
         /// </summary>
@@ -34,10 +36,9 @@ namespace Projeto_PI
         private int idImg;
 
         /// <summary>
-        /// Referancia a entidade Ong
+        /// Referancia a entidade Usuario
         /// </summary>
-        public Ongs ong;
-
+        public Usuarios usuario;
 
         /// <summary>
         /// verifica se o acesso a pagina esta sendo via metodo POST ou GET
@@ -65,9 +66,9 @@ namespace Projeto_PI
         /// </summary>
         private void AtualizaCampos()
         {
-            hNomeUsuario.InnerText = ong.Usuarios.nome;
-            pTextoComplementar.InnerText = (string.IsNullOrEmpty(ong.Usuarios.frase) ? "Coloque uma frase aqui" : ong.Usuarios.frase);
-            imgPerfil.ImageUrl = "Upload Imagens/" + ong.Usuarios.Imagens.nome;
+            hNomeUsuario.InnerText = usuario.nome;
+            pTextoComplementar.InnerText = (string.IsNullOrEmpty(usuario.frase) ? "Coloque uma frase aqui" : usuario.frase);
+            imgPerfil.ImageUrl = (usuario.Imagens == null) ? "imagens/imgDefault.png" : "Upload Imagens/" + usuario.Imagens.nome;
         }
 
         /// <summary>
@@ -144,17 +145,25 @@ namespace Projeto_PI
             hiddenAcao.ClientIDMode = ClientIDMode.Static;
             hiddenAlteracao.ClientIDMode = ClientIDMode.Static;
             modalAlteracoes.ClientIDMode = ClientIDMode.Static;
+            sectionPessoal.ClientIDMode = ClientIDMode.Static;
+            sectionProjetos.ClientIDMode = ClientIDMode.Static;
             //captura o id passado
             id = (Session["usuario"] != null) ? Convert.ToInt32(Session["usuario"].ToString()) : Convert.ToInt32(Request["usuario"].ToString());
 
-            ong = bd.Ongs.Where(o => o.id == id).Single();
+            usuario = bd.Usuarios.Where(u => u.id == id).Single();
+            
             if (VerificaAcesso())
             {
                 modalAlteracoes.Visible = true;
+                if (usuario.Doadores != null)
+                {
+                    sectionProjetos.Visible = false;
+                    sectionPessoal.Visible = false;
+                    sectionVoluntarios.Visible = false;
+                }
             }
             else
             {
-
                 btnAddConteudoSobre.Visible = false;
                 btnAddConteudoPessoal.Visible = false;
                 sectionVoluntarios.Visible = false;
@@ -179,26 +188,26 @@ namespace Projeto_PI
                 {
                     case ALTERAR_PERFIL:
                         SalvaImagem();
-                        ong.Usuarios.idImagem = idImg;
-                        ong.Usuarios.nome = nome;
-                        ong.Usuarios.frase = frase;
+                        usuario.idImagem = idImg;
+                        usuario.nome = nome;
+                        usuario.frase = frase;
                         break;
                     case ALTERAR_SOBRE:
-                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
-                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
+                        usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
+                        usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
                         break;
                     case ADICIONAR_SOBRE:
-                        ong.Usuarios.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = ong.Usuarios.id, idImagem = null });
+                        usuario.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = usuario.id, idImagem = null });
                         break;
                     case ADICIONAR_PESSOAL:
                         SalvaImagem();
-                        ong.Usuarios.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = ong.Usuarios.id, idImagem = idImg });
+                        usuario.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = usuario.id, idImagem = idImg });
                         break;
                     case ALTERAR_PESSOAL:
                         SalvaImagem();
-                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().idImagem = idImg;
-                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
-                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
+                        usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().idImagem = idImg;
+                        usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
+                        usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
                         break;
                 }
 
@@ -208,7 +217,7 @@ namespace Projeto_PI
                 lblErro.Text = ex.Message;
             }
             //da um update na ong
-            bd.Entry(ong).State = EntityState.Modified;
+            bd.Entry(usuario).State = EntityState.Modified;
             bd.SaveChanges();
             AtualizaCampos();
         }

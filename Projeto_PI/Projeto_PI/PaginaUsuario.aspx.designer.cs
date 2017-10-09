@@ -58,6 +58,15 @@ namespace Projeto_PI {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnAddConteudoSobre;
         
         /// <summary>
+        /// Controle sectionPessoal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionPessoal;
+        
+        /// <summary>
         /// Controle btnAddConteudoPessoal.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace Projeto_PI {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnAddConteudoPessoal;
+        
+        /// <summary>
+        /// Controle sectionProjetos.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionProjetos;
         
         /// <summary>
         /// Controle sectionVoluntarios.
