@@ -18,6 +18,31 @@ function trocaForm(tipo) {
     }
 }
 
+function desativaFormsCadastro() {
+    var optOng = $("#ong");
+    var optDoador = $("#doador");
+    if (optOng.is(":checked")) {
+        $("#formOng :input").attr("disabled", "true");
+    }
+    else if(optDoador.is(":checked")) {
+        $("#formDoador :input").attr("disabled", "true");
+    }
+    $("#modalLogin :input").removeAttr("disabled");
+}
+
+function ativaFormsCadastro() {
+    $("#modalLogin").on("hidden.bs.modal", function () {
+        var optOng = $("#ong");
+        var optDoador = $("#doador");
+        if (optOng.is(":checked")) {
+            $("#formOng :input").removeAttr("disabled");
+        }
+        else if (optDoador.is(":checked")) {
+            $("#formDoador :input").removeAttr("disabled");
+        }
+        $("#modalLogin :input").attr("disabled", "true");
+    });
+}
 
 //cria mascaras para os inputs
 //https://plugins.jquery.com/mask/

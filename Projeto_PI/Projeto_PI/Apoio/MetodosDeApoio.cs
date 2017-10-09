@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.UI;
 
 namespace Projeto_PI.Apoio
 {
@@ -143,6 +144,18 @@ namespace Projeto_PI.Apoio
             if (rev != Convert.ToInt32(cpf[10].ToString()))
                 return false;
             return true;
+        }
+
+        public static void VerificaAcesso(this Page pagina)
+        {
+            if (pagina.Session["usuario"] != null)
+            {
+                pagina.MasterPageFile = "MenuLogado.master";
+            }
+            else
+            {
+                pagina.MasterPageFile = "Site.master";
+            }
         }
     }
 }

@@ -55,6 +55,11 @@ namespace Projeto_PI.Apoio
                 throw new Exception("CNPJ já cadastrado");
             }
             telefone = telefone.TiraMascara();
+            var tot = bd.Ongs.Count(o => o.telefone == telefone);
+            if (tot != 0)
+            {
+                throw new Exception("Este telefone ja esta em uso");
+            }
             if (!telefone.Telefone())
             {
                 throw new Exception("Informe um telefone valido");

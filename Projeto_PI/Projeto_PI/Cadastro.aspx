@@ -245,6 +245,7 @@
         </div>
         <script>
             $("#formDoador :input").attr("disabled", "true");
+            $("#modalLogin :input").attr("disabled", "true");
         </script>
     </div>
 </asp:Content>

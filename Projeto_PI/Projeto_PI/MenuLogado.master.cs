@@ -11,7 +11,13 @@ namespace Projeto_PI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            aSair.ServerClick += ASair_ServerClick;
+        }
+ 
+        private void ASair_ServerClick(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect(Request.RawUrl);          
         }
     }
 }

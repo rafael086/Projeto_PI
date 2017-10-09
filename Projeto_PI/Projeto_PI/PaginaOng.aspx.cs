@@ -17,12 +17,12 @@ namespace Projeto_PI
         /// Define o tipo de ação que esta sendo tomada pelo usuario
         /// </summary>
         private const string ALTERAR_PERFIL = "AlterarPerfil", ALTERAR_SOBRE = "AlterarSobre", ADICIONAR_SOBRE = "AdicionarSobre", ADICIONAR_PESSOAL = "AdicionarPessoal", ALTERAR_PESSOAL = "AlterarPessoal";
-        
+
         /// <summary>
         /// referencia ao banco de dados
         /// </summary>
         private EntidadesProjetoPI bd = new EntidadesProjetoPI();
-        
+
         /// <summary>
         /// id do usuario
         /// </summary>
@@ -44,7 +44,8 @@ namespace Projeto_PI
         /// </summary>
         /// <returns>true - se via POST, false - se via GET</returns>
         /// <exception cref="HttpException"></exception>
-        private bool VerificaHTTP() {
+        private bool VerificaAcesso()
+        {
             if (Session["usuario"] != null && Session["usuario"].ToString() == Request["usuario"].ToString())
             {
                 return true;
@@ -66,7 +67,7 @@ namespace Projeto_PI
         {
             hNomeUsuario.InnerText = ong.Usuarios.nome;
             pTextoComplementar.InnerText = (string.IsNullOrEmpty(ong.Usuarios.frase) ? "Coloque uma frase aqui" : ong.Usuarios.frase);
-            imgPerfil.ImageUrl = "Upload Imagens/"+ong.Usuarios.Imagens.nome;
+            imgPerfil.ImageUrl = "Upload Imagens/" + ong.Usuarios.Imagens.nome;
         }
 
         /// <summary>
@@ -114,7 +115,7 @@ namespace Projeto_PI
         {
             try
             {
-                if (VerificaHTTP())
+                if (VerificaAcesso())
                 {
                     Page.MasterPageFile = "MenuLogado.master";
                 }
@@ -134,7 +135,7 @@ namespace Projeto_PI
         protected void Page_Load(object sender, EventArgs e)
         {
             //torna os IDs dos controles HTML estaticos
-            
+
             btnAddConteudoPessoal.ClientIDMode = ClientIDMode.Static;
             btnAddConteudoSobre.ClientIDMode = ClientIDMode.Static;
             hNomeUsuario.ClientIDMode = ClientIDMode.Static;
@@ -145,15 +146,15 @@ namespace Projeto_PI
             modalAlteracoes.ClientIDMode = ClientIDMode.Static;
             //captura o id passado
             id = (Session["usuario"] != null) ? Convert.ToInt32(Session["usuario"].ToString()) : Convert.ToInt32(Request["usuario"].ToString());
-            
+
             ong = bd.Ongs.Where(o => o.id == id).Single();
-            if (VerificaHTTP())
+            if (VerificaAcesso())
             {
                 modalAlteracoes.Visible = true;
             }
             else
             {
-                
+
                 btnAddConteudoSobre.Visible = false;
                 btnAddConteudoPessoal.Visible = false;
                 sectionVoluntarios.Visible = false;
@@ -172,36 +173,44 @@ namespace Projeto_PI
                 lblErro.Text = "Digite um nome valido";
                 return;
             }
-            switch (hiddenAcao.Value)
+            try
             {
-                case ALTERAR_PERFIL:
-                    SalvaImagem();
-                    ong.Usuarios.idImagem = idImg;
-                    ong.Usuarios.nome = nome;
-                    ong.Usuarios.frase = frase;
-                    break;
-                case ALTERAR_SOBRE:
-                    ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
-                    ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
-                    break;
-                case ADICIONAR_SOBRE:
-                    ong.Usuarios.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = ong.Usuarios.id, idImagem = null });
-                    break;
-                case ADICIONAR_PESSOAL:
-                    SalvaImagem();
-                    ong.Usuarios.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = ong.Usuarios.id, idImagem = idImg });
-                    break;
-                case ALTERAR_PESSOAL:
-                    SalvaImagem();
-                    ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().idImagem = idImg;
-                    ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
-                    ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
-                    break;
+                switch (hiddenAcao.Value)
+                {
+                    case ALTERAR_PERFIL:
+                        SalvaImagem();
+                        ong.Usuarios.idImagem = idImg;
+                        ong.Usuarios.nome = nome;
+                        ong.Usuarios.frase = frase;
+                        break;
+                    case ALTERAR_SOBRE:
+                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
+                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
+                        break;
+                    case ADICIONAR_SOBRE:
+                        ong.Usuarios.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = ong.Usuarios.id, idImagem = null });
+                        break;
+                    case ADICIONAR_PESSOAL:
+                        SalvaImagem();
+                        ong.Usuarios.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = ong.Usuarios.id, idImagem = idImg });
+                        break;
+                    case ALTERAR_PESSOAL:
+                        SalvaImagem();
+                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().idImagem = idImg;
+                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
+                        ong.Usuarios.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;
+                        break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                lblErro.Text = ex.Message;
             }
             //da um update na ong
             bd.Entry(ong).State = EntityState.Modified;
             bd.SaveChanges();
-            AtualizaCampos();      
+            AtualizaCampos();
         }
     }
 }
