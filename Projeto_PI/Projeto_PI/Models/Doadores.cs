@@ -18,6 +18,7 @@ namespace Projeto_PI.Models
         public Doadores()
         {
             this.Voluntarios = new HashSet<Voluntarios>();
+            this.Projetos = new HashSet<Projetos>();
         }
     
         public int id { get; set; }
@@ -26,5 +27,7 @@ namespace Projeto_PI.Models
         public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Voluntarios> Voluntarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Projetos> Projetos { get; set; }
     }
 }

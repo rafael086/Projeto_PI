@@ -8,6 +8,7 @@
     <Property Name="cpf" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Usuarios" Relationship="Self.Id_Doadores_IdUsuarios" FromRole="Doadores" ToRole="Usuarios" />
     <NavigationProperty Name="Voluntarios" Relationship="Self.idDoador_Voluntarios_id_Doador" FromRole="Doadores" ToRole="Voluntarios" />
+    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.Apoios1" FromRole="Doadores" ToRole="Projetos" />
   </EntityType>
   <EntityType Name="Enderecos">
     <Key>
@@ -58,6 +59,8 @@
     <NavigationProperty Name="Imagens" Relationship="Self.banner_Projetos_id_Imagens" FromRole="Projetos" ToRole="Imagens" />
     <NavigationProperty Name="Usuarios" Relationship="Self.idUsuario_Projetos_id_Usuarios" FromRole="Projetos" ToRole="Usuarios" />
     <NavigationProperty Name="Usuarios1" Relationship="Self.Apoios" FromRole="Projetos" ToRole="Usuarios" />
+    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Doadores" Relationship="Projeto_PIModel.Apoios1" FromRole="Projetos" ToRole="Doadores" />
   </EntityType>
   <EntityType Name="Sobre">
     <Key>
@@ -306,5 +309,13 @@
       <Parameter Name="cidade" Mode="In" Type="String" />
       <Parameter Name="estado" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="Apoios1" Association="Projeto_PIModel.Apoios1">
+      <End Role="Doadores" EntitySet="Doadores" />
+      <End Role="Projetos" EntitySet="Projetos" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="Apoios1">
+    <End Type="Projeto_PIModel.Doadores" Role="Doadores" Multiplicity="*" />
+    <End Type="Projeto_PIModel.Projetos" Role="Projetos" Multiplicity="*" />
+  </Association>
 </Schema>

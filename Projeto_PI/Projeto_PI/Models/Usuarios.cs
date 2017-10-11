@@ -19,7 +19,6 @@ namespace Projeto_PI.Models
         {
             this.Projetos = new HashSet<Projetos>();
             this.Sobre = new HashSet<Sobre>();
-            this.Projetos1 = new HashSet<Projetos>();
         }
     
         public int id { get; set; }
@@ -38,7 +37,5 @@ namespace Projeto_PI.Models
         public virtual ICollection<Projetos> Projetos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sobre> Sobre { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projetos> Projetos1 { get; set; }
     }
 }

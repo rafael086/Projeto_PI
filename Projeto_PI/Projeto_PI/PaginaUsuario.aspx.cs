@@ -74,6 +74,7 @@ namespace Projeto_PI
         /// <summary>
         /// Salva a imagem no banco e na pasta
         /// </summary>
+        /*
         private void SalvaImagem()
         {
             if (!fuImagem.HasFile)
@@ -105,7 +106,7 @@ namespace Projeto_PI
             var img = bd.Imagens.Add(new Imagens { nome = nomeImg });
             idImg = img.id;
         }
-
+        */
         /// <summary>
         /// Verifica se o usuario esta sendo enviado por sessao ou via url
         /// caso seja passado por sessao carrega a master page de menu de usuarios
@@ -157,7 +158,7 @@ namespace Projeto_PI
                 modalAlteracoes.Visible = true;
                 if (usuario.Doadores != null)
                 {
-                    sectionProjetos.Visible = false;
+                    //sectionProjetos.Visible = false;
                     sectionPessoal.Visible = false;
                     sectionVoluntarios.Visible = false;
                 }
@@ -187,7 +188,7 @@ namespace Projeto_PI
                 switch (hiddenAcao.Value)
                 {
                     case ALTERAR_PERFIL:
-                        SalvaImagem();
+                        idImg = fuImagem.SalvaImagem(Server.MapPath("Upload Imagens\\"));
                         usuario.idImagem = idImg;
                         usuario.nome = nome;
                         usuario.frase = frase;
@@ -200,11 +201,11 @@ namespace Projeto_PI
                         usuario.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = usuario.id, idImagem = null });
                         break;
                     case ADICIONAR_PESSOAL:
-                        SalvaImagem();
+                        idImg = fuImagem.SalvaImagem(Server.MapPath("Upload Imagens\\"));
                         usuario.Sobre.Add(new Sobre { titulo = nome, texto = frase, idUsuario = usuario.id, idImagem = idImg });
                         break;
                     case ALTERAR_PESSOAL:
-                        SalvaImagem();
+                        idImg = fuImagem.SalvaImagem(Server.MapPath("Upload Imagens\\"));
                         usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().idImagem = idImg;
                         usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().titulo = nome;
                         usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single().texto = frase;

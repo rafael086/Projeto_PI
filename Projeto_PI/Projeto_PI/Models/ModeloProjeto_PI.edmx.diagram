@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0a0f17bdfa3d4cd48536f3d94e7e7bf0" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="Projeto_PIModel.Doadores" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Projeto_PIModel.Enderecos" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Projeto_PIModel.Imagens" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Projeto_PIModel.Ongs" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Projeto_PIModel.Projetos" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Projeto_PIModel.Sobre" Width="1.5" PointX="10.5" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Projeto_PIModel.Usuarios" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Projeto_PIModel.Voluntarios" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="Projeto_PIModel.Id_Doadores_IdUsuarios" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.idDoador_Voluntarios_id_Doador" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.idEndereco_Usuarios_id_Enderecos" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.banner_Projetos_id_Imagens" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.idImagem_Sobre_id_Imagens" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.idImagem_Usuarios_id_Imagens" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.Id_Ongs_Id_Usuarios" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.idOng_Voluntarios_id_Ong" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.idUsuario_Projetos_id_Usuarios" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.idUsuario_Sobre_id_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="Projeto_PIModel.Apoios" ManuallyRouted="false" />
+      <Diagram DiagramId="0a0f17bdfa3d4cd48536f3d94e7e7bf0" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="Projeto_PIModel.Doadores" Width="1.5" PointX="5.25" PointY="10.125" />
+        <EntityTypeShape EntityType="Projeto_PIModel.Enderecos" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="Projeto_PIModel.Imagens" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="Projeto_PIModel.Ongs" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="Projeto_PIModel.Projetos" Width="1.5" PointX="6" PointY="6" />
+        <EntityTypeShape EntityType="Projeto_PIModel.Sobre" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="Projeto_PIModel.Usuarios" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="Projeto_PIModel.Voluntarios" Width="1.5" PointX="8.5" PointY="5.5" />
+        <AssociationConnector Association="Projeto_PIModel.Id_Doadores_IdUsuarios" />
+        <AssociationConnector Association="Projeto_PIModel.idDoador_Voluntarios_id_Doador" />
+        <AssociationConnector Association="Projeto_PIModel.idEndereco_Usuarios_id_Enderecos" />
+        <AssociationConnector Association="Projeto_PIModel.banner_Projetos_id_Imagens" />
+        <AssociationConnector Association="Projeto_PIModel.idImagem_Sobre_id_Imagens" />
+        <AssociationConnector Association="Projeto_PIModel.idImagem_Usuarios_id_Imagens" />
+        <AssociationConnector Association="Projeto_PIModel.Id_Ongs_Id_Usuarios" />
+        <AssociationConnector Association="Projeto_PIModel.idOng_Voluntarios_id_Ong" />
+        <AssociationConnector Association="Projeto_PIModel.idUsuario_Projetos_id_Usuarios" />
+        <AssociationConnector Association="Projeto_PIModel.idUsuario_Sobre_id_Usuario" />
+        <AssociationConnector Association="Projeto_PIModel.Apoios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

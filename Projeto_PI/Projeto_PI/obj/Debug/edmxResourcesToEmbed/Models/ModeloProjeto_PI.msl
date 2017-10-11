@@ -45,6 +45,7 @@
     <EntitySetMapping Name="Projetos">
       <EntityTypeMapping TypeName="Projeto_PIModel.Projetos">
         <MappingFragment StoreEntitySet="Projetos">
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nome" ColumnName="nome" />
           <ScalarProperty Name="descricao" ColumnName="descricao" />
@@ -91,11 +92,16 @@
       <EndProperty Name="Projetos">
         <ScalarProperty Name="id" ColumnName="idProjeto" />
       </EndProperty>
-      <EndProperty Name="Usuarios">
-        <ScalarProperty Name="id" ColumnName="idUsuario" />
-      </EndProperty>
     </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="setOngs" FunctionName="Projeto_PIModel.Store.setOngs" />
     <FunctionImportMapping FunctionImportName="setDoadores" FunctionName="Projeto_PIModel.Store.setDoadores" />
+    <AssociationSetMapping Name="Apoios1" TypeName="Projeto_PIModel.Apoios1" StoreEntitySet="Apoios">
+      <EndProperty Name="Projetos">
+        <ScalarProperty Name="id" ColumnName="idProjeto" />
+      </EndProperty>
+      <EndProperty Name="Doadores">
+        <ScalarProperty Name="id" ColumnName="idDoador" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

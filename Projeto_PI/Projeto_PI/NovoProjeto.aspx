@@ -4,46 +4,46 @@
     <div class="container-fluid" role="main">
         <div class="row">
             <h2 class="page-header text-center">Cadastre um novo projeto</h2>
-            <div class="row col-md-4 col-md-offset-4">
+            <div runat="server" id="opcProjeto" class="row col-md-4 col-md-offset-4">
                 <span class="pull-left">Tipo do projeto</span>
                 <div class="btn-group pull-right" data-toggle="buttons">
                     <label for="doacao" class="btn btn-default active">
-                        <input type="radio" onchange="trocaForm(this)" name="tipo" id="doacao" value="doacao" checked>Doação
+                        <input runat="server" type="radio" name="tipo" id="radioDoacao" value="doacao" checked>Doação
                     </label>
                     <label for="acao" class="btn btn-default">
-                        <input type="radio" onchange="trocaForm(this)" name="tipo" id="acao" value="acao">Ação
+                        <input runat="server" type="radio" name="tipo" id="radioAcao" value="acao">Ação
                     </label>
                 </div>
             </div>
-            <form action="" name="form-novo-projeto" id="form-novo-projeto" class="form-horizontal col-md-4 col-md-offset-4">
+            <div id="form-novo-projeto" class="form-horizontal col-md-4 col-md-offset-4">
                 <div class="form-group">
-                    <label for="nome" class="control-label col-md-4">Nome</label>
+                    <asp:Label ID="lblNome" AssociatedControlID="txtNomeProjeto" runat="server" CssClass="control-label col-md-4" Text="Nome"></asp:Label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="nome" id="nome">
+                        <asp:TextBox ID="txtNomeProjeto" required="" CssClass="form-control" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descricao" class="control-label col-md-4">Descrição</label>
+                    <asp:Label ID="lblDescricao" CssClass="control-label col-md-4" AssociatedControlID="txtDescricaoProjeto" runat="server" Text="Descrição"></asp:Label>
                     <div class="col-md-8">
-                        <textarea name="descricao" class="form-control" id="descricao" cols="10" rows="2"></textarea>
+                        <asp:TextBox ID="txtDescricaoProjeto" required="" CssClass="form-control" Columns="10" Rows="2" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="banner" class="control-label col-md-4">Banner</label>
+                    <asp:Label ID="lblBanner" Text="Banner" AssociatedControlID="fuBanner" CssClass="control-label col-md-4" runat="server" />
                     <div class="col-md-8">
-                        <input type="file" class="form-control" name="banner" id="banner">
+                        <asp:FileUpload ID="fuBanner" required=""  CssClass="form-control" runat="server" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta" class="control-label col-md-4">Meta</label>
+                    <asp:Label Text="Meta" ID="lblMeta" AssociatedControlID="txtMeta" CssClass="control-label col-md-4" runat="server" />
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="meta" id="meta">
+                        <asp:TextBox ID="txtMeta" required="" CssClass="form-control" runat="server" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Cadastrar" class="btn btn-block">
+                    <asp:Button ID="btnIniciarProjeto" Text="Iniciar projeto" CssClass="btn btn-block" runat="server" OnClick="btnIniciarProjeto_Click" />
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </asp:Content>

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using Projeto_PI.Models;
 
 namespace Projeto_PI.Apoio
 {
@@ -70,6 +73,47 @@ namespace Projeto_PI.Apoio
         public static bool CEP(this string input) {
             return Regex.IsMatch(input, "^\\d{8}$");
         }
+
+        /// <summary>
+        /// Salva uma imagem no servidor e no banco de dados atravez de um objeto FileUpload e retorna o id da imagem
+        /// </summary>
+        /// <param name="fuImagem">O input da imagem</param>
+        /// <param name="arquivo">Arquivo onde a imagem vai ser gravada</param>
+        /// <returns>o id da imagem</returns>
+        /// <example>O arquivo deve ser passado em sua forma "fisica" use <code>Server.MapPath("arquivo\\")</code> como parametro para o arquivo</example>
+        public static int SalvaImagem(this FileUpload fuImagem, string arquivo)
+        {
+            if (!fuImagem.HasFile)
+            {
+                throw new Exception("Nenhum arquivo foi enviado");
+            }
+            string extensao = Path.GetExtension(fuImagem.FileName);
+            string nomeImg = fuImagem.FileName;
+            if (extensao != ".jpg" && extensao != ".png" && extensao != ".gif")
+            {
+                throw new Exception("Apenas arquivos .jpg, .gif ou .png");
+            }
+            //verifica se existe um arquivo com o mesmo nome no diretorio de upload de imagens, se existir coloca "(n)" depois do nome do arquivo
+            int cont = 0;
+            do
+            {
+                cont++;
+                int tot = Directory.GetFiles(arquivo).Count(a => Path.GetFileName(a) == nomeImg);
+                if (tot > 0)
+                {
+                    nomeImg = string.Format("{0}({1}){2}", Path.GetFileNameWithoutExtension(fuImagem.FileName), cont, extensao);
+                    continue;
+                }
+                break;
+            } while (true);
+            fuImagem.SaveAs(arquivo + nomeImg);
+            //adiciona a nova imagem ao banco
+            EntidadesProjetoPI bd = new EntidadesProjetoPI();
+            var img = bd.Imagens.Add(new Imagens { nome = nomeImg });
+            bd.SaveChanges();
+            return img.id;
+        }
+
         /// <summary>
         /// Valida um cnpj, referencia: http://www.geradorcnpj.com/javascript-validar-cnpj.htm
         /// </summary>
@@ -146,6 +190,10 @@ namespace Projeto_PI.Apoio
             return true;
         }
 
+        /// <summary>
+        /// verifica se o acesso a pagina é por um usuario logado ou nao e carrega a master page que é de acordo
+        /// </summary>
+        /// <param name="pagina"></param>
         public static void VerificaAcesso(this Page pagina)
         {
             if (pagina.Session["usuario"] != null)

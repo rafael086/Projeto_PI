@@ -17,7 +17,7 @@ namespace Projeto_PI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Projetos()
         {
-            this.Usuarios1 = new HashSet<Usuarios>();
+            this.Doadores = new HashSet<Doadores>();
         }
     
         public int id { get; set; }
@@ -26,10 +26,11 @@ namespace Projeto_PI.Models
         public int banner { get; set; }
         public string meta { get; set; }
         public int idUsuario { get; set; }
+        public string tipo { get; set; }
     
         public virtual Imagens Imagens { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuarios> Usuarios1 { get; set; }
+        public virtual ICollection<Doadores> Doadores { get; set; }
     }
 }

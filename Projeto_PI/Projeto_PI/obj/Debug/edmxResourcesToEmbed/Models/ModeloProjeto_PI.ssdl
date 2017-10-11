@@ -3,10 +3,10 @@
   <EntityType Name="Apoios">
     <Key>
       <PropertyRef Name="idProjeto" />
-      <PropertyRef Name="idUsuario" />
+      <PropertyRef Name="idDoador" />
     </Key>
     <Property Name="idProjeto" Type="int" Nullable="false" />
-    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="idDoador" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Doadores">
     <Key>
@@ -55,6 +55,7 @@
     <Property Name="banner" Type="int" Nullable="false" />
     <Property Name="meta" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="tipo" Type="nchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="Sobre">
     <Key>
@@ -120,6 +121,18 @@
       </Principal>
       <Dependent Role="Ongs">
         <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idDoador_Apoios_id_Doadores">
+    <End Role="Doadores" Type="Self.Doadores" Multiplicity="1" />
+    <End Role="Apoios" Type="Self.Apoios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doadores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Apoios">
+        <PropertyRef Name="idDoador" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -192,18 +205,6 @@
       </Principal>
       <Dependent Role="Apoios">
         <PropertyRef Name="idProjeto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="idUsuario_Apoios_id_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-    <End Role="Apoios" Type="Self.Apoios" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Apoios">
-        <PropertyRef Name="idUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -281,6 +282,10 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Ongs" EntitySet="Ongs" />
     </AssociationSet>
+    <AssociationSet Name="idDoador_Apoios_id_Doadores" Association="Self.idDoador_Apoios_id_Doadores">
+      <End Role="Doadores" EntitySet="Doadores" />
+      <End Role="Apoios" EntitySet="Apoios" />
+    </AssociationSet>
     <AssociationSet Name="idDoador_Voluntarios_id_Doador" Association="Self.idDoador_Voluntarios_id_Doador">
       <End Role="Doadores" EntitySet="Doadores" />
       <End Role="Voluntarios" EntitySet="Voluntarios" />
@@ -303,10 +308,6 @@
     </AssociationSet>
     <AssociationSet Name="idProjeto_Apoios_id_Projeto" Association="Self.idProjeto_Apoios_id_Projeto">
       <End Role="Projetos" EntitySet="Projetos" />
-      <End Role="Apoios" EntitySet="Apoios" />
-    </AssociationSet>
-    <AssociationSet Name="idUsuario_Apoios_id_Usuarios" Association="Self.idUsuario_Apoios_id_Usuarios">
-      <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Apoios" EntitySet="Apoios" />
     </AssociationSet>
     <AssociationSet Name="idUsuario_Projetos_id_Usuarios" Association="Self.idUsuario_Projetos_id_Usuarios">
