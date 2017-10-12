@@ -1,44 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Projeto_PIModelStoreContainer" CdmEntityContainer="EntidadesProjetoPI">
+    <FunctionImportMapping FunctionImportName="setOngs" FunctionName="Projeto_PIModel.Store.setOngs" />
+    <FunctionImportMapping FunctionImportName="setDoadores" FunctionName="Projeto_PIModel.Store.setDoadores" />
     <EntitySetMapping Name="Doadores">
       <EntityTypeMapping TypeName="Projeto_PIModel.Doadores">
         <MappingFragment StoreEntitySet="Doadores">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Enderecos">
       <EntityTypeMapping TypeName="Projeto_PIModel.Enderecos">
         <MappingFragment StoreEntitySet="Enderecos">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="cep" ColumnName="cep" />
-          <ScalarProperty Name="numero" ColumnName="numero" />
-          <ScalarProperty Name="bairro" ColumnName="bairro" />
-          <ScalarProperty Name="rua" ColumnName="rua" />
-          <ScalarProperty Name="cidade" ColumnName="cidade" />
           <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+          <ScalarProperty Name="rua" ColumnName="rua" />
+          <ScalarProperty Name="bairro" ColumnName="bairro" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="cep" ColumnName="cep" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Imagens">
       <EntityTypeMapping TypeName="Projeto_PIModel.Imagens">
         <MappingFragment StoreEntitySet="Imagens">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Ongs">
       <EntityTypeMapping TypeName="Projeto_PIModel.Ongs">
         <MappingFragment StoreEntitySet="Ongs">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
-          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
-          <ScalarProperty Name="telefone" ColumnName="telefone" />
-          <ScalarProperty Name="representante" ColumnName="representante" />
           <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="representante" ColumnName="representante" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -46,56 +48,49 @@
       <EntityTypeMapping TypeName="Projeto_PIModel.Projetos">
         <MappingFragment StoreEntitySet="Projetos">
           <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="nome" ColumnName="nome" />
-          <ScalarProperty Name="descricao" ColumnName="descricao" />
-          <ScalarProperty Name="banner" ColumnName="banner" />
-          <ScalarProperty Name="meta" ColumnName="meta" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="meta" ColumnName="meta" />
+          <ScalarProperty Name="banner" ColumnName="banner" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Sobre">
       <EntityTypeMapping TypeName="Projeto_PIModel.Sobre">
         <MappingFragment StoreEntitySet="Sobre">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="texto" ColumnName="texto" />
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="idImagem" ColumnName="idImagem" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="texto" ColumnName="texto" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="Projeto_PIModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="nome" ColumnName="nome" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="senha" ColumnName="senha" />
-          <ScalarProperty Name="idEndereco" ColumnName="idEndereco" />
-          <ScalarProperty Name="idImagem" ColumnName="idImagem" />
           <ScalarProperty Name="frase" ColumnName="frase" />
+          <ScalarProperty Name="idImagem" ColumnName="idImagem" />
+          <ScalarProperty Name="idEndereco" ColumnName="idEndereco" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Voluntarios">
       <EntityTypeMapping TypeName="Projeto_PIModel.Voluntarios">
         <MappingFragment StoreEntitySet="Voluntarios">
-          <ScalarProperty Name="idOng" ColumnName="idOng" />
-          <ScalarProperty Name="idDoador" ColumnName="idDoador" />
           <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+          <ScalarProperty Name="idDoador" ColumnName="idDoador" />
+          <ScalarProperty Name="idOng" ColumnName="idOng" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="Apoios" TypeName="Projeto_PIModel.Apoios" StoreEntitySet="Apoios">
-      <EndProperty Name="Projetos">
-        <ScalarProperty Name="id" ColumnName="idProjeto" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="setOngs" FunctionName="Projeto_PIModel.Store.setOngs" />
-    <FunctionImportMapping FunctionImportName="setDoadores" FunctionName="Projeto_PIModel.Store.setDoadores" />
-    <AssociationSetMapping Name="Apoios1" TypeName="Projeto_PIModel.Apoios1" StoreEntitySet="Apoios">
       <EndProperty Name="Projetos">
         <ScalarProperty Name="id" ColumnName="idProjeto" />
       </EndProperty>

@@ -7,10 +7,10 @@
             <div runat="server" id="opcProjeto" class="row col-md-4 col-md-offset-4">
                 <span class="pull-left">Tipo do projeto</span>
                 <div class="btn-group pull-right" data-toggle="buttons">
-                    <label for="doacao" class="btn btn-default active">
+                    <label for="doacao" class="btn btn-default active" onclick="$('#txtMeta').mask('000.000.000.000.000,00', { reverse: true });">
                         <input runat="server" type="radio" name="tipo" id="radioDoacao" value="doacao" checked>Doação
                     </label>
-                    <label for="acao" class="btn btn-default">
+                    <label for="acao" class="btn btn-default" onclick="$('#txtMeta').unmask()">
                         <input runat="server" type="radio" name="tipo" id="radioAcao" value="acao">Ação
                     </label>
                 </div>
@@ -25,19 +25,19 @@
                 <div class="form-group">
                     <asp:Label ID="lblDescricao" CssClass="control-label col-md-4" AssociatedControlID="txtDescricaoProjeto" runat="server" Text="Descrição"></asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtDescricaoProjeto" required="" CssClass="form-control" Columns="10" Rows="2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtDescricaoProjeto" required="" CssClass="form-control" TextMode="MultiLine" Columns="10" Rows="5" runat="server"></asp:TextBox>
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="lblBanner" Text="Banner" AssociatedControlID="fuBanner" CssClass="control-label col-md-4" runat="server" />
                     <div class="col-md-8">
-                        <asp:FileUpload ID="fuBanner" required=""  CssClass="form-control" runat="server" />
+                        <asp:FileUpload ID="fuBanner" required="" CssClass="form-control" runat="server" />
                     </div>
                 </div>
                 <div class="form-group">
                     <asp:Label Text="Meta" ID="lblMeta" AssociatedControlID="txtMeta" CssClass="control-label col-md-4" runat="server" />
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtMeta" required="" CssClass="form-control" runat="server" />
+                        <asp:TextBox ID="txtMeta" required="" CssClass="form-control" runat="server" ClientIDMode="Static" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,5 +45,10 @@
                 </div>
             </div>
         </div>
+        <% if (usuario.Doadores != null){%>
+        <script>
+            $('#txtMeta').unmask();
+        </script>
+        <%} %>
     </div>
 </asp:Content>

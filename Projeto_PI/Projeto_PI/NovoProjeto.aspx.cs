@@ -25,7 +25,7 @@ namespace Projeto_PI
         /// <summary>
         /// referencia ao usuario
         /// </summary>
-        Usuarios usuario;
+        protected Usuarios usuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)

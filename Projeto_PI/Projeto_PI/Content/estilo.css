@@ -57,6 +57,7 @@ section#resultados-ong .panel-body, section#resultados-projetos .panel-body {
 
 #sectionProjetos .panel-body {
     height: 132px;
+    overflow:hidden;
 }
 
 #sectionVoluntarios img {

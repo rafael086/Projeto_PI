@@ -8,45 +8,26 @@
     <div role="main" class="container-fluid">
             <section id="ongs" class="row">
         		<h2 class="page-header text-center">Ongs</h2>
+                <% foreach (var ong in ongs)
+                    { %>
             	<div class="col-md-4">
             		<figure class="thumbnail">
-            			<img src="imagens/org.png" alt="">
-            			<figcaption class="caption">legenda</figcaption>
+            			<img src="Upload Imagens/<% Response.Write(ong.Usuarios.Imagens.nome); %>" alt="">
+            			<figcaption class="caption"><a href="PaginaUsuario.aspx?usuario=<% Response.Write(ong.id); %>"><% Response.Write(ong.Usuarios.nome); %></a></figcaption>
             		</figure>
             	</div>
-            	<div class="col-md-4">
-            		<figure class="thumbnail">
-            			<img src="imagens/org.png" alt="">
-            			<figcaption class="caption">legenda</figcaption>
-            		</figure>
-            	</div>
-            	<div class="col-md-4">
-            		<figure class="thumbnail">
-            			<img src="imagens/org.png" alt="">
-            			<figcaption class="caption">legenda</figcaption>
-            		</figure>
-            	</div>
+                <%} %>
             </section>
             <section id="projetos" class="row">
         		<h2 class="text-center page-header">Projetos</h2>
+                <%foreach (var projeto in projetos){%>
             	<div class="col-md-4">
             		<figure class="thumbnail">
-            			<img src="imagens/projeto.png" alt="">
-            			<figcaption class="caption">legenda</figcaption>
+            			<img src="Upload Imagens/<% Response.Write(projeto.Imagens.nome); %>" alt="">
+            			<figcaption class="caption"><% Response.Write(projeto.nome);%></figcaption>
             		</figure>
             	</div>
-            	<div class="col-md-4">
-            		<figure class="thumbnail">
-            			<img src="imagens/projeto.png" alt="">
-            			<figcaption class="caption">legenda</figcaption>
-            		</figure>
-            	</div>
-            	<div class="col-md-4">
-            		<figure class="thumbnail">
-            			<img src="imagens/projeto.png" alt="">
-            			<figcaption class="caption">legenda</figcaption>
-            		</figure>
-            	</div>
+            	<%} %>
             </section>
         </div>
 </asp:Content>

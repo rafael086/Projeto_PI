@@ -13,7 +13,7 @@ namespace Projeto_PI
 {
     public partial class PaginaOng : System.Web.UI.Page
     {
-        enum TipoUsuario { Ong, Doador};
+        enum TipoAcesso { Visitante, UsuarioVisitante, Usuario};
 
         /// <summary>
         /// Define o tipo de ação que esta sendo tomada pelo usuario
@@ -38,22 +38,26 @@ namespace Projeto_PI
         /// <summary>
         /// Referancia a entidade Usuario
         /// </summary>
-        public Usuarios usuario;
+        protected Usuarios usuario;
 
         /// <summary>
         /// verifica se o acesso a pagina esta sendo via metodo POST ou GET
         /// </summary>
         /// <returns>true - se via POST, false - se via GET</returns>
         /// <exception cref="HttpException"></exception>
-        private bool VerificaAcesso()
+        private TipoAcesso VerificaAcesso()
         {
             if (Session["usuario"] != null && Session["usuario"].ToString() == Request["usuario"].ToString())
             {
-                return true;
+                return TipoAcesso.Usuario;
+            }
+            else if (Session["usuario"] != null && Request["usuario"] != null)
+            {
+                return TipoAcesso.UsuarioVisitante;
             }
             else if (Request["usuario"] != null)
             {
-                return false;
+                return TipoAcesso.Visitante;
             }
             else
             {
@@ -68,7 +72,7 @@ namespace Projeto_PI
         {
             hNomeUsuario.InnerText = usuario.nome;
             pTextoComplementar.InnerText = (string.IsNullOrEmpty(usuario.frase) ? "Coloque uma frase aqui" : usuario.frase);
-            imgPerfil.ImageUrl = (usuario.Imagens == null) ? "imagens/imgDefault.png" : "Upload Imagens/" + usuario.Imagens.nome;
+            imgPerfil.ImageUrl = "Upload Imagens/" + usuario.Imagens.nome;
         }
 
         /// <summary>
@@ -107,6 +111,8 @@ namespace Projeto_PI
             idImg = img.id;
         }
         */
+
+        
         /// <summary>
         /// Verifica se o usuario esta sendo enviado por sessao ou via url
         /// caso seja passado por sessao carrega a master page de menu de usuarios
@@ -117,7 +123,7 @@ namespace Projeto_PI
         {
             try
             {
-                if (VerificaAcesso())
+                if (TipoAcesso.Usuario == VerificaAcesso() || TipoAcesso.UsuarioVisitante == VerificaAcesso())
                 {
                     Page.MasterPageFile = "MenuLogado.master";
                 }
@@ -149,11 +155,11 @@ namespace Projeto_PI
             sectionPessoal.ClientIDMode = ClientIDMode.Static;
             sectionProjetos.ClientIDMode = ClientIDMode.Static;
             //captura o id passado
-            id = (Session["usuario"] != null) ? Convert.ToInt32(Session["usuario"].ToString()) : Convert.ToInt32(Request["usuario"].ToString());
+            id = Convert.ToInt32(Request["usuario"].ToString());
 
             usuario = bd.Usuarios.Where(u => u.id == id).Single();
             
-            if (VerificaAcesso())
+            if (TipoAcesso.Usuario == VerificaAcesso())
             {
                 modalAlteracoes.Visible = true;
                 if (usuario.Doadores != null)
@@ -217,7 +223,7 @@ namespace Projeto_PI
             {
                 lblErro.Text = ex.Message;
             }
-            //da um update na ong
+            //da um update no usuario
             bd.Entry(usuario).State = EntityState.Modified;
             bd.SaveChanges();
             AtualizaCampos();

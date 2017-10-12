@@ -1,4 +1,23 @@
-﻿//=================================SCRIPTS DA PAGINA DE CADASTRO=================================================\\
+﻿//*********************************SCRIPTS REUTILIZAVEIS*********************************************************\\
+//remove os espacos excedentes dos inputs
+function tiraEspacoExcedente(input) {
+    input.value = input.value.trim();
+    input.value = input.value.replace(/\s{2,}/g, " ");
+}
+//cria mascaras para os inputs
+//https://plugins.jquery.com/mask/
+jQuery(function ($) {
+    //inputs da pagina de cadastro
+    $("#txtCNPJ").mask("99.999.999/9999-99");
+    $("#txtTelefone").mask("(99)9999-9999");
+    $("#txtCEPOng, #txtCEPDoador").mask("99999-999");
+    $("#txtCPFDoador").mask("999.999.999-99");
+    //inputs da pagina de cadastro de projeto
+    $('#txtMeta').mask('000.000.000.000.000,00', { reverse: true });
+});
+
+
+//=================================SCRIPTS DA PAGINA DE CADASTRO=================================================\\
 //Muda o formulario na pagina de cadastro 
 function trocaForm(tipo) {
     //em $(#<formID> input> coloco todos os input do form que esta com display none como disabled pois apesar de o form não esta visivel ele ainda faz parte do form geral(form runat=server), então se eu não desativar os inputs que estão invisiveis o submit não ira acontecer pois todos os campos devem estar preenchidos(vide atributo 'required').
@@ -44,19 +63,7 @@ function ativaFormsCadastro() {
     });
 }
 
-//cria mascaras para os inputs
-//https://plugins.jquery.com/mask/
-jQuery(function ($) {
-    $("#txtCNPJ").mask("99.999.999/9999-99");
-    $("#txtTelefone").mask("(99)9999-9999");
-    $("#txtCEPOng, #txtCEPDoador").mask("99999-999");
-    $("#txtCPFDoador").mask("999.999.999-99");
-});
-//remove os espacos excedentes dos inputs
-function tiraEspacoExcedente(input) {
-    input.value = input.value.trim();
-    input.value = input.value.replace(/\s{2,}/g, " ");
-}
+
 
 //faz uma requisicao ajax ao metodo estatico BuscaCep da pagina de cadastro
 function getEndereco(cep) {
@@ -205,7 +212,7 @@ function validarCPF(cpf) {
     return true;
 }
 
-//************************Scripts da pagina da ONG***************************//
+//************************Scripts da pagina de usuario***************************//
 function configuraAlteracoesSobre(idAlterar,titulo,frase) {
     $("#fg1").css("display", "none");
     $("#hiddenAcao").val("AlterarSobre");
@@ -240,3 +247,5 @@ function configuraAlteracoesPessoal(idAlterar, titulo, frase) {
     $("#txtNome").val(titulo);
     $("#txtFrase").val(frase);
 }
+
+
