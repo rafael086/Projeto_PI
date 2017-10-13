@@ -14,7 +14,7 @@ namespace Projeto_PI
         protected List<Projetos> projetos = new EntidadesProjetoPI().Projetos.OrderByDescending(p => p.id).Take(3).ToList();
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            Page.VerificaAcesso();
+            Page.VerificaAcessoLogado();
         }
         protected void Page_Load(object sender, EventArgs e)
         {

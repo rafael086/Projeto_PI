@@ -24,8 +24,8 @@
                             <a href="Default.aspx" class="navbar-brand">Nome do site</a>
                         </div>
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Ongs</a></li>
-                            <li><a href="#">Projetos</a></li>
+                            <li><a href="Categoria.aspx?tipo=ongs&pagina=1">Ongs</a></li>
+                            <li><a href="Categoria.aspx?tipo=projetos&pagina=1">Projetos</a></li>
                             <asp:ContentPlaceHolder ID="BotaoCriarProjeto" runat="server"></asp:ContentPlaceHolder>
                         </ul>
                         <div class="navbar-form navbar-left">

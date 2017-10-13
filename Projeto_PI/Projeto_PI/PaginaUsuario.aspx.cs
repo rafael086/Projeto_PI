@@ -13,8 +13,7 @@ namespace Projeto_PI
 {
     public partial class PaginaOng : System.Web.UI.Page
     {
-        enum TipoAcesso { Visitante, UsuarioVisitante, Usuario};
-
+        //enum TipoAcesso { Visitante, UsuarioVisitante, Usuario};
         /// <summary>
         /// Define o tipo de ação que esta sendo tomada pelo usuario
         /// </summary>
@@ -45,6 +44,8 @@ namespace Projeto_PI
         /// </summary>
         /// <returns>true - se via POST, false - se via GET</returns>
         /// <exception cref="HttpException"></exception>
+        
+            /*
         private TipoAcesso VerificaAcesso()
         {
             if (Session["usuario"] != null && Session["usuario"].ToString() == Request["usuario"].ToString())
@@ -64,7 +65,7 @@ namespace Projeto_PI
                 throw new HttpException("Nenhum dado foi enviado via HTTP");
             }
         }
-
+        */
         /// <summary>
         /// atualiza os campos da pagina
         /// </summary>
@@ -123,7 +124,7 @@ namespace Projeto_PI
         {
             try
             {
-                if (TipoAcesso.Usuario == VerificaAcesso() || TipoAcesso.UsuarioVisitante == VerificaAcesso())
+                if (MetodosDeApoio.TipoAcesso.Usuario == Page.VerificaTipoAcesso() || MetodosDeApoio.TipoAcesso.UsuarioVisitante == Page.VerificaTipoAcesso())
                 {
                     Page.MasterPageFile = "MenuLogado.master";
                 }
@@ -159,7 +160,7 @@ namespace Projeto_PI
 
             usuario = bd.Usuarios.Where(u => u.id == id).Single();
             
-            if (TipoAcesso.Usuario == VerificaAcesso())
+            if (MetodosDeApoio.TipoAcesso.Usuario == Page.VerificaTipoAcesso())
             {
                 modalAlteracoes.Visible = true;
                 if (usuario.Doadores != null)

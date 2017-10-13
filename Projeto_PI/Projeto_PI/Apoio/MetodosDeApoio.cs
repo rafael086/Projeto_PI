@@ -15,6 +15,7 @@ namespace Projeto_PI.Apoio
     /// </summary>
     public static class MetodosDeApoio
     {
+        public enum TipoAcesso{ Visitante, UsuarioVisitante, Usuario };
         /// <summary>
         /// Retira Tudo que não for letra ou numero da string
         /// </summary>
@@ -194,7 +195,7 @@ namespace Projeto_PI.Apoio
         /// verifica se o acesso a pagina é por um usuario logado ou nao e carrega a master page que é de acordo
         /// </summary>
         /// <param name="pagina"></param>
-        public static void VerificaAcesso(this Page pagina)
+        public static void VerificaAcessoLogado(this Page pagina)
         {
             if (pagina.Session["usuario"] != null)
             {
@@ -203,6 +204,34 @@ namespace Projeto_PI.Apoio
             else
             {
                 pagina.MasterPageFile = "Site.master";
+            }
+        }
+
+        /// <summary>
+        /// Verifica se o tipo de acesso a pagina, usar este metodo quando é passado via url um usuario
+        /// </summary>
+        /// <param name="pagina"></param>
+        /// <returns><code>TipoAcesso.Usuario</code> - se o acesso a pagina esta sendo por um usuario logado e ele é o "dono da pagina"
+        /// <code>TipoAcesso.Visitante</code> - se o acesso a pagina esta sendo feito por usuario não logado
+        /// <code>TipoAcesso.UsuarioVisitante</code> - se o acesso a pagina esta sendo feito por um usuario logado mas, que não é o "dono" da pagina</returns>
+        /// <exception cref="HttpException">se houver algum erro ao verificar o acesso</exception>
+        public static TipoAcesso VerificaTipoAcesso(this Page pagina)
+        {
+            if (pagina.Session["usuario"] != null && pagina.Session["usuario"].ToString() == pagina.Request["usuario"].ToString())
+            {
+                return TipoAcesso.Usuario;
+            }
+            else if (pagina.Session["usuario"] != null && pagina.Request["usuario"] != null)
+            {
+                return TipoAcesso.UsuarioVisitante;
+            }
+            else if (pagina.Request["usuario"] != null)
+            {
+                return TipoAcesso.Visitante;
+            }
+            else
+            {
+                throw new HttpException("Nenhum dado foi enviado via HTTP");
             }
         }
     }
