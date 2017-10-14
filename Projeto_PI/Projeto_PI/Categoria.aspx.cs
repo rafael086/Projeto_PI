@@ -13,7 +13,7 @@ namespace Projeto_PI
         /// <summary>
         /// usada para verificar o tipo de acesso
         /// </summary>
-        private const string ONGS = "ongs", PROJETOS = "projetos";
+        protected const string ONGS = "ongs", PROJETOS = "projetos";
         /// <summary>
         /// limite de itens por pagina
         /// </summary>
