@@ -29,14 +29,23 @@
       <Parameter Name="cidade" Mode="In" Type="String" />
       <Parameter Name="estado" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Apoios" EntityType="Projeto_PIModel.Apoios" />
+    <EntitySet Name="Comentarios" EntityType="Projeto_PIModel.Comentarios" />
     <EntitySet Name="Doadores" EntityType="Projeto_PIModel.Doadores" />
     <EntitySet Name="Enderecos" EntityType="Projeto_PIModel.Enderecos" />
     <EntitySet Name="Imagens" EntityType="Projeto_PIModel.Imagens" />
     <EntitySet Name="Ongs" EntityType="Projeto_PIModel.Ongs" />
-    <EntitySet Name="Projetos" EntityType="Projeto_PIModel.Projetos" />
     <EntitySet Name="Sobre" EntityType="Projeto_PIModel.Sobre" />
     <EntitySet Name="Usuarios" EntityType="Projeto_PIModel.Usuarios" />
     <EntitySet Name="Voluntarios" EntityType="Projeto_PIModel.Voluntarios" />
+    <AssociationSet Name="idDoador_Apoios_id_Doadores" Association="Projeto_PIModel.idDoador_Apoios_id_Doadores">
+      <End Role="Doadores" EntitySet="Doadores" />
+      <End Role="Apoios" EntitySet="Apoios" />
+    </AssociationSet>
+    <AssociationSet Name="idUsuario_Comentarios_id_Usuario" Association="Projeto_PIModel.idUsuario_Comentarios_id_Usuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Comentarios" EntitySet="Comentarios" />
+    </AssociationSet>
     <AssociationSet Name="Id_Doadores_IdUsuarios" Association="Projeto_PIModel.Id_Doadores_IdUsuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Doadores" EntitySet="Doadores" />
@@ -48,10 +57,6 @@
     <AssociationSet Name="idEndereco_Usuarios_id_Enderecos" Association="Projeto_PIModel.idEndereco_Usuarios_id_Enderecos">
       <End Role="Enderecos" EntitySet="Enderecos" />
       <End Role="Usuarios" EntitySet="Usuarios" />
-    </AssociationSet>
-    <AssociationSet Name="banner_Projetos_id_Imagens" Association="Projeto_PIModel.banner_Projetos_id_Imagens">
-      <End Role="Imagens" EntitySet="Imagens" />
-      <End Role="Projetos" EntitySet="Projetos" />
     </AssociationSet>
     <AssociationSet Name="idImagem_Sobre_id_Imagens" Association="Projeto_PIModel.idImagem_Sobre_id_Imagens">
       <End Role="Imagens" EntitySet="Imagens" />
@@ -69,28 +74,59 @@
       <End Role="Ongs" EntitySet="Ongs" />
       <End Role="Voluntarios" EntitySet="Voluntarios" />
     </AssociationSet>
-    <AssociationSet Name="idUsuario_Projetos_id_Usuarios" Association="Projeto_PIModel.idUsuario_Projetos_id_Usuarios">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Projetos" EntitySet="Projetos" />
-    </AssociationSet>
     <AssociationSet Name="idUsuario_Sobre_id_Usuario" Association="Projeto_PIModel.idUsuario_Sobre_id_Usuario">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Sobre" EntitySet="Sobre" />
     </AssociationSet>
-    <AssociationSet Name="Apoios" Association="Projeto_PIModel.Apoios">
-      <End Role="Doadores" EntitySet="Doadores" />
+    <EntitySet Name="Projetos" EntityType="Projeto_PIModel.Projetos" />
+    <AssociationSet Name="idProjeto_Apoios_id_Projeto" Association="Projeto_PIModel.idProjeto_Apoios_id_Projeto">
+      <End Role="Projetos" EntitySet="Projetos" />
+      <End Role="Apoios" EntitySet="Apoios" />
+    </AssociationSet>
+    <AssociationSet Name="idProjeto_Comentarios_id_Projeto" Association="Projeto_PIModel.idProjeto_Comentarios_id_Projeto">
+      <End Role="Projetos" EntitySet="Projetos" />
+      <End Role="Comentarios" EntitySet="Comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="banner_Projetos_id_Imagens" Association="Projeto_PIModel.banner_Projetos_id_Imagens">
+      <End Role="Imagens" EntitySet="Imagens" />
+      <End Role="Projetos" EntitySet="Projetos" />
+    </AssociationSet>
+    <AssociationSet Name="idUsuario_Projetos_id_Usuarios" Association="Projeto_PIModel.idUsuario_Projetos_id_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Projetos" EntitySet="Projetos" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Apoios">
+    <Key>
+      <PropertyRef Name="idProjeto" />
+      <PropertyRef Name="idDoador" />
+    </Key>
+    <Property Name="idProjeto" Type="Int32" Nullable="false" />
+    <Property Name="idDoador" Type="Int32" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Doadores" Relationship="Projeto_PIModel.idDoador_Apoios_id_Doadores" FromRole="Apoios" ToRole="Doadores" />
+    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.idProjeto_Apoios_id_Projeto" FromRole="Apoios" ToRole="Projetos" />
+  </EntityType>
+  <EntityType Name="Comentarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="comentario" Type="String" Nullable="false" MaxLength="245" FixedLength="false" Unicode="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idProjeto" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.idUsuario_Comentarios_id_Usuario" FromRole="Comentarios" ToRole="Usuarios" />
+    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.idProjeto_Comentarios_id_Projeto" FromRole="Comentarios" ToRole="Projetos" />
+  </EntityType>
   <EntityType Name="Doadores">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="cpf" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Apoios" Relationship="Projeto_PIModel.idDoador_Apoios_id_Doadores" FromRole="Doadores" ToRole="Apoios" />
     <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.Id_Doadores_IdUsuarios" FromRole="Doadores" ToRole="Usuarios" />
     <NavigationProperty Name="Voluntarios" Relationship="Projeto_PIModel.idDoador_Voluntarios_id_Doador" FromRole="Doadores" ToRole="Voluntarios" />
-    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.Apoios" FromRole="Doadores" ToRole="Projetos" />
   </EntityType>
   <EntityType Name="Enderecos">
     <Key>
@@ -111,9 +147,9 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nome" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.banner_Projetos_id_Imagens" FromRole="Imagens" ToRole="Projetos" />
     <NavigationProperty Name="Sobre" Relationship="Projeto_PIModel.idImagem_Sobre_id_Imagens" FromRole="Imagens" ToRole="Sobre" />
     <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.idImagem_Usuarios_id_Imagens" FromRole="Imagens" ToRole="Usuarios" />
+    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.banner_Projetos_id_Imagens" FromRole="Imagens" ToRole="Projetos" />
   </EntityType>
   <EntityType Name="Ongs">
     <Key>
@@ -127,21 +163,6 @@
     <Property Name="cargo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.Id_Ongs_Id_Usuarios" FromRole="Ongs" ToRole="Usuarios" />
     <NavigationProperty Name="Voluntarios" Relationship="Projeto_PIModel.idOng_Voluntarios_id_Ong" FromRole="Ongs" ToRole="Voluntarios" />
-  </EntityType>
-  <EntityType Name="Projetos">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nome" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-    <Property Name="descricao" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="banner" Type="Int32" Nullable="false" />
-    <Property Name="meta" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-    <Property Name="idUsuario" Type="Int32" Nullable="false" />
-    <Property Name="tipo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="Imagens" Relationship="Projeto_PIModel.banner_Projetos_id_Imagens" FromRole="Projetos" ToRole="Imagens" />
-    <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.idUsuario_Projetos_id_Usuarios" FromRole="Projetos" ToRole="Usuarios" />
-    <NavigationProperty Name="Doadores" Relationship="Projeto_PIModel.Apoios" FromRole="Projetos" ToRole="Doadores" />
   </EntityType>
   <EntityType Name="Sobre">
     <Key>
@@ -164,26 +185,51 @@
     <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="senha" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
     <Property Name="idEndereco" Type="Int32" Nullable="false" />
-    <Property Name="idImagem" Type="Int32" />
+    <Property Name="idImagem" Type="Int32" Nullable="false" />
     <Property Name="frase" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comentarios" Relationship="Projeto_PIModel.idUsuario_Comentarios_id_Usuario" FromRole="Usuarios" ToRole="Comentarios" />
     <NavigationProperty Name="Doadores" Relationship="Projeto_PIModel.Id_Doadores_IdUsuarios" FromRole="Usuarios" ToRole="Doadores" />
     <NavigationProperty Name="Enderecos" Relationship="Projeto_PIModel.idEndereco_Usuarios_id_Enderecos" FromRole="Usuarios" ToRole="Enderecos" />
     <NavigationProperty Name="Imagens" Relationship="Projeto_PIModel.idImagem_Usuarios_id_Imagens" FromRole="Usuarios" ToRole="Imagens" />
     <NavigationProperty Name="Ongs" Relationship="Projeto_PIModel.Id_Ongs_Id_Usuarios" FromRole="Usuarios" ToRole="Ongs" />
-    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.idUsuario_Projetos_id_Usuarios" FromRole="Usuarios" ToRole="Projetos" />
     <NavigationProperty Name="Sobre" Relationship="Projeto_PIModel.idUsuario_Sobre_id_Usuario" FromRole="Usuarios" ToRole="Sobre" />
+    <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.idUsuario_Projetos_id_Usuarios" FromRole="Usuarios" ToRole="Projetos" />
   </EntityType>
   <EntityType Name="Voluntarios">
     <Key>
       <PropertyRef Name="idOng" />
       <PropertyRef Name="idDoador" />
     </Key>
-    <Property Name="idOng" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idOng" Type="Int32" Nullable="false" />
     <Property Name="idDoador" Type="Int32" Nullable="false" />
-    <Property Name="Situacao" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="situacao" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" DefaultValue="Em aguardo" />
     <NavigationProperty Name="Doadores" Relationship="Projeto_PIModel.idDoador_Voluntarios_id_Doador" FromRole="Voluntarios" ToRole="Doadores" />
     <NavigationProperty Name="Ongs" Relationship="Projeto_PIModel.idOng_Voluntarios_id_Ong" FromRole="Voluntarios" ToRole="Ongs" />
   </EntityType>
+  <Association Name="idDoador_Apoios_id_Doadores">
+    <End Type="Projeto_PIModel.Doadores" Role="Doadores" Multiplicity="1" />
+    <End Type="Projeto_PIModel.Apoios" Role="Apoios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doadores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Apoios">
+        <PropertyRef Name="idDoador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idUsuario_Comentarios_id_Usuario">
+    <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="Projeto_PIModel.Comentarios" Role="Comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Comentarios">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Id_Doadores_IdUsuarios">
     <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="1" />
     <End Type="Projeto_PIModel.Doadores" Role="Doadores" Multiplicity="0..1" />
@@ -220,18 +266,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="banner_Projetos_id_Imagens">
-    <End Type="Projeto_PIModel.Imagens" Role="Imagens" Multiplicity="1" />
-    <End Type="Projeto_PIModel.Projetos" Role="Projetos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Imagens">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Projetos">
-        <PropertyRef Name="banner" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="idImagem_Sobre_id_Imagens">
     <End Type="Projeto_PIModel.Imagens" Role="Imagens" Multiplicity="0..1" />
     <End Type="Projeto_PIModel.Sobre" Role="Sobre" Multiplicity="*" />
@@ -245,7 +279,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="idImagem_Usuarios_id_Imagens">
-    <End Type="Projeto_PIModel.Imagens" Role="Imagens" Multiplicity="0..1" />
+    <End Type="Projeto_PIModel.Imagens" Role="Imagens" Multiplicity="1" />
     <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Imagens">
@@ -280,18 +314,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="idUsuario_Projetos_id_Usuarios">
-    <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="1" />
-    <End Type="Projeto_PIModel.Projetos" Role="Projetos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Projetos">
-        <PropertyRef Name="idUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="idUsuario_Sobre_id_Usuario">
     <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="1" />
     <End Type="Projeto_PIModel.Sobre" Role="Sobre" Multiplicity="*" />
@@ -304,8 +326,70 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Apoios">
-    <End Type="Projeto_PIModel.Doadores" Role="Doadores" Multiplicity="*" />
+  <EntityType Name="Projetos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="banner" Type="Int32" Nullable="false" />
+    <Property Name="meta" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="arrecadado" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="finalizado" Type="Boolean" Nullable="false" DefaultValue="False" />
+    <NavigationProperty Name="Apoios" Relationship="Projeto_PIModel.idProjeto_Apoios_id_Projeto" FromRole="Projetos" ToRole="Apoios" />
+    <NavigationProperty Name="Comentarios" Relationship="Projeto_PIModel.idProjeto_Comentarios_id_Projeto" FromRole="Projetos" ToRole="Comentarios" />
+    <NavigationProperty Name="Imagens" Relationship="Projeto_PIModel.banner_Projetos_id_Imagens" FromRole="Projetos" ToRole="Imagens" />
+    <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.idUsuario_Projetos_id_Usuarios" FromRole="Projetos" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="idProjeto_Apoios_id_Projeto">
+    <End Type="Projeto_PIModel.Projetos" Role="Projetos" Multiplicity="1" />
+    <End Type="Projeto_PIModel.Apoios" Role="Apoios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projetos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Apoios">
+        <PropertyRef Name="idProjeto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idProjeto_Comentarios_id_Projeto">
+    <End Type="Projeto_PIModel.Projetos" Role="Projetos" Multiplicity="1" />
+    <End Type="Projeto_PIModel.Comentarios" Role="Comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projetos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Comentarios">
+        <PropertyRef Name="idProjeto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="banner_Projetos_id_Imagens">
+    <End Type="Projeto_PIModel.Imagens" Role="Imagens" Multiplicity="1" />
     <End Type="Projeto_PIModel.Projetos" Role="Projetos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imagens">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Projetos">
+        <PropertyRef Name="banner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idUsuario_Projetos_id_Usuarios">
+    <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="Projeto_PIModel.Projetos" Role="Projetos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Projetos">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

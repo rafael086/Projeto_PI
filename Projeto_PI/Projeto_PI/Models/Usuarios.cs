@@ -17,8 +17,9 @@ namespace Projeto_PI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
         {
-            this.Projetos = new HashSet<Projetos>();
+            this.Comentarios = new HashSet<Comentarios>();
             this.Sobre = new HashSet<Sobre>();
+            this.Projetos = new HashSet<Projetos>();
         }
     
         public int id { get; set; }
@@ -26,16 +27,18 @@ namespace Projeto_PI.Models
         public string email { get; set; }
         public string senha { get; set; }
         public int idEndereco { get; set; }
-        public Nullable<int> idImagem { get; set; }
+        public int idImagem { get; set; }
         public string frase { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comentarios> Comentarios { get; set; }
         public virtual Doadores Doadores { get; set; }
         public virtual Enderecos Enderecos { get; set; }
         public virtual Imagens Imagens { get; set; }
         public virtual Ongs Ongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projetos> Projetos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sobre> Sobre { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Projetos> Projetos { get; set; }
     }
 }

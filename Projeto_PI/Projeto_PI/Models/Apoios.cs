@@ -12,19 +12,13 @@ namespace Projeto_PI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Voluntarios
+    public partial class Apoios
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Voluntarios()
-        {
-            this.situacao = "Em aguardo";
-        }
-    
-        public int idOng { get; set; }
+        public int idProjeto { get; set; }
         public int idDoador { get; set; }
-        public string situacao { get; set; }
+        public decimal valor { get; set; }
     
         public virtual Doadores Doadores { get; set; }
-        public virtual Ongs Ongs { get; set; }
+        public virtual Projetos Projetos { get; set; }
     }
 }

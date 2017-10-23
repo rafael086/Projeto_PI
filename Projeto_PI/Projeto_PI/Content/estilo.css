@@ -1,21 +1,38 @@
-﻿/*Estilos Gerais*/
+﻿/************************Estilos Gerais*********************************/
 /*limita o tilulo do painel a seu conteiner*/
 .panel-heading h3 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+/*limita o texto do corpo do painel a seu conteiner*/
 .panel-body{
     overflow: hidden;
 }
 
-/*Estilo pagina Default*/
+/*alinha os labels dos forms a esquerda*/
+.control-label{
+    text-align:left!important;
+}
+
+/*tira padding e margin da barra de progresso*/
+.progress{
+    padding:0;
+    margin:0;
+}
+
+/*configura estilo do rodape do painel*/
+.panel-footer{
+    overflow: overlay;
+    padding: 10px 0;
+}
+
+/********************Estilo pagina Default*****************************/
 section#ongs img, section#projetos img {
     width: 100%;
     height: 250px;
 }
-/*Estilo Buscas*/
+/****************************Estilo Buscas***********************************/
 section#resultados-ong img, section#resultados-projetos img {
     width: 100%;
     height: 250px;
@@ -25,30 +42,30 @@ section#resultados-ong .panel-body, section#resultados-projetos .panel-body {
     height: 132px;
 }
 
-/*Estilo Cadastro*/
+/*Estilo Cadastro
 #formOng .control-label, #formDoador .control-label {
     text-align: left;
-}
+}*/
 
 #formDoador {
     display: none;
 }
-/*Estilo NovoProjeto*/
+/*Estilo NovoProjet
 #form-novo-projeto .control-label {
     text-align: left;
-}
+}*/
 /*jumbotron pagina-doador/ong*/
 #destaque-usuario img {
     height: 300px;
     width: 100%;
 }
 /*Estilo pagina doador*/
-#historico img {
+#sectionHistoricoDoacoes img {
     width: 100%;
     height: 200px;
 }
 
-#historico .panel-body {
+#sectionHistoricoDoacoes .panel-body {
     height: 79px;
 }
 /*estilo pagina-ong*/
@@ -70,6 +87,7 @@ section#resultados-ong .panel-body, section#resultados-projetos .panel-body {
     width: 200px;
     height: 200px;
 }
+
 /*estilo pagina-projeto*/
 #destaque-projeto img {
     width: 100%;

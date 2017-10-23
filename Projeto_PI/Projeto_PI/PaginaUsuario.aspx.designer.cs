@@ -49,6 +49,33 @@ namespace Projeto_PI {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aEditarPerfil;
         
         /// <summary>
+        /// Controle sectionVoluntariar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionVoluntariar;
+        
+        /// <summary>
+        /// Controle aVoluntariar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aVoluntariar;
+        
+        /// <summary>
+        /// Controle aDesvoluntariar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aDesvoluntariar;
+        
+        /// <summary>
         /// Controle btnAddConteudoSobre.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,15 @@ namespace Projeto_PI {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionProjetos;
         
         /// <summary>
+        /// Controle sectionHistoricoDoacoes.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionHistoricoDoacoes;
+        
+        /// <summary>
         /// Controle sectionVoluntarios.
         /// </summary>
         /// <remarks>
@@ -92,6 +128,42 @@ namespace Projeto_PI {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl sectionVoluntarios;
+        
+        /// <summary>
+        /// Controle modalDetalhesVoluntarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modalDetalhesVoluntarios;
+        
+        /// <summary>
+        /// Controle hiddenVoluntario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hiddenVoluntario;
+        
+        /// <summary>
+        /// Controle btnConfirmaVoluntario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnConfirmaVoluntario;
+        
+        /// <summary>
+        /// Controle btnRejeitaVoluntario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnRejeitaVoluntario;
         
         /// <summary>
         /// Controle modalAlteracoes.
@@ -191,5 +263,14 @@ namespace Projeto_PI {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSalvar;
+        
+        /// <summary>
+        /// Controle aExcluir.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aExcluir;
     }
 }

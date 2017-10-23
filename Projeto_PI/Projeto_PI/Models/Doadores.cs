@@ -17,17 +17,17 @@ namespace Projeto_PI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Doadores()
         {
+            this.Apoios = new HashSet<Apoios>();
             this.Voluntarios = new HashSet<Voluntarios>();
-            this.Projetos = new HashSet<Projetos>();
         }
     
         public int id { get; set; }
         public string cpf { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Apoios> Apoios { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Voluntarios> Voluntarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Projetos> Projetos { get; set; }
     }
 }

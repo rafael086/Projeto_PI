@@ -12,10 +12,7 @@ jQuery(function ($) {
     $("#txtTelefone").mask("(99)9999-9999");
     $("#txtCEPOng, #txtCEPDoador").mask("99999-999");
     $("#txtCPFDoador").mask("999.999.999-99");
-    //inputs da pagina de cadastro de projeto
-    $('#txtMeta').mask('000.000.000.000.000,00', { reverse: true });
 });
-
 
 //=================================SCRIPTS DA PAGINA DE CADASTRO=================================================\\
 //Muda o formulario na pagina de cadastro 
@@ -62,8 +59,6 @@ function ativaFormsCadastro() {
         $("#modalLogin :input").attr("disabled", "true");
     });
 }
-
-
 
 //faz uma requisicao ajax ao metodo estatico BuscaCep da pagina de cadastro
 function getEndereco(cep) {
@@ -212,18 +207,22 @@ function validarCPF(cpf) {
     return true;
 }
 
-//************************Scripts da pagina de usuario***************************//
+//********************************************Scripts da pagina de usuario***************************//
 function configuraAlteracoesSobre(idAlterar,titulo,frase) {
     $("#fg1").css("display", "none");
     $("#hiddenAcao").val("AlterarSobre");
     $("#hiddenAlteracao").val(idAlterar);
     $("#txtNome").val(titulo)
     $("#txtFrase").val(frase);
+    $("#aExcluir").css("display", "block");
 }
 
 function configuraAlteracoesPerfil() {
     $("#fg1").css("display", "block");
     $("#hiddenAcao").val("AlterarPerfil");
+    $("#aExcluir").css("display", "none");
+    $("#txtNome").val($("#hNomeUsuario").text());
+    $("#txtFrase").val($("#pTextoComplementar").text());
 }
 
 function configuraAlteracoesAddSobre() {
@@ -231,6 +230,7 @@ function configuraAlteracoesAddSobre() {
     $("#hiddenAcao").val("AdicionarSobre")
     $("#txtNome").val("")
     $("#txtFrase").val("");
+    $("#aExcluir").css("display", "none");
 }
 
 function configuraAlteracoesAddPessoal() {
@@ -238,6 +238,7 @@ function configuraAlteracoesAddPessoal() {
     $("#hiddenAcao").val("AdicionarPessoal");
     $("#txtNome").val("")
     $("#txtFrase").val("");
+    $("#aExcluir").css("display", "none");
 }
 
 function configuraAlteracoesPessoal(idAlterar, titulo, frase) {
@@ -246,6 +247,28 @@ function configuraAlteracoesPessoal(idAlterar, titulo, frase) {
     $("#hiddenAlteracao").val(idAlterar);
     $("#txtNome").val(titulo);
     $("#txtFrase").val(frase);
+    $("#aExcluir").css("display", "block");
+
 }
 
+function configuraModalVoluntario(id, email, cep, numero, rua, bairro, cidade, estado) {
+    var colunas = $("#modalDetalhesVoluntarios table tbody tr td");
+    $("#hiddenVoluntario").val(id);
+    var valores = new Array(email, cep, numero, rua, bairro, cidade, estado);
+    for (var i = 0; i < colunas.length; i++) {
+        colunas[i].textContent = valores[i];
+    }
+}
+//==========================================SCRIPTS DA PAGINA DO PROJETO==================================\\
 
+
+function ativaFormComentario() {
+    $("#modalApoio").on("hidden.bs.modal", function () {
+        $("#formComentario :input").removeAttr("disabled");
+        $("#formApoio :input").attr("disabled", "true");
+    });
+}
+function ativaFormApoio() {
+    $("#formApoio :input").removeAttr("disabled");
+    $("#formComentario :input").attr("disabled", "true");
+}

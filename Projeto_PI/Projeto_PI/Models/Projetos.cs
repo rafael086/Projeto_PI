@@ -17,7 +17,9 @@ namespace Projeto_PI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Projetos()
         {
-            this.Doadores = new HashSet<Doadores>();
+            this.finalizado = false;
+            this.Apoios = new HashSet<Apoios>();
+            this.Comentarios = new HashSet<Comentarios>();
         }
     
         public int id { get; set; }
@@ -27,10 +29,14 @@ namespace Projeto_PI.Models
         public string meta { get; set; }
         public int idUsuario { get; set; }
         public string tipo { get; set; }
+        public decimal arrecadado { get; set; }
+        public bool finalizado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Apoios> Apoios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comentarios> Comentarios { get; set; }
         public virtual Imagens Imagens { get; set; }
         public virtual Usuarios Usuarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Doadores> Doadores { get; set; }
     }
 }

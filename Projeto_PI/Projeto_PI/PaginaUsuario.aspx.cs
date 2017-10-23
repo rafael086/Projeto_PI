@@ -40,80 +40,10 @@ namespace Projeto_PI
         protected Usuarios usuario;
 
         /// <summary>
-        /// verifica se o acesso a pagina esta sendo via metodo POST ou GET
+        /// referencia a entidade Doadores
         /// </summary>
-        /// <returns>true - se via POST, false - se via GET</returns>
-        /// <exception cref="HttpException"></exception>
-        
-            /*
-        private TipoAcesso VerificaAcesso()
-        {
-            if (Session["usuario"] != null && Session["usuario"].ToString() == Request["usuario"].ToString())
-            {
-                return TipoAcesso.Usuario;
-            }
-            else if (Session["usuario"] != null && Request["usuario"] != null)
-            {
-                return TipoAcesso.UsuarioVisitante;
-            }
-            else if (Request["usuario"] != null)
-            {
-                return TipoAcesso.Visitante;
-            }
-            else
-            {
-                throw new HttpException("Nenhum dado foi enviado via HTTP");
-            }
-        }
-        */
-        /// <summary>
-        /// atualiza os campos da pagina
-        /// </summary>
-        private void AtualizaCampos()
-        {
-            hNomeUsuario.InnerText = usuario.nome;
-            pTextoComplementar.InnerText = (string.IsNullOrEmpty(usuario.frase) ? "Coloque uma frase aqui" : usuario.frase);
-            imgPerfil.ImageUrl = "Upload Imagens/" + usuario.Imagens.nome;
-        }
+        private Doadores voluntario;
 
-        /// <summary>
-        /// Salva a imagem no banco e na pasta
-        /// </summary>
-        /*
-        private void SalvaImagem()
-        {
-            if (!fuImagem.HasFile)
-            {
-                throw new Exception("Nenhum arquivo foi enviado");
-            }
-            string extensao = Path.GetExtension(fuImagem.FileName);
-            string arquivo = Server.MapPath("Upload Imagens\\");
-            string nomeImg = fuImagem.FileName;
-            if (extensao != ".jpg" && extensao != ".png" && extensao != ".gif")
-            {
-                throw new Exception("Apenas arquivos .jpg, .gif ou .png");
-            }
-            //verifica se existe um arquivo com o mesmo nome no diretorio de upload de imagens, se existir coloca "(n)" depois do nome do arquivo
-            int cont = 0;
-            do
-            {
-                cont++;
-                int tot = Directory.GetFiles(arquivo).Count(a => Path.GetFileName(a) == nomeImg);
-                if (tot > 0)
-                {
-                    nomeImg = string.Format("{0}({1}){2}", Path.GetFileNameWithoutExtension(fuImagem.FileName), cont, extensao);
-                    continue;
-                }
-                break;
-            } while (true);
-            fuImagem.SaveAs(arquivo + nomeImg);
-            //adiciona a nova imagem ao banco
-            var img = bd.Imagens.Add(new Imagens { nome = nomeImg });
-            idImg = img.id;
-        }
-        */
-
-        
         /// <summary>
         /// Verifica se o usuario esta sendo enviado por sessao ou via url
         /// caso seja passado por sessao carrega a master page de menu de usuarios
@@ -144,7 +74,8 @@ namespace Projeto_PI
         protected void Page_Load(object sender, EventArgs e)
         {
             //torna os IDs dos controles HTML estaticos
-
+            aExcluir.ServerClick += AExcluir_ServerClick;
+            aExcluir.ClientIDMode = ClientIDMode.Static;
             btnAddConteudoPessoal.ClientIDMode = ClientIDMode.Static;
             btnAddConteudoSobre.ClientIDMode = ClientIDMode.Static;
             hNomeUsuario.ClientIDMode = ClientIDMode.Static;
@@ -155,30 +86,115 @@ namespace Projeto_PI
             modalAlteracoes.ClientIDMode = ClientIDMode.Static;
             sectionPessoal.ClientIDMode = ClientIDMode.Static;
             sectionProjetos.ClientIDMode = ClientIDMode.Static;
+            sectionHistoricoDoacoes.ClientIDMode = ClientIDMode.Static;
+            modalDetalhesVoluntarios.ClientIDMode = ClientIDMode.Static;
+            hiddenVoluntario.ClientIDMode = ClientIDMode.Static;
+            modalDetalhesVoluntarios.Visible = false;
             //captura o id passado
             id = Convert.ToInt32(Request["usuario"].ToString());
 
             usuario = bd.Usuarios.Where(u => u.id == id).Single();
-            
-            if (MetodosDeApoio.TipoAcesso.Usuario == Page.VerificaTipoAcesso())
+            MetodosDeApoio.TipoAcesso acesso = Page.VerificaTipoAcesso();
+            if (acesso == MetodosDeApoio.TipoAcesso.Usuario)
             {
                 modalAlteracoes.Visible = true;
-                if (usuario.Doadores != null)
+                sectionVoluntariar.Visible = false;
+                if (usuario.Doadores != null)//se for um doador
                 {
                     //sectionProjetos.Visible = false;
                     sectionPessoal.Visible = false;
                     sectionVoluntarios.Visible = false;
+                    sectionVoluntariar.Visible = false;
+                }
+                else
+                {
+                    btnConfirmaVoluntario.ServerClick += BtnConfirmaVoluntario_ServerClick;
+                    btnRejeitaVoluntario.ServerClick += BtnRejeitaVoluntario_ServerClick; 
+                    modalDetalhesVoluntarios.Visible = true;
+                    sectionHistoricoDoacoes.Visible = false;
                 }
             }
             else
             {
+                if (usuario.Doadores != null)//se for um doador
+                {
+                    //sectionProjetos.Visible = false;
+                    sectionPessoal.Visible = false;
+                    sectionVoluntarios.Visible = false;
+                    sectionVoluntariar.Visible = false;
+                }
+                else
+                {
+                    if (acesso == MetodosDeApoio.TipoAcesso.UsuarioVisitante && bd.Usuarios.AsEnumerable().Where(u => u.id == Convert.ToInt32(Session["usuario"].ToString())).Single().Doadores != null)//se for um usuario visitante e do tipo doador
+                    {
+                        voluntario = bd.Doadores.AsEnumerable().Where(d => d.id == Convert.ToInt32(Session["usuario"].ToString())).Single();
+                        if (usuario.Ongs.Voluntarios.Count(v => v.idDoador == voluntario.id) <= 0)
+                        {
+                            aDesvoluntariar.Visible = false;
+                            aVoluntariar.ServerClick += AVoluntariar_ServerClick;
+                        }
+                        else
+                        {
+                            aVoluntariar.Visible = false;
+                            aDesvoluntariar.ServerClick += ADesvoluntariar_ServerClick;
+                        }
+                    }
+                    else
+                    {
+                        aVoluntariar.Attributes["data-toggle"] = "modal";
+                        aVoluntariar.Attributes["data-target"] = "#modalLogin";
+                    }
+                    sectionHistoricoDoacoes.Visible = false;
+                }
                 btnAddConteudoSobre.Visible = false;
                 btnAddConteudoPessoal.Visible = false;
                 sectionVoluntarios.Visible = false;
                 aEditarPerfil.Visible = false;
                 modalAlteracoes.Visible = false;
             }
-            AtualizaCampos();
+            hNomeUsuario.InnerText = usuario.nome;
+            pTextoComplementar.InnerText = (string.IsNullOrEmpty(usuario.frase) ? "Coloque uma frase aqui" : usuario.frase);
+            imgPerfil.ImageUrl = "Upload Imagens/" + usuario.Imagens.nome;
+        }
+
+        private void BtnRejeitaVoluntario_ServerClick(object sender, EventArgs e)
+        {
+            int idVoluntario = Convert.ToInt32(hiddenVoluntario.Value);
+            Voluntarios voluntario = usuario.Ongs.Voluntarios.Where(v => v.idDoador == idVoluntario).Single();
+            voluntario.situacao = "Negado";
+            bd.Entry(voluntario).State = EntityState.Modified;
+            bd.SaveChanges();
+        }
+
+        private void BtnConfirmaVoluntario_ServerClick(object sender, EventArgs e)
+        {
+            int idVoluntario = Convert.ToInt32(hiddenVoluntario.Value);
+            Voluntarios voluntario = usuario.Ongs.Voluntarios.Where(v => v.idDoador == idVoluntario).Single();
+            voluntario.situacao = "Confirmado";
+            bd.Entry(voluntario).State = EntityState.Modified;
+            bd.SaveChanges();
+        }
+
+        private void ADesvoluntariar_ServerClick(object sender, EventArgs e)
+        {
+            usuario.Ongs.Voluntarios.Remove(usuario.Ongs.Voluntarios.Where(v => v.idDoador == voluntario.id).Single());
+            bd.SaveChanges();
+            Response.Redirect(Request.RawUrl);
+        }
+
+        private void AVoluntariar_ServerClick(object sender, EventArgs e)
+        {
+            usuario.Ongs.Voluntarios.Add(new Voluntarios { idDoador = voluntario.id});
+            bd.SaveChanges();         
+            Response.Redirect(Request.RawUrl);
+        }
+
+        private void AExcluir_ServerClick(object sender, EventArgs e)
+        {
+            Sobre sobre = usuario.Sobre.Where(s => s.id == Convert.ToInt32(hiddenAlteracao.Value)).Single();
+            usuario.Sobre.Remove(sobre);
+            bd.Entry(sobre).State = EntityState.Deleted;
+            bd.SaveChanges();
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -227,7 +243,7 @@ namespace Projeto_PI
             //da um update no usuario
             bd.Entry(usuario).State = EntityState.Modified;
             bd.SaveChanges();
-            AtualizaCampos();
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

@@ -31,22 +31,43 @@ namespace Projeto_PI
         /// </summary>
         protected EntidadesProjetoPI bd = new EntidadesProjetoPI();
 
+
         /// <summary>
         /// objeto generico para que projetos e ongs possam ser exibidas da mesma maneira
         /// </summary>
         protected class Resultado
         {
-            public Resultado(int id, string nome, string descricao, string imagem)
+            private Resultado(int id, string nome, string descricao, string imagem)
             {
                 Id = id;
                 Nome = nome;
                 Descricao = descricao;
                 Imagem = imagem;
+
             }
+            public Resultado(int id, string nome, string descricao, string imagem, string tipo, int apoios, string meta, string estilo, int progresso) : this(id, nome, descricao, imagem)
+            {
+                Tipo = tipo;
+                Apoios = apoios;
+                Meta = meta;
+                Estilo = estilo;
+                Progresso = progresso;
+            }
+            public Resultado(int id, string nome, string descricao, string imagem, int projetos) : this(id, nome, descricao, imagem)
+            {
+                Projetos = projetos;
+            }
+
             public int Id { get; }
             public string Nome { get; }
             public string Descricao { get; }
-            public string Imagem { get; set; }
+            public string Imagem { get; }
+            public int Projetos { get; }
+            public string Tipo { get; }
+            public int Apoios { get; }
+            public string Meta { get; }
+            public string Estilo { get; }
+            public int Progresso { get; }
         }
 
         /// <summary>
@@ -102,7 +123,7 @@ namespace Projeto_PI
                     if (pagina > ultimo)
                         Response.Redirect(string.Format("Categoria.aspx?tipo={0}&pagina=1", Request["tipo"].ToString()));
                     h2Titulo.InnerText = "Ongs";
-                    bd.Ongs.OrderByDescending(o => o.id).Skip(inicio).Take(LIMITE).ToList().ForEach(o => resultados.Add(new Resultado(o.id, o.Usuarios.nome, o.Usuarios.frase, o.Usuarios.Imagens.nome)));
+                    bd.Ongs.OrderByDescending(o => o.id).Skip(inicio).Take(LIMITE).ToList().ForEach(o => resultados.Add(new Resultado(o.id, o.Usuarios.nome, o.Usuarios.frase, o.Usuarios.Imagens.nome, o.Usuarios.Projetos.Count)));
                 }
                 else
                 {
@@ -110,7 +131,17 @@ namespace Projeto_PI
                     if (pagina > ultimo)
                         Response.Redirect(string.Format("Categoria.aspx?tipo={0}&pagina=1", Request["tipo"].ToString()));
                     h2Titulo.InnerText = "Projetos";
-                    bd.Projetos.OrderByDescending(p => p.id).Skip(inicio).Take(LIMITE).ToList().ForEach(p => resultados.Add(new Resultado(p.id, p.nome, p.descricao, p.Imagens.nome)));
+                    bd.Projetos.OrderByDescending(p => p.id).Skip(inicio).Take(LIMITE).ToList().ForEach(p =>
+                    {
+                        try
+                        {
+                            resultados.Add(new Resultado(p.id, p.nome, p.descricao, p.Imagens.nome, p.tipo.TrimEnd(), p.Apoios.Count, p.meta, p.EscreveProgresso(), p.ProgressoProjeto()));
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            resultados.Add(new Resultado(p.id, p.nome, p.descricao, p.Imagens.nome, p.tipo.TrimEnd(), p.Apoios.Count, p.meta, null, 0));
+                        }
+                    });
                 }
 
             }

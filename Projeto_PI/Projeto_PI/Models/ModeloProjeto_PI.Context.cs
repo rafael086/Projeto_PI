@@ -27,14 +27,16 @@ namespace Projeto_PI.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Apoios> Apoios { get; set; }
+        public virtual DbSet<Comentarios> Comentarios { get; set; }
         public virtual DbSet<Doadores> Doadores { get; set; }
         public virtual DbSet<Enderecos> Enderecos { get; set; }
         public virtual DbSet<Imagens> Imagens { get; set; }
         public virtual DbSet<Ongs> Ongs { get; set; }
-        public virtual DbSet<Projetos> Projetos { get; set; }
         public virtual DbSet<Sobre> Sobre { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Voluntarios> Voluntarios { get; set; }
+        public virtual DbSet<Projetos> Projetos { get; set; }
     
         public virtual int setOngs(string nome, string email, string senha, string razaoSocial, string cnpj, string telefone, string representante, string cargo, string cep, string numero, string bairro, string rua, string cidade, string estado)
         {

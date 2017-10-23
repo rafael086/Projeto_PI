@@ -3,6 +3,25 @@
   <EntityContainerMapping StorageEntityContainer="Projeto_PIModelStoreContainer" CdmEntityContainer="EntidadesProjetoPI">
     <FunctionImportMapping FunctionImportName="setOngs" FunctionName="Projeto_PIModel.Store.setOngs" />
     <FunctionImportMapping FunctionImportName="setDoadores" FunctionName="Projeto_PIModel.Store.setDoadores" />
+    <EntitySetMapping Name="Apoios">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Apoios">
+        <MappingFragment StoreEntitySet="Apoios">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="idDoador" ColumnName="idDoador" />
+          <ScalarProperty Name="idProjeto" ColumnName="idProjeto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comentarios">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Comentarios">
+        <MappingFragment StoreEntitySet="Comentarios">
+          <ScalarProperty Name="idProjeto" ColumnName="idProjeto" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Doadores">
       <EntityTypeMapping TypeName="Projeto_PIModel.Doadores">
         <MappingFragment StoreEntitySet="Doadores">
@@ -44,19 +63,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Projetos">
-      <EntityTypeMapping TypeName="Projeto_PIModel.Projetos">
-        <MappingFragment StoreEntitySet="Projetos">
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="meta" ColumnName="meta" />
-          <ScalarProperty Name="banner" ColumnName="banner" />
-          <ScalarProperty Name="descricao" ColumnName="descricao" />
-          <ScalarProperty Name="nome" ColumnName="nome" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Sobre">
       <EntityTypeMapping TypeName="Projeto_PIModel.Sobre">
         <MappingFragment StoreEntitySet="Sobre">
@@ -84,19 +90,26 @@
     <EntitySetMapping Name="Voluntarios">
       <EntityTypeMapping TypeName="Projeto_PIModel.Voluntarios">
         <MappingFragment StoreEntitySet="Voluntarios">
-          <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+          <ScalarProperty Name="situacao" ColumnName="situacao" />
           <ScalarProperty Name="idDoador" ColumnName="idDoador" />
           <ScalarProperty Name="idOng" ColumnName="idOng" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Apoios" TypeName="Projeto_PIModel.Apoios" StoreEntitySet="Apoios">
-      <EndProperty Name="Projetos">
-        <ScalarProperty Name="id" ColumnName="idProjeto" />
-      </EndProperty>
-      <EndProperty Name="Doadores">
-        <ScalarProperty Name="id" ColumnName="idDoador" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Projetos">
+      <EntityTypeMapping TypeName="Projeto_PIModel.Projetos">
+        <MappingFragment StoreEntitySet="Projetos">
+          <ScalarProperty Name="finalizado" ColumnName="finalizado" />
+          <ScalarProperty Name="arrecadado" ColumnName="arrecadado" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="meta" ColumnName="meta" />
+          <ScalarProperty Name="banner" ColumnName="banner" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

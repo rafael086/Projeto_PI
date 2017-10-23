@@ -42,13 +42,22 @@
                 </div>
                 <div class="form-group">
                     <asp:Button ID="btnIniciarProjeto" Text="Iniciar projeto" CssClass="btn btn-block" runat="server" OnClick="btnIniciarProjeto_Click" />
+                    <asp:Button ID="btnEditarProjeto" runat="server" Text="Salvar alteracoes" CssClass="btn btn-block" OnClick="btnEditarProjeto_Click" Visible="false"></asp:Button>
                 </div>
             </div>
         </div>
-        <% if (usuario.Doadores != null){%>
         <script>
-            $('#txtMeta').unmask();
+            <% if (projeto != null && projeto.tipo.TrimEnd() == "Doação")
+            {%>
+            jQuery(function ($) {
+                $("#txtMeta").mask("000.000.000.000.000,00", { reverse: true });
+            });
+            <%}
+            else if(Request["acao"].ToString() == "criar" && usuario.Doadores==null){ %>
+            jQuery(function ($) {
+                $("#txtMeta").mask("000.000.000.000.000,00", { reverse: true });
+            });
+            <%} %>
         </script>
-        <%} %>
     </div>
 </asp:Content>

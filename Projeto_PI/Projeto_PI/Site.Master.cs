@@ -12,7 +12,12 @@ namespace Projeto_PI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnBusca.ServerClick += BtnBusca_ServerClick;
+        }
 
+        private void BtnBusca_ServerClick(object sender, EventArgs e)
+        {
+            Response.Redirect("Busca.aspx?busca="+txtBusca.Text);
         }
 
         protected void btnEntrar_Click(object sender, EventArgs e)

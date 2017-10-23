@@ -15,7 +15,23 @@ namespace Projeto_PI.Apoio
     /// </summary>
     public static class MetodosDeApoio
     {
-        public enum TipoAcesso{ Visitante, UsuarioVisitante, Usuario };
+        /// <summary>
+        /// define o tipo de acesso a pagina
+        /// </summary>
+        public enum TipoAcesso{
+            /// <summary>
+            /// é um usuario que não esta logado
+            /// </summary>
+            Visitante,
+            /// <summary>
+            /// é um usuario logado mas que não é o "dono" da pagina
+            /// </summary>
+            UsuarioVisitante,
+            /// <summary>
+            /// é um usuario logado e dono da pagina
+            /// </summary>
+            Usuario
+        };
         /// <summary>
         /// Retira Tudo que não for letra ou numero da string
         /// </summary>
@@ -210,10 +226,9 @@ namespace Projeto_PI.Apoio
         /// <summary>
         /// Verifica se o tipo de acesso a pagina, usar este metodo quando é passado via url um usuario
         /// </summary>
-        /// <param name="pagina"></param>
-        /// <returns><code>TipoAcesso.Usuario</code> - se o acesso a pagina esta sendo por um usuario logado e ele é o "dono da pagina"
-        /// <code>TipoAcesso.Visitante</code> - se o acesso a pagina esta sendo feito por usuario não logado
-        /// <code>TipoAcesso.UsuarioVisitante</code> - se o acesso a pagina esta sendo feito por um usuario logado mas, que não é o "dono" da pagina</returns>
+        /// <returns>TipoAcesso.Usuario - se o acesso a pagina esta sendo por um usuario logado e ele é o "dono da pagina"
+        /// TipoAcesso.Visitante- se o acesso a pagina esta sendo feito por usuario não logado
+        /// TipoAcesso.UsuarioVisitante - se o acesso a pagina esta sendo feito por um usuario logado mas, que não é o "dono" da pagina</returns>
         /// <exception cref="HttpException">se houver algum erro ao verificar o acesso</exception>
         public static TipoAcesso VerificaTipoAcesso(this Page pagina)
         {

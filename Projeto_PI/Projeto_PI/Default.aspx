@@ -24,7 +24,7 @@
             	<div class="col-md-4">
             		<figure class="thumbnail">
             			<img src="Upload Imagens/<% Response.Write(projeto.Imagens.nome); %>" alt="">
-            			<figcaption class="caption"><% Response.Write(projeto.nome);%></figcaption>
+            			<figcaption class="caption"><a href="PaginaProjeto.aspx?projeto=<% Response.Write(projeto.id);%>"><% Response.Write(projeto.nome);%></a></figcaption>
             		</figure>
             	</div>
             	<%} %>

@@ -30,9 +30,9 @@
                         </ul>
                         <div class="navbar-form navbar-left">
                             <div class="input-group">
-                                <input type="text" name="busca" class="form-control" placeholder="Buscar ongs">
+                                <asp:TextBox ID="txtBusca" CssClass="form-control" placeholder="Buscar ongs/projetos" runat="server"/>
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
+                                    <button class="btn btn-default" runat="server" id="btnBusca">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </div>

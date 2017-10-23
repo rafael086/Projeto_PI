@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Categoria.aspx" />
+    <Content Include="EditarCadastro.aspx" />
     <Content Include="Models\ModeloProjeto_PI.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModeloProjeto_PI.edmx</DependentUpon>
@@ -337,6 +338,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditarCadastro.aspx.cs">
+      <DependentUpon>EditarCadastro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarCadastro.aspx.designer.cs">
+      <DependentUpon>EditarCadastro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -346,6 +354,12 @@
     </Compile>
     <Compile Include="MenuLogado.master.designer.cs">
       <DependentUpon>MenuLogado.master</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Apoios.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comentarios.cs">
+      <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Doadores.cs">
       <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
@@ -377,6 +391,7 @@
     <Compile Include="Models\Projetos.cs">
       <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProjetosParcial.cs" />
     <Compile Include="Models\Sobre.cs">
       <DependentUpon>ModeloProjeto_PI.tt</DependentUpon>
     </Compile>

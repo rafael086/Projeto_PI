@@ -64,8 +64,8 @@ namespace Projeto_PI.Apoio
             {
                 throw new Exception("Informe um telefone valido");
             }
-            EntidadesProjetoPI banco = new EntidadesProjetoPI();
-            banco.setOngs(nome, email, senha, razaoSocial, cnpj, telefone, representante, cargo, cep, numero, bairro, rua, cidade, estado);
+           
+            bd.setOngs(nome, email, senha, razaoSocial, cnpj, telefone, representante, cargo, cep, numero, bairro, rua, cidade, estado);
 
         }
 

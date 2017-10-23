@@ -7,6 +7,16 @@
     </Key>
     <Property Name="idProjeto" Type="int" Nullable="false" />
     <Property Name="idDoador" Type="int" Nullable="false" />
+    <Property Name="valor" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comentarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="comentario" Type="varchar" MaxLength="245" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="idProjeto" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Doadores">
     <Key>
@@ -55,7 +65,9 @@
     <Property Name="banner" Type="int" Nullable="false" />
     <Property Name="meta" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
-    <Property Name="tipo" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="arrecadado" Type="money" Nullable="false" />
+    <Property Name="finalizado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Sobre">
     <Key>
@@ -76,7 +88,7 @@
     <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="senha" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="idEndereco" Type="int" Nullable="false" />
-    <Property Name="idImagem" Type="int" />
+    <Property Name="idImagem" Type="int" Nullable="false" />
     <Property Name="frase" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Voluntarios">
@@ -84,9 +96,9 @@
       <PropertyRef Name="idOng" />
       <PropertyRef Name="idDoador" />
     </Key>
-    <Property Name="idOng" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idOng" Type="int" Nullable="false" />
     <Property Name="idDoador" Type="int" Nullable="false" />
-    <Property Name="Situacao" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="situacao" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
   <Association Name="banner_Projetos_id_Imagens">
     <End Role="Imagens" Type="Self.Imagens" Multiplicity="1" />
@@ -173,7 +185,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="idImagem_Usuarios_id_Imagens">
-    <End Role="Imagens" Type="Self.Imagens" Multiplicity="0..1" />
+    <End Role="Imagens" Type="Self.Imagens" Multiplicity="1" />
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Imagens">
@@ -205,6 +217,30 @@
       </Principal>
       <Dependent Role="Apoios">
         <PropertyRef Name="idProjeto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idProjeto_Comentarios_id_Projeto">
+    <End Role="Projetos" Type="Self.Projetos" Multiplicity="1" />
+    <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projetos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Comentarios">
+        <PropertyRef Name="idProjeto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idUsuario_Comentarios_id_Usuario">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Comentarios">
+        <PropertyRef Name="idUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -262,6 +298,7 @@
   </Function>
   <EntityContainer Name="Projeto_PIModelStoreContainer">
     <EntitySet Name="Apoios" EntityType="Self.Apoios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comentarios" EntityType="Self.Comentarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Doadores" EntityType="Self.Doadores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Enderecos" EntityType="Self.Enderecos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Imagens" EntityType="Self.Imagens" Schema="dbo" store:Type="Tables" />
@@ -309,6 +346,14 @@
     <AssociationSet Name="idProjeto_Apoios_id_Projeto" Association="Self.idProjeto_Apoios_id_Projeto">
       <End Role="Projetos" EntitySet="Projetos" />
       <End Role="Apoios" EntitySet="Apoios" />
+    </AssociationSet>
+    <AssociationSet Name="idProjeto_Comentarios_id_Projeto" Association="Self.idProjeto_Comentarios_id_Projeto">
+      <End Role="Projetos" EntitySet="Projetos" />
+      <End Role="Comentarios" EntitySet="Comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="idUsuario_Comentarios_id_Usuario" Association="Self.idUsuario_Comentarios_id_Usuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Comentarios" EntitySet="Comentarios" />
     </AssociationSet>
     <AssociationSet Name="idUsuario_Projetos_id_Usuarios" Association="Self.idUsuario_Projetos_id_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />

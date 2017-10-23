@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Nome Ong" Language="C#" MasterPageFile="~/MenuLogado.master" AutoEventWireup="true" CodeBehind="PaginaUsuario.aspx.cs" Inherits="Projeto_PI.PaginaOng" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ConteudoPrincipal" runat="server">
     <!-- Esta pagina foi configurada para que possa ser usada tanto para os usuarios ONGS quanto para os DOADORES-->
     <!--a div destaque-usuario vai ser usada para os dois tipos de usuarios-->
@@ -13,6 +14,45 @@
         <a href="#" runat="server" onclick="configuraAlteracoesPerfil()" id="aEditarPerfil" data-toggle="modal" data-target="#modalAlteracoes">Editar</a>
     </div>
     <div class="container-fluid" role="main">
+        <!-- a section voluntariar vai ser visivel para ong e doadores, porem apenas para ongs que ela vai fazer parte do conteudo da pagina-->
+        <section runat="server" id="sectionVoluntariar">
+            <h2 class="text-center page-header">Quer ser um voluntario?</h2>
+            <table class="table">
+                <caption class="caption text-center">
+                    <h3>Endereco</h3>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Cep</th>
+                        <th>Numero</th>
+                        <th>Rua</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Representante</th>
+                        <th>Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><% Response.Write(usuario.email); %></td>
+                        <td><% Response.Write(usuario.Ongs.telefone); %></td>
+                        <td><% Response.Write(usuario.Enderecos.cep); %></td>
+                        <td><% Response.Write(usuario.Enderecos.numero); %></td>
+                        <td><% Response.Write(usuario.Enderecos.rua); %></td>
+                        <td><% Response.Write(usuario.Enderecos.bairro); %></td>
+                        <td><% Response.Write(usuario.Enderecos.cidade); %></td>
+                        <td><% Response.Write(usuario.Enderecos.estado); %></td>
+                        <td><% Response.Write(usuario.Ongs.representante); %></td>
+                        <td><% Response.Write(usuario.Ongs.cargo); %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="#" id="aVoluntariar" runat="server" class="btn btn-block btn-success">Voluntariar-se</a>
+            <a href="#" id="aDesvoluntariar" runat="server" class="btn btn-block btn-danger">Você ja se voluntariou, clique para remover a solicitação</a>
+        </section>
         <!--a section sobre tambem vai ser usada tanto para ongs quanto sobre doadores-->
         <section id="sobre">
             <h2 class="text-center page-header">Sobre </h2>
@@ -42,6 +82,7 @@
                 </button>
             </div>
         </section>
+        <!--A section pessoal vai ser usada so por ongs-->
         <section runat="server" id="sectionPessoal">
             <h2 class="text-center page-header">Pessoal</h2>
             <div class="row">
@@ -69,45 +110,151 @@
                 </button>
             </div>
         </section>
+        <!--A section projetos é usada por ongs e doadores-->
         <section runat="server" id="sectionProjetos">
             <h2 class="text-center page-header">Seus projetos</h2>
             <div class="row">
-                <%foreach (var item in usuario.Projetos)
-                    {
-                %>
+                <%foreach (var projeto in usuario.Projetos.OrderByDescending(p => p.id))
+                    {%>
                 <div class="col-md-6">
                     <div class="col-md-4">
-                        <img src="Upload Imagens/<%Response.Write(item.Imagens.nome); %>" class="img-rounded" alt="">
+                        <img src="Upload Imagens/<%Response.Write(projeto.Imagens.nome); %>" class="img-rounded" alt="">
                     </div>
                     <div class="col-md-8 panel panel-default">
                         <div class="panel-heading">
-                            <h3><%Response.Write(item.nome); %></h3>
+                            <h3><a href="PaginaProjeto.aspx?projeto=<%Response.Write(projeto.id);%>"><%Response.Write(projeto.nome); %></a></h3>
                         </div>
                         <div class="panel-body">
-                            <p><%Response.Write(item.descricao); %></p>
+                            <p><%Response.Write(projeto.descricao); %></p>
                         </div>
                         <div class="panel-footer">
-                            rodape
+                            <% if (projeto.tipo.TrimEnd() == "Doação")
+                                {%>
+                            <div class="progress col-md-9">
+                                <div class="progress-bar progress-bar-success" role="progressbar" <% Response.Write(projeto.EscreveProgresso()); %>>
+                                    <% Response.Write(projeto.ProgressoProjeto() + "%"); %>
+                                </div>
+                            </div>
+                            <span class="col-md-3"><% Response.Write(projeto.Apoios.Count); %> Apoios</span>
+                            <%}
+                                else
+                                { %>
+                            <span class="col-md-6">Apoiado por <% Response.Write(projeto.Apoios.Count); %> pessoas</span>
+                            <span class="col-md-6">Meta: <%Response.Write(projeto.meta); %></span>
+                            <%} %>
                         </div>
                     </div>
                 </div>
                 <%  } %>
             </div>
         </section>
-        <section runat="server" id="sectionVoluntarios">
-            <h2 class="text-center page-header">Area dos voluntarios</h2>
-            <div class="media col-md-6 col-md-offset-3">
-                <div class="media-left">
-                    <img src="imagens/man.png" alt="" class="media-object">
+        <!--A section historico é usada apenas por doadores-->
+        <section id="sectionHistoricoDoacoes" runat="server">
+            <h2 class="text-center page-header">Historico de apoios</h2>
+            <div class="row">
+                <%foreach (var projeto in usuario.Doadores.Apoios.Where(a => a.idDoador == usuario.id).Select(a => a.Projetos))
+                    {%>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="col-md-4">
+                        <img src="Upload Imagens/<%Response.Write(projeto.Imagens.nome); %>" class="img-rounded" alt="">
+                    </div>
+                    <div class="col-md-8 panel panel-default">
+                        <div class="panel-heading">
+                            <h3><a href="PaginaProjeto.aspx?projeto=<%Response.Write(projeto.id);%>"><%Response.Write(projeto.nome); %></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            <p><%Response.Write(projeto.descricao); %></p>
+                        </div>
+                        <div class="panel-footer">
+                            <% if (projeto.tipo.TrimEnd() == "Doação")
+                                {%>
+                            <div class="progress col-md-9">
+                                <div class="progress-bar progress-bar-success" role="progressbar" <% Response.Write(projeto.EscreveProgresso()); %>>
+                                    <% Response.Write(projeto.ProgressoProjeto() + "%"); %>
+                                </div>
+                            </div>
+                            <span class="col-md-3"><% Response.Write(projeto.Apoios.Count); %> Apoios</span>
+                            <%}
+                                else
+                                { %>
+                            <span class="col-md-6">Apoiado por <% Response.Write(projeto.Apoios.Count); %> pessoas</span>
+                            <span class="col-md-6">Meta: <%Response.Write(projeto.meta); %></span>
+                            <%} %>
+                        </div>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <h3 class="media-heading">Nome</h3>
-                    <p>quero ser um voluntario</p>
-                    <a href="#" class="pull-right">aprovar</a>
-                </div>
+                <%} %>
             </div>
         </section>
+        <!--A section voluntarios é usada apenas por ongs-->
+        <section runat="server" id="sectionVoluntarios">
+            <h2 class="text-center page-header">Area dos voluntarios</h2>
+            <%foreach (var voluntario in usuario.Ongs.Voluntarios.Where(v => v.situacao.Trim() == "Em aguardo"))
+                {%>
+            <div class="media col-md-6 col-md-offset-3">
+                <div class="media-left">
+                    <img src="Upload Imagens/<% Response.Write(voluntario.Doadores.Usuarios.Imagens.nome); %>" alt="" class="media-object">
+                </div>
+                <div class="media-body">
+                    <h3 class="media-heading"><% Response.Write(voluntario.Doadores.Usuarios.nome);%></h3>
+                    <p>quer ser um voluntario</p>
+                    <%
+                        string parametros = string.Format("'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", voluntario.idDoador, voluntario.Doadores.Usuarios.email, voluntario.Doadores.Usuarios.Enderecos.cep, voluntario.Doadores.Usuarios.Enderecos.numero, voluntario.Doadores.Usuarios.Enderecos.rua, voluntario.Doadores.Usuarios.Enderecos.bairro, voluntario.Doadores.Usuarios.Enderecos.cidade, voluntario.Doadores.Usuarios.Enderecos.estado);
+                    %>
+                    <a href="#" onclick="configuraModalVoluntario(<%Response.Write(parametros); %>)" class="pull-right btn btn-default" data-toggle="modal" data-target="#modalDetalhesVoluntarios">+ Detalhes</a>
+                </div>
+                <hr />
+            </div>
+            <%} %>
+        </section>
     </div>
+    <!--a modal de detalhes do voluntario é visivel apenas para ongs-->
+    <div id="modalDetalhesVoluntarios" class="modal fade" runat="server" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Detalhes do voluntario</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" runat="server" id="hiddenVoluntario" value="" />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Cep</th>
+                                <th>Numero</th>
+                                <th>Rua</th>
+                                <th>Bairro</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <button id="btnConfirmaVoluntario" class="btn btn-block btn-success" runat="server">Confirmar voluntario</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="btnRejeitaVoluntario" class="btn btn-block btn-danger" runat="server">Rejeitar voluntario</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--A modal de alteracoes é usada por ongs e daodores-->
     <div runat="server" id="modalAlteracoes" class="modal fade" role="dialog">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
@@ -139,7 +286,8 @@
                         <input type="hidden" runat="server" id="hiddenAlteracao" value="" />
                         <input type="hidden" runat="server" id="hiddenAcao" value="" />
                         <div class="form-group">
-                            <asp:Button ID="btnSalvar" runat="server" CssClass="btn btn-block" Text="Salvar" OnClick="btnSalvar_Click" ClientIDMode="Static"></asp:Button>
+                            <asp:Button ID="btnSalvar" runat="server" CssClass="btn btn-success btn-block" Text="Salvar" OnClick="btnSalvar_Click" ClientIDMode="Static"></asp:Button>
+                            <a href="#" runat="server" id="aExcluir" class="btn btn-danger btn-block">Excluir</a>
                         </div>
                     </div>
                 </div>
