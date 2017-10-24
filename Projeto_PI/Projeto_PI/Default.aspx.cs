@@ -10,7 +10,7 @@ namespace Projeto_PI
 {
     public partial class Default : System.Web.UI.Page
     {
-        protected List<Ongs> ongs = new EntidadesProjetoPI().Ongs.OrderByDescending(o => o.id).Take(3).ToList();
+        protected List<Ongs> ongs = new EntidadesProjetoPI().Usuarios.OfType<Ongs>().OrderByDescending(o => o.id).Take(3).ToList();
         protected List<Projetos> projetos = new EntidadesProjetoPI().Projetos.OrderByDescending(p => p.id).Take(3).ToList();
         protected void Page_PreInit(object sender, EventArgs e)
         {

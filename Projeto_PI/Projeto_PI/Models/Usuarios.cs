@@ -12,7 +12,7 @@ namespace Projeto_PI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuarios
+    public abstract partial class Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
@@ -32,10 +32,8 @@ namespace Projeto_PI.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentarios> Comentarios { get; set; }
-        public virtual Doadores Doadores { get; set; }
         public virtual Enderecos Enderecos { get; set; }
         public virtual Imagens Imagens { get; set; }
-        public virtual Ongs Ongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sobre> Sobre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

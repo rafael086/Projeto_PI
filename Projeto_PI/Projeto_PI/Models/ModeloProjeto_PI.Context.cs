@@ -29,10 +29,8 @@ namespace Projeto_PI.Models
     
         public virtual DbSet<Apoios> Apoios { get; set; }
         public virtual DbSet<Comentarios> Comentarios { get; set; }
-        public virtual DbSet<Doadores> Doadores { get; set; }
         public virtual DbSet<Enderecos> Enderecos { get; set; }
         public virtual DbSet<Imagens> Imagens { get; set; }
-        public virtual DbSet<Ongs> Ongs { get; set; }
         public virtual DbSet<Sobre> Sobre { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Voluntarios> Voluntarios { get; set; }

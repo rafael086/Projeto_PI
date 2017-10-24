@@ -404,27 +404,21 @@
           </FunctionImport>
           <EntitySet Name="Apoios" EntityType="Projeto_PIModel.Apoios" />
           <EntitySet Name="Comentarios" EntityType="Projeto_PIModel.Comentarios" />
-          <EntitySet Name="Doadores" EntityType="Projeto_PIModel.Doadores" />
           <EntitySet Name="Enderecos" EntityType="Projeto_PIModel.Enderecos" />
           <EntitySet Name="Imagens" EntityType="Projeto_PIModel.Imagens" />
-          <EntitySet Name="Ongs" EntityType="Projeto_PIModel.Ongs" />
           <EntitySet Name="Sobre" EntityType="Projeto_PIModel.Sobre" />
           <EntitySet Name="Usuarios" EntityType="Projeto_PIModel.Usuarios" />
           <EntitySet Name="Voluntarios" EntityType="Projeto_PIModel.Voluntarios" />
           <AssociationSet Name="idDoador_Apoios_id_Doadores" Association="Projeto_PIModel.idDoador_Apoios_id_Doadores">
-            <End Role="Doadores" EntitySet="Doadores" />
+            <End Role="Doadores" EntitySet="Usuarios" />
             <End Role="Apoios" EntitySet="Apoios" />
           </AssociationSet>
           <AssociationSet Name="idUsuario_Comentarios_id_Usuario" Association="Projeto_PIModel.idUsuario_Comentarios_id_Usuario">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Comentarios" EntitySet="Comentarios" />
           </AssociationSet>
-          <AssociationSet Name="Id_Doadores_IdUsuarios" Association="Projeto_PIModel.Id_Doadores_IdUsuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Doadores" EntitySet="Doadores" />
-          </AssociationSet>
           <AssociationSet Name="idDoador_Voluntarios_id_Doador" Association="Projeto_PIModel.idDoador_Voluntarios_id_Doador">
-            <End Role="Doadores" EntitySet="Doadores" />
+            <End Role="Doadores" EntitySet="Usuarios" />
             <End Role="Voluntarios" EntitySet="Voluntarios" />
           </AssociationSet>
           <AssociationSet Name="idEndereco_Usuarios_id_Enderecos" Association="Projeto_PIModel.idEndereco_Usuarios_id_Enderecos">
@@ -439,12 +433,8 @@
             <End Role="Imagens" EntitySet="Imagens" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="Id_Ongs_Id_Usuarios" Association="Projeto_PIModel.Id_Ongs_Id_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Ongs" EntitySet="Ongs" />
-          </AssociationSet>
           <AssociationSet Name="idOng_Voluntarios_id_Ong" Association="Projeto_PIModel.idOng_Voluntarios_id_Ong">
-            <End Role="Ongs" EntitySet="Ongs" />
+            <End Role="Ongs" EntitySet="Usuarios" />
             <End Role="Voluntarios" EntitySet="Voluntarios" />
           </AssociationSet>
           <AssociationSet Name="idUsuario_Sobre_id_Usuario" Association="Projeto_PIModel.idUsuario_Sobre_id_Usuario">
@@ -491,14 +481,9 @@
           <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.idUsuario_Comentarios_id_Usuario" FromRole="Comentarios" ToRole="Usuarios" />
           <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.idProjeto_Comentarios_id_Projeto" FromRole="Comentarios" ToRole="Projetos" />
         </EntityType>
-        <EntityType Name="Doadores">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+        <EntityType Name="Doadores" BaseType="Projeto_PIModel.Usuarios">
           <Property Name="cpf" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Apoios" Relationship="Projeto_PIModel.idDoador_Apoios_id_Doadores" FromRole="Doadores" ToRole="Apoios" />
-          <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.Id_Doadores_IdUsuarios" FromRole="Doadores" ToRole="Usuarios" />
           <NavigationProperty Name="Voluntarios" Relationship="Projeto_PIModel.idDoador_Voluntarios_id_Doador" FromRole="Doadores" ToRole="Voluntarios" />
         </EntityType>
         <EntityType Name="Enderecos">
@@ -524,17 +509,12 @@
           <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.idImagem_Usuarios_id_Imagens" FromRole="Imagens" ToRole="Usuarios" />
           <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.banner_Projetos_id_Imagens" FromRole="Imagens" ToRole="Projetos" />
         </EntityType>
-        <EntityType Name="Ongs">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+        <EntityType Name="Ongs" BaseType="Projeto_PIModel.Usuarios">
           <Property Name="razaoSocial" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="cnpj" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
           <Property Name="telefone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="representante" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="cargo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.Id_Ongs_Id_Usuarios" FromRole="Ongs" ToRole="Usuarios" />
           <NavigationProperty Name="Voluntarios" Relationship="Projeto_PIModel.idOng_Voluntarios_id_Ong" FromRole="Ongs" ToRole="Voluntarios" />
         </EntityType>
         <EntityType Name="Sobre">
@@ -549,7 +529,7 @@
           <NavigationProperty Name="Imagens" Relationship="Projeto_PIModel.idImagem_Sobre_id_Imagens" FromRole="Sobre" ToRole="Imagens" />
           <NavigationProperty Name="Usuarios" Relationship="Projeto_PIModel.idUsuario_Sobre_id_Usuario" FromRole="Sobre" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="Usuarios">
+        <EntityType Name="Usuarios" Abstract="true">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -561,10 +541,8 @@
           <Property Name="idImagem" Type="Int32" Nullable="false" />
           <Property Name="frase" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Comentarios" Relationship="Projeto_PIModel.idUsuario_Comentarios_id_Usuario" FromRole="Usuarios" ToRole="Comentarios" />
-          <NavigationProperty Name="Doadores" Relationship="Projeto_PIModel.Id_Doadores_IdUsuarios" FromRole="Usuarios" ToRole="Doadores" />
           <NavigationProperty Name="Enderecos" Relationship="Projeto_PIModel.idEndereco_Usuarios_id_Enderecos" FromRole="Usuarios" ToRole="Enderecos" />
           <NavigationProperty Name="Imagens" Relationship="Projeto_PIModel.idImagem_Usuarios_id_Imagens" FromRole="Usuarios" ToRole="Imagens" />
-          <NavigationProperty Name="Ongs" Relationship="Projeto_PIModel.Id_Ongs_Id_Usuarios" FromRole="Usuarios" ToRole="Ongs" />
           <NavigationProperty Name="Sobre" Relationship="Projeto_PIModel.idUsuario_Sobre_id_Usuario" FromRole="Usuarios" ToRole="Sobre" />
           <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.idUsuario_Projetos_id_Usuarios" FromRole="Usuarios" ToRole="Projetos" />
         </EntityType>
@@ -600,18 +578,6 @@
             </Principal>
             <Dependent Role="Comentarios">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Id_Doadores_IdUsuarios">
-          <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="1" />
-          <End Type="Projeto_PIModel.Doadores" Role="Doadores" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Doadores">
-              <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -660,18 +626,6 @@
             </Principal>
             <Dependent Role="Usuarios">
               <PropertyRef Name="idImagem" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Id_Ongs_Id_Usuarios">
-          <End Type="Projeto_PIModel.Usuarios" Role="Usuarios" Multiplicity="1" />
-          <End Type="Projeto_PIModel.Ongs" Role="Ongs" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Ongs">
-              <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -792,14 +746,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Doadores">
-            <EntityTypeMapping TypeName="Projeto_PIModel.Doadores">
-              <MappingFragment StoreEntitySet="Doadores">
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Enderecos">
             <EntityTypeMapping TypeName="Projeto_PIModel.Enderecos">
               <MappingFragment StoreEntitySet="Enderecos">
@@ -821,18 +767,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Ongs">
-            <EntityTypeMapping TypeName="Projeto_PIModel.Ongs">
-              <MappingFragment StoreEntitySet="Ongs">
-                <ScalarProperty Name="cargo" ColumnName="cargo" />
-                <ScalarProperty Name="representante" ColumnName="representante" />
-                <ScalarProperty Name="telefone" ColumnName="telefone" />
-                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
-                <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sobre">
             <EntityTypeMapping TypeName="Projeto_PIModel.Sobre">
               <MappingFragment StoreEntitySet="Sobre">
@@ -845,15 +779,31 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="Projeto_PIModel.Usuarios">
+            <EntityTypeMapping TypeName="IsTypeOf(Projeto_PIModel.Usuarios)">
               <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="frase" ColumnName="frase" />
-                <ScalarProperty Name="idImagem" ColumnName="idImagem" />
-                <ScalarProperty Name="idEndereco" ColumnName="idEndereco" />
-                <ScalarProperty Name="senha" ColumnName="senha" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="idEndereco" ColumnName="idEndereco" />
+                <ScalarProperty Name="idImagem" ColumnName="idImagem" />
+                <ScalarProperty Name="frase" ColumnName="frase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Projeto_PIModel.Doadores)">
+              <MappingFragment StoreEntitySet="Doadores">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Projeto_PIModel.Ongs)">
+              <MappingFragment StoreEntitySet="Ongs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="representante" ColumnName="representante" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

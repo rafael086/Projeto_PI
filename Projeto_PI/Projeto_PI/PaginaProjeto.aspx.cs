@@ -48,7 +48,7 @@ namespace Projeto_PI
                 spanArrecadado.Visible = (projeto.tipo.TrimEnd() == "Doação") ? true : false;
                 modalApoio.ClientIDMode = ClientIDMode.Static;
                 //se o usuario for do tipo ONG deixa o botao apoiar invisivel
-                if (Session["usuario"] != null && bd.Doadores.AsEnumerable().Where(d => d.id == Convert.ToInt32(Session["usuario"].ToString())).SingleOrDefault() == null)
+                if (Session["usuario"] != null && bd.Usuarios.OfType<Doadores>().AsEnumerable().Where(d => d.id == Convert.ToInt32(Session["usuario"].ToString())).SingleOrDefault() == null)
                 {
                     aApoiar.Visible = false;
                 }
@@ -57,13 +57,8 @@ namespace Projeto_PI
                 {
                     formComentario.Visible = false;
                     aApoiar.Attributes["data-target"] = "#modalLogin";
+                    aApoiar.Attributes["onclick"] = "desativaFormsCadastro()";
                     modalApoio.Visible = false;
-                }
-                if (projeto.finalizado)//se o projeto ja estiver finalizado
-                {
-                    h3Status.Visible = true;
-                    modalApoio.Visible = false;
-                    aApoiar.Visible = false;
                 }
                 else
                 {
@@ -94,13 +89,18 @@ namespace Projeto_PI
                         modalApoio.Visible = false;
                     }
                 }
-                
+                if (projeto.finalizado)//se o projeto ja estiver finalizado
+                {
+                    h3Status.Visible = true;
+                    modalApoio.Visible = false;
+                    aApoiar.Visible = false;
+                }
                 //atribui os dados aos elementos
                 h2NomeProjeto.InnerText = projeto.nome;
-                spanArrecadado.InnerText = "Arrecadado: " + string.Format("{0:0.00}",projeto.arrecadado);
+                spanArrecadado.InnerText = "Arrecadado: " + string.Format("{0:0.00}", projeto.arrecadado);
                 spanMeta.InnerText = " Meta: " + projeto.meta;
-                spanApoios.InnerText = string.Format("Apoiado por {0} pessoas",projeto.Apoios.Count(a => a.idProjeto == idProjeto).ToString());
-                imgProjeto.ImageUrl = "Upload Imagens/"+projeto.Imagens.nome;
+                spanApoios.InnerText = string.Format("Apoiado por {0} pessoas", projeto.Apoios.Count(a => a.idProjeto == idProjeto).ToString());
+                imgProjeto.ImageUrl = "Upload Imagens/" + projeto.Imagens.nome;
                 pDescricao.InnerText = projeto.descricao;
             }
             catch (Exception)
@@ -132,7 +132,7 @@ namespace Projeto_PI
         private void AApoiado_ServerClick(object sender, EventArgs e)
         {
             Apoios apoio = projeto.Apoios.Where(a => a.idDoador == idDoador).Single();
-            if(projeto.tipo.TrimEnd() == "Doação")
+            if (projeto.tipo.TrimEnd() == "Doação")
                 projeto.arrecadado -= apoio.valor;
             projeto.Apoios.Remove(apoio);
             bd.Entry(projeto).State = EntityState.Modified;
@@ -145,7 +145,7 @@ namespace Projeto_PI
             CreditCardAttribute valida = new CreditCardAttribute();
             try
             {
-                decimal valor = 0m; 
+                decimal valor = 0m;
                 if (projeto.tipo.TrimEnd() == "Doação")
                 {
                     string cartao = txtCartaoCredito.Text;
@@ -165,12 +165,13 @@ namespace Projeto_PI
                     }
                     projeto.arrecadado += valor;
                 }
-                projeto.Apoios.Add(new Apoios {idDoador = idDoador, idProjeto = projeto.id, valor = valor });
+                projeto.Apoios.Add(new Apoios { idDoador = idDoador, idProjeto = projeto.id, valor = valor });
                 bd.Entry(projeto).State = EntityState.Modified;
                 bd.SaveChanges();
                 Response.Redirect(Request.RawUrl);
             }
-            catch (FormatException) {
+            catch (FormatException)
+            {
                 lblErro.Text = "um valor invalido foi passado como doacao";
                 lblErro.Visible = true;
                 return;
@@ -186,7 +187,7 @@ namespace Projeto_PI
         protected void btnEnviarComentario_Click(object sender, EventArgs e)
         {
             string comentario = txtComentario.Text;
-            bd.Comentarios.Add(new Comentarios {comentario = comentario,idProjeto = projeto.id,idUsuario = Convert.ToInt32(Session["usuario"].ToString())});
+            bd.Comentarios.Add(new Comentarios { comentario = comentario, idProjeto = projeto.id, idUsuario = Convert.ToInt32(Session["usuario"].ToString()) });
             bd.SaveChanges();
             Response.Redirect(Request.RawUrl);
         }

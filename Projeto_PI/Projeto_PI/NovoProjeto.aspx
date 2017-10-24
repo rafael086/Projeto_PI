@@ -53,7 +53,7 @@
                 $("#txtMeta").mask("000.000.000.000.000,00", { reverse: true });
             });
             <%}
-            else if(Request["acao"].ToString() == "criar" && usuario.Doadores==null){ %>
+            else if (Request["acao"].ToString() == "criar" && doador == null){ %>
             jQuery(function ($) {
                 $("#txtMeta").mask("000.000.000.000.000,00", { reverse: true });
             });

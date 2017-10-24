@@ -119,11 +119,11 @@ namespace Projeto_PI
                 inicio = (pagina - 1) * LIMITE;
                 if (VerificaTipoConsulta())
                 {
-                    ultimo = Convert.ToInt32(Math.Ceiling(bd.Ongs.Count() / Convert.ToDouble(LIMITE)));
+                    ultimo = Convert.ToInt32(Math.Ceiling(bd.Usuarios.OfType<Ongs>().Count() / Convert.ToDouble(LIMITE)));
                     if (pagina > ultimo)
                         Response.Redirect(string.Format("Categoria.aspx?tipo={0}&pagina=1", Request["tipo"].ToString()));
                     h2Titulo.InnerText = "Ongs";
-                    bd.Ongs.OrderByDescending(o => o.id).Skip(inicio).Take(LIMITE).ToList().ForEach(o => resultados.Add(new Resultado(o.id, o.Usuarios.nome, o.Usuarios.frase, o.Usuarios.Imagens.nome, o.Usuarios.Projetos.Count)));
+                    bd.Usuarios.OfType<Ongs>().OrderByDescending(o => o.id).Skip(inicio).Take(LIMITE).ToList().ForEach(o => resultados.Add(new Resultado(o.id, o.nome, o.frase, o.Imagens.nome, o.Projetos.Count)));
                 }
                 else
                 {

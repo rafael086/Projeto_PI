@@ -44,18 +44,19 @@ namespace Projeto_PI.Apoio
             }
 
             EntidadesProjetoPI bd = new EntidadesProjetoPI();
-            var query = bd.Ongs.Count(ong => ong.razaoSocial == razaoSocial);
-            if (query != 0)
+            var ongs = bd.Usuarios.OfType<Ongs>();
+            var tot = ongs.Count(ong => ong.razaoSocial == razaoSocial);
+            if (tot != 0)
             {
                 throw new Exception("Razão social ja existe");
             }
-            query = bd.Ongs.Count(ong => ong.cnpj == cnpj);
-            if (query != 0)
+            tot = ongs.Count(ong => ong.cnpj == cnpj);
+            if (tot != 0)
             {
                 throw new Exception("CNPJ já cadastrado");
             }
             telefone = telefone.TiraMascara();
-            var tot = bd.Ongs.Count(o => o.telefone == telefone);
+            tot = ongs.Count(o => o.telefone == telefone);
             if (tot != 0)
             {
                 throw new Exception("Este telefone ja esta em uso");
@@ -64,7 +65,7 @@ namespace Projeto_PI.Apoio
             {
                 throw new Exception("Informe um telefone valido");
             }
-           
+
             bd.setOngs(nome, email, senha, razaoSocial, cnpj, telefone, representante, cargo, cep, numero, bairro, rua, cidade, estado);
 
         }
@@ -89,7 +90,7 @@ namespace Projeto_PI.Apoio
                 throw new Exception("Informe um cpf valido");
             }
             EntidadesProjetoPI banco = new EntidadesProjetoPI();
-            var tot = banco.Doadores.Count(d => d.cpf == cpf);
+            var tot = banco.Usuarios.OfType<Doadores>().Count(d => d.cpf == cpf);
             if (tot != 0)
             {
                 throw new Exception("CPF ja cadastrado");
@@ -131,7 +132,7 @@ namespace Projeto_PI.Apoio
             {
                 throw new Exception("Informe um cep valido");
             }
-            if (!Regex.IsMatch(numero,"\\d+"))
+            if (!Regex.IsMatch(numero, "\\d+"))
             {
                 throw new Exception("informe um numero valido");
             }
@@ -156,7 +157,7 @@ namespace Projeto_PI.Apoio
             if (tot != 0)
             {
                 throw new Exception("Ja existe um cadastro neste endereco");
-            }        
+            }
         }
     }
 }

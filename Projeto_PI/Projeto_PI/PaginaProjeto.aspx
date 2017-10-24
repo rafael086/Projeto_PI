@@ -30,11 +30,11 @@
                         <div class="row center-block" style="width: 50%; height: 100px;">
                             <div class="media col-md-12">
                                 <div class="media-left col-md-4">
-                                    <img style="width: 100%; height: 100px" src="Upload Imagens/<%Response.Write(item.Doadores.Usuarios.Imagens.nome); %>" alt="" class="media-object"/>
+                                    <img style="width: 100%; height: 100px" src="Upload Imagens/<%Response.Write(item.Doadores.Imagens.nome); %>" alt="" class="media-object"/>
                                 </div>
                                 <div class="media-body">
-                                    <h3 class="media-heading"><a href="PaginaUsuario.aspx?usuario=<% Response.Write(item.Doadores.id); %>"><%Response.Write(item.Doadores.Usuarios.nome); %></a></h3>
-                                    <p><%Response.Write(item.Doadores.Usuarios.frase); %></p>
+                                    <h3 class="media-heading"><a href="PaginaUsuario.aspx?usuario=<% Response.Write(item.Doadores.id); %>"><%Response.Write(item.Doadores.nome); %></a></h3>
+                                    <p><%Response.Write(item.Doadores.frase); %></p>
                                 </div>
                             </div>
                         </div>

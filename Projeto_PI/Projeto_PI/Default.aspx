@@ -12,8 +12,8 @@
                     { %>
             	<div class="col-md-4">
             		<figure class="thumbnail">
-            			<img src="Upload Imagens/<% Response.Write(ong.Usuarios.Imagens.nome); %>" alt="">
-            			<figcaption class="caption"><a href="PaginaUsuario.aspx?usuario=<% Response.Write(ong.id); %>"><% Response.Write(ong.Usuarios.nome); %></a></figcaption>
+            			<img src="Upload Imagens/<% Response.Write(ong.Imagens.nome); %>" alt="">
+            			<figcaption class="caption"><a href="PaginaUsuario.aspx?usuario=<% Response.Write(ong.id); %>"><% Response.Write(ong.nome); %></a></figcaption>
             		</figure>
             	</div>
                 <%} %>

@@ -37,16 +37,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><% Response.Write(usuario.email); %></td>
-                        <td><% Response.Write(usuario.Ongs.telefone); %></td>
-                        <td><% Response.Write(usuario.Enderecos.cep); %></td>
-                        <td><% Response.Write(usuario.Enderecos.numero); %></td>
-                        <td><% Response.Write(usuario.Enderecos.rua); %></td>
-                        <td><% Response.Write(usuario.Enderecos.bairro); %></td>
-                        <td><% Response.Write(usuario.Enderecos.cidade); %></td>
-                        <td><% Response.Write(usuario.Enderecos.estado); %></td>
-                        <td><% Response.Write(usuario.Ongs.representante); %></td>
-                        <td><% Response.Write(usuario.Ongs.cargo); %></td>
+                        <td><% Response.Write(ong.email); %></td>
+                        <td><% Response.Write(ong.telefone); %></td>
+                        <td><% Response.Write(ong.Enderecos.cep); %></td>
+                        <td><% Response.Write(ong.Enderecos.numero); %></td>
+                        <td><% Response.Write(ong.Enderecos.rua); %></td>
+                        <td><% Response.Write(ong.Enderecos.bairro); %></td>
+                        <td><% Response.Write(ong.Enderecos.cidade); %></td>
+                        <td><% Response.Write(ong.Enderecos.estado); %></td>
+                        <td><% Response.Write(ong.representante); %></td>
+                        <td><% Response.Write(ong.cargo); %></td>
                     </tr>
                 </tbody>
             </table>
@@ -152,8 +152,7 @@
         <section id="sectionHistoricoDoacoes" runat="server">
             <h2 class="text-center page-header">Historico de apoios</h2>
             <div class="row">
-                <%foreach (var projeto in usuario.Doadores.Apoios.Where(a => a.idDoador == usuario.id).Select(a => a.Projetos))
-                    {%>
+                <%foreach (var projeto in doador.Apoios.Where(a => a.idDoador == usuario.id).Select(a => a.Projetos)){%>
                 <div class="col-md-10 col-md-offset-1">
                     <div class="col-md-4">
                         <img src="Upload Imagens/<%Response.Write(projeto.Imagens.nome); %>" class="img-rounded" alt="">
@@ -189,17 +188,17 @@
         <!--A section voluntarios é usada apenas por ongs-->
         <section runat="server" id="sectionVoluntarios">
             <h2 class="text-center page-header">Area dos voluntarios</h2>
-            <%foreach (var voluntario in usuario.Ongs.Voluntarios.Where(v => v.situacao.Trim() == "Em aguardo"))
+            <%foreach (var voluntario in ong.Voluntarios.Where(v => v.situacao.Trim() == "Em aguardo"))
                 {%>
             <div class="media col-md-6 col-md-offset-3">
                 <div class="media-left">
-                    <img src="Upload Imagens/<% Response.Write(voluntario.Doadores.Usuarios.Imagens.nome); %>" alt="" class="media-object">
+                    <img src="Upload Imagens/<% Response.Write(voluntario.Doadores.Imagens.nome); %>" alt="" class="media-object">
                 </div>
                 <div class="media-body">
-                    <h3 class="media-heading"><% Response.Write(voluntario.Doadores.Usuarios.nome);%></h3>
+                    <h3 class="media-heading"><% Response.Write(voluntario.Doadores.nome);%></h3>
                     <p>quer ser um voluntario</p>
                     <%
-                        string parametros = string.Format("'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", voluntario.idDoador, voluntario.Doadores.Usuarios.email, voluntario.Doadores.Usuarios.Enderecos.cep, voluntario.Doadores.Usuarios.Enderecos.numero, voluntario.Doadores.Usuarios.Enderecos.rua, voluntario.Doadores.Usuarios.Enderecos.bairro, voluntario.Doadores.Usuarios.Enderecos.cidade, voluntario.Doadores.Usuarios.Enderecos.estado);
+                        string parametros = string.Format("'{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}'", voluntario.idDoador, voluntario.Doadores.email, voluntario.Doadores.Enderecos.cep, voluntario.Doadores.Enderecos.numero, voluntario.Doadores.Enderecos.rua, voluntario.Doadores.Enderecos.bairro, voluntario.Doadores.Enderecos.cidade, voluntario.Doadores.Enderecos.estado);
                     %>
                     <a href="#" onclick="configuraModalVoluntario(<%Response.Write(parametros); %>)" class="pull-right btn btn-default" data-toggle="modal" data-target="#modalDetalhesVoluntarios">+ Detalhes</a>
                 </div>

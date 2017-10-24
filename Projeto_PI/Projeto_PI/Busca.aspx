@@ -12,17 +12,17 @@
             {%>
             <div class="row">
                 <div class="col-md-4">
-                    <img src="Upload Imagens/<% Response.Write(ong.Usuarios.Imagens.nome);%>" class="img-rounded" alt="">
+                    <img src="Upload Imagens/<% Response.Write(ong.Imagens.nome);%>" class="img-rounded" alt="">
                 </div>
                 <div class="col-md-8 panel panel-default">
                     <div class="panel-heading">
-                        <h3><a href="PaginaUsuario.aspx?usuario=<%Response.Write(ong.id);%>"><% Response.Write(ong.Usuarios.nome);%></a></h3>
+                        <h3><a href="PaginaUsuario.aspx?usuario=<%Response.Write(ong.id);%>"><% Response.Write(ong.nome);%></a></h3>
                     </div>
                     <div class="panel-body">
-                        <p><% Response.Write(ong.Usuarios.frase);%></p>
+                        <p><% Response.Write(ong.frase);%></p>
                     </div>
                     <div class="panel-footer">
-                        <span class="col-md-12">Projetos criados: <% Response.Write(ong.Usuarios.Projetos.Count);%></span>
+                        <span class="col-md-12">Projetos criados: <% Response.Write(ong.Projetos.Count);%></span>
                     </div>
                 </div>
             </div>

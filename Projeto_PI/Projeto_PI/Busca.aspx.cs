@@ -26,8 +26,8 @@ namespace Projeto_PI
             string busca = Request["busca"].ToString();
             h1TituloBusca.InnerText += " \"" + busca + "\"";
             busca = busca.ToLower();
-            projetos = bd.Projetos.Where(p => p.nome.ToLower().Contains(busca) || p.descricao.ToLower().Contains(busca) || p.tipo.ToLower()==busca).ToList();
-            ongs = bd.Ongs.Where(o => o.Usuarios.nome.ToLower().Contains(busca) || o.Usuarios.frase.ToLower().Contains(busca) || o.Usuarios.Sobre.Where(s => s.titulo.ToLower().Contains(busca) || s.texto.ToLower().Contains(busca)).Count() > 0).ToList();
+            projetos = bd.Projetos.Where(p => p.nome.ToLower().Contains(busca) || p.descricao.ToLower().Contains(busca) || p.tipo.ToLower() == busca).ToList();
+            ongs = bd.Usuarios.OfType<Ongs>().Where(o => o.nome.ToLower().Contains(busca) || o.frase.ToLower().Contains(busca) || o.Sobre.Where(s => s.titulo.ToLower().Contains(busca) || s.texto.ToLower().Contains(busca)).Count() > 0).ToList();
         }
     }
 }

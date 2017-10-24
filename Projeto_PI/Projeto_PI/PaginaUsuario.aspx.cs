@@ -40,10 +40,19 @@ namespace Projeto_PI
         protected Usuarios usuario;
 
         /// <summary>
-        /// referencia a entidade Doadores
+        /// referencia a um voluntario
         /// </summary>
         private Doadores voluntario;
 
+        /// <summary>
+        /// referencia a entidade doador 
+        /// </summary>
+        protected Doadores doador;
+
+        /// <summary>
+        /// referencia a entidade Ongs
+        /// </summary>
+        protected Ongs ong;
         /// <summary>
         /// Verifica se o usuario esta sendo enviado por sessao ou via url
         /// caso seja passado por sessao carrega a master page de menu de usuarios
@@ -94,12 +103,14 @@ namespace Projeto_PI
             id = Convert.ToInt32(Request["usuario"].ToString());
 
             usuario = bd.Usuarios.Where(u => u.id == id).Single();
+            ong = bd.Usuarios.OfType<Ongs>().Where(o => o.id == id).SingleOrDefault();
+            doador = bd.Usuarios.OfType<Doadores>().Where(d => d.id == id).SingleOrDefault();
             MetodosDeApoio.TipoAcesso acesso = Page.VerificaTipoAcesso();
             if (acesso == MetodosDeApoio.TipoAcesso.Usuario)
             {
                 modalAlteracoes.Visible = true;
                 sectionVoluntariar.Visible = false;
-                if (usuario.Doadores != null)//se for um doador
+                if (doador != null)//se for um doador
                 {
                     //sectionProjetos.Visible = false;
                     sectionPessoal.Visible = false;
@@ -109,14 +120,14 @@ namespace Projeto_PI
                 else
                 {
                     btnConfirmaVoluntario.ServerClick += BtnConfirmaVoluntario_ServerClick;
-                    btnRejeitaVoluntario.ServerClick += BtnRejeitaVoluntario_ServerClick; 
+                    btnRejeitaVoluntario.ServerClick += BtnRejeitaVoluntario_ServerClick;
                     modalDetalhesVoluntarios.Visible = true;
                     sectionHistoricoDoacoes.Visible = false;
                 }
             }
             else
             {
-                if (usuario.Doadores != null)//se for um doador
+                if (doador != null)//se for um doador
                 {
                     //sectionProjetos.Visible = false;
                     sectionPessoal.Visible = false;
@@ -125,10 +136,10 @@ namespace Projeto_PI
                 }
                 else
                 {
-                    if (acesso == MetodosDeApoio.TipoAcesso.UsuarioVisitante && bd.Usuarios.AsEnumerable().Where(u => u.id == Convert.ToInt32(Session["usuario"].ToString())).Single().Doadores != null)//se for um usuario visitante e do tipo doador
+                    if (acesso == MetodosDeApoio.TipoAcesso.UsuarioVisitante && bd.Usuarios.OfType<Doadores>().AsEnumerable().Where(u => u.id == Convert.ToInt32(Session["usuario"].ToString())).SingleOrDefault() != null)//se for um usuario visitante e do tipo doador
                     {
-                        voluntario = bd.Doadores.AsEnumerable().Where(d => d.id == Convert.ToInt32(Session["usuario"].ToString())).Single();
-                        if (usuario.Ongs.Voluntarios.Count(v => v.idDoador == voluntario.id) <= 0)
+                        voluntario = bd.Usuarios.OfType<Doadores>().AsEnumerable().Where(d => d.id == Convert.ToInt32(Session["usuario"].ToString())).Single();
+                        if (ong.Voluntarios.Count(v => v.idDoador == voluntario.id) <= 0)
                         {
                             aDesvoluntariar.Visible = false;
                             aVoluntariar.ServerClick += AVoluntariar_ServerClick;
@@ -143,6 +154,7 @@ namespace Projeto_PI
                     {
                         aVoluntariar.Attributes["data-toggle"] = "modal";
                         aVoluntariar.Attributes["data-target"] = "#modalLogin";
+                        aDesvoluntariar.Visible = false;
                     }
                     sectionHistoricoDoacoes.Visible = false;
                 }
@@ -160,7 +172,7 @@ namespace Projeto_PI
         private void BtnRejeitaVoluntario_ServerClick(object sender, EventArgs e)
         {
             int idVoluntario = Convert.ToInt32(hiddenVoluntario.Value);
-            Voluntarios voluntario = usuario.Ongs.Voluntarios.Where(v => v.idDoador == idVoluntario).Single();
+            Voluntarios voluntario = ong.Voluntarios.Where(v => v.idDoador == idVoluntario).Single();
             voluntario.situacao = "Negado";
             bd.Entry(voluntario).State = EntityState.Modified;
             bd.SaveChanges();
@@ -169,7 +181,7 @@ namespace Projeto_PI
         private void BtnConfirmaVoluntario_ServerClick(object sender, EventArgs e)
         {
             int idVoluntario = Convert.ToInt32(hiddenVoluntario.Value);
-            Voluntarios voluntario = usuario.Ongs.Voluntarios.Where(v => v.idDoador == idVoluntario).Single();
+            Voluntarios voluntario = ong.Voluntarios.Where(v => v.idDoador == idVoluntario).Single();
             voluntario.situacao = "Confirmado";
             bd.Entry(voluntario).State = EntityState.Modified;
             bd.SaveChanges();
@@ -177,15 +189,15 @@ namespace Projeto_PI
 
         private void ADesvoluntariar_ServerClick(object sender, EventArgs e)
         {
-            usuario.Ongs.Voluntarios.Remove(usuario.Ongs.Voluntarios.Where(v => v.idDoador == voluntario.id).Single());
+            ong.Voluntarios.Remove(ong.Voluntarios.Where(v => v.idDoador == voluntario.id).Single());
             bd.SaveChanges();
             Response.Redirect(Request.RawUrl);
         }
 
         private void AVoluntariar_ServerClick(object sender, EventArgs e)
         {
-            usuario.Ongs.Voluntarios.Add(new Voluntarios { idDoador = voluntario.id});
-            bd.SaveChanges();         
+            ong.Voluntarios.Add(new Voluntarios { idDoador = voluntario.id });
+            bd.SaveChanges();
             Response.Redirect(Request.RawUrl);
         }
 

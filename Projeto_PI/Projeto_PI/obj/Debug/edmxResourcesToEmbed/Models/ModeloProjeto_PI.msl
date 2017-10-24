@@ -22,14 +22,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Doadores">
-      <EntityTypeMapping TypeName="Projeto_PIModel.Doadores">
-        <MappingFragment StoreEntitySet="Doadores">
-          <ScalarProperty Name="cpf" ColumnName="cpf" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Enderecos">
       <EntityTypeMapping TypeName="Projeto_PIModel.Enderecos">
         <MappingFragment StoreEntitySet="Enderecos">
@@ -51,18 +43,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Ongs">
-      <EntityTypeMapping TypeName="Projeto_PIModel.Ongs">
-        <MappingFragment StoreEntitySet="Ongs">
-          <ScalarProperty Name="cargo" ColumnName="cargo" />
-          <ScalarProperty Name="representante" ColumnName="representante" />
-          <ScalarProperty Name="telefone" ColumnName="telefone" />
-          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
-          <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Sobre">
       <EntityTypeMapping TypeName="Projeto_PIModel.Sobre">
         <MappingFragment StoreEntitySet="Sobre">
@@ -75,15 +55,31 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="Projeto_PIModel.Usuarios">
+      <EntityTypeMapping TypeName="IsTypeOf(Projeto_PIModel.Usuarios)">
         <MappingFragment StoreEntitySet="Usuarios">
-          <ScalarProperty Name="frase" ColumnName="frase" />
-          <ScalarProperty Name="idImagem" ColumnName="idImagem" />
-          <ScalarProperty Name="idEndereco" ColumnName="idEndereco" />
-          <ScalarProperty Name="senha" ColumnName="senha" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="nome" ColumnName="nome" />
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="idEndereco" ColumnName="idEndereco" />
+          <ScalarProperty Name="idImagem" ColumnName="idImagem" />
+          <ScalarProperty Name="frase" ColumnName="frase" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Projeto_PIModel.Doadores)">
+        <MappingFragment StoreEntitySet="Doadores">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Projeto_PIModel.Ongs)">
+        <MappingFragment StoreEntitySet="Ongs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="representante" ColumnName="representante" />
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

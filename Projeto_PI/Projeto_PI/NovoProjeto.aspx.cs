@@ -20,7 +20,8 @@ namespace Projeto_PI
         /// <summary>
         /// referencia ao usuario
         /// </summary>
-        protected Usuarios usuario;
+        private Usuarios usuario;
+        protected Doadores doador;
         protected Projetos projeto;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,9 +29,10 @@ namespace Projeto_PI
             {
                 int id = Convert.ToInt32(Session["usuario"].ToString());
                 usuario = bd.Usuarios.Where(u => u.id == id).Single();
+                doador = bd.Usuarios.OfType<Doadores>().Where(u => u.id == id).SingleOrDefault();
                 if (Request["acao"].ToString() == "criar")
                 {
-                    opcProjeto.Visible = (usuario.Doadores == null) ? true : false;
+                    opcProjeto.Visible = (doador == null) ? true : false;
                 }
                 else if (Request["acao"].ToString() == "editar")
                 {
@@ -63,8 +65,8 @@ namespace Projeto_PI
             string tipoProjeto;
             if (!opcProjeto.Visible)
             {
-                meta = txtMeta.Text;
                 tipoProjeto = "Ação";
+                meta = txtMeta.Text;
             }
             else
             {
@@ -73,7 +75,7 @@ namespace Projeto_PI
             }
             usuario.Projetos.Add(new Projetos { nome = nomeProjeto, descricao = descricaoProjeto, meta = meta, banner = idImg, tipo = tipoProjeto });
             bd.SaveChanges();
-            Response.Redirect("PaginaUsuario.aspx?usuario="+usuario.id);
+            Response.Redirect("PaginaUsuario.aspx?usuario=" + usuario.id);
         }
 
         protected void btnEditarProjeto_Click(object sender, EventArgs e)
