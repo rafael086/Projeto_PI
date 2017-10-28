@@ -23,7 +23,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="cpf" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="cpf" Type="varchar" MaxLength="11" Nullable="false" />
   </EntityType>
   <EntityType Name="Enderecos">
     <Key>

@@ -20,7 +20,7 @@ namespace Projeto_PI.Apoio
             try
             {
                 ValidaParametrosUsuario(nome = nome.TiraEspacoExcedente().RemoveNaoLetras(), email, senha = senha.TiraEspacoExcedente());
-                ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente());
+                ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente(),true);
             }
             catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace Projeto_PI.Apoio
             try
             {
                 ValidaParametrosUsuario(nome = nome.TiraEspacoExcedente().RemoveNaoLetras(), email, senha = senha.TiraEspacoExcedente());
-                ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente());
+                ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente(), false);
             }
             catch (Exception e)
             {
@@ -126,7 +126,7 @@ namespace Projeto_PI.Apoio
         /// Valida os parametros passados da entidade Enderecos
         /// </summary>
         /// <exception cref="System.Exception">Se algum parametro não for valido</exception>
-        private static void ValidaParametrosEndereco(string cep, string numero, string bairro, string rua, string cidade, string estado)
+        private static void ValidaParametrosEndereco(string cep, string numero, string bairro, string rua, string cidade, string estado, bool ong)
         {
             if (!cep.CEP())
             {
@@ -154,7 +154,7 @@ namespace Projeto_PI.Apoio
             }
             EntidadesProjetoPI banco = new EntidadesProjetoPI();
             var tot = banco.Enderecos.Count(e => e.cep == cep && e.bairro == bairro && e.cidade == cidade && e.estado == estado && e.numero == numero && e.rua == rua);
-            if (tot != 0)
+            if (tot != 0 && ong)
             {
                 throw new Exception("Ja existe um cadastro neste endereco");
             }

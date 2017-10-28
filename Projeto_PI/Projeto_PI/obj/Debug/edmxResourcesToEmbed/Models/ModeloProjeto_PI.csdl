@@ -109,7 +109,7 @@
     <NavigationProperty Name="Projetos" Relationship="Projeto_PIModel.idProjeto_Comentarios_id_Projeto" FromRole="Comentarios" ToRole="Projetos" />
   </EntityType>
   <EntityType Name="Doadores" BaseType="Projeto_PIModel.Usuarios">
-    <Property Name="cpf" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="cpf" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Apoios" Relationship="Projeto_PIModel.idDoador_Apoios_id_Doadores" FromRole="Doadores" ToRole="Apoios" />
     <NavigationProperty Name="Voluntarios" Relationship="Projeto_PIModel.idDoador_Voluntarios_id_Doador" FromRole="Doadores" ToRole="Voluntarios" />
   </EntityType>
