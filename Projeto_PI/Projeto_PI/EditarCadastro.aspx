@@ -115,7 +115,7 @@
         <div class="form-group">
             <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenha">Repetir Senha</asp:Label>
             <div class="col-md-8">
-                <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtConfirmaSenha" TextMode="Password" required="required" ClientIDMode="Static" />
+                <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this); msgSenhaCorreta(this)" CssClass="form-control" ID="txtConfirmaSenha" TextMode="Password" required="required" ClientIDMode="Static" />
             </div>
         </div>
         <hr>

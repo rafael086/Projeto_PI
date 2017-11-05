@@ -21,15 +21,15 @@ namespace Projeto_PI
         /// <summary>
         /// define de onde deve começar a capturar itens
         /// </summary>
-        protected int inicio;
+        private int inicio;
         /// <summary>
         ///define a ultima pagina
         /// </summary>
-        protected int ultimo;
+        private int ultimo;
         /// <summary>
         /// referencia as entidades do banco de dados
         /// </summary>
-        protected EntidadesProjetoPI bd = new EntidadesProjetoPI();
+        private EntidadesProjetoPI bd = new EntidadesProjetoPI();
 
 
         /// <summary>
@@ -115,24 +115,27 @@ namespace Projeto_PI
         {
             try
             {
-                int pagina = (Convert.ToInt32(Request["pagina"]) < 1) ? 1 : Convert.ToInt32((Request["pagina"]).ToString());
+                aAnterior.Visible = false;
+                aProximo.Visible = false;
+                int pagina = (Convert.ToInt32(Request["pagina"]) < 1) ? 1 : Convert.ToInt32((Request["pagina"]).ToString());     
                 inicio = (pagina - 1) * LIMITE;
-                if (VerificaTipoConsulta())
+                if (VerificaTipoConsulta())//se o acesso for para ongs
                 {
-                    ultimo = Convert.ToInt32(Math.Ceiling(bd.Usuarios.OfType<Ongs>().Count() / Convert.ToDouble(LIMITE)));
-                    if (pagina > ultimo)
+                    ultimo = Convert.ToInt32(Math.Ceiling(bd.Usuarios.OfType<Ongs>().Count() / Convert.ToDouble(LIMITE)));//define a ultima pagina
+                    if (pagina > ultimo)//se, por um acaso, a pagina que deve ser exibida for maior que a ultima retorna para a primeira
                         Response.Redirect(string.Format("Categoria.aspx?tipo={0}&pagina=1", Request["tipo"].ToString()));
                     h2Titulo.InnerText = "Ongs";
                     bd.Usuarios.OfType<Ongs>().OrderByDescending(o => o.id).Skip(inicio).Take(LIMITE).ToList().ForEach(o => resultados.Add(new Resultado(o.id, o.nome, o.frase, o.Imagens.nome, o.Projetos.Count)));
                 }
                 else
                 {
-                    ultimo = Convert.ToInt32(Math.Ceiling(bd.Projetos.Count() / Convert.ToDouble(LIMITE)));
-                    if (pagina > ultimo)
+                    ultimo = Convert.ToInt32(Math.Ceiling(bd.Projetos.Count() / Convert.ToDouble(LIMITE)));//define a ultima pagina
+                    if (pagina > ultimo)//se, por um acaso, a pagina que deve ser exibida for maior que a ultima retorna para a primeira
                         Response.Redirect(string.Format("Categoria.aspx?tipo={0}&pagina=1", Request["tipo"].ToString()));
                     h2Titulo.InnerText = "Projetos";
                     bd.Projetos.OrderByDescending(p => p.id).Skip(inicio).Take(LIMITE).ToList().ForEach(p =>
                     {
+                        //neste caso o try catch serve para verificar se o projeto é acao ou doaçao, se for uma acao uma InvalidOperationException é lançada e esse projeto e incluido a lista de resultados
                         try
                         {
                             resultados.Add(new Resultado(p.id, p.nome, p.descricao, p.Imagens.nome, p.tipo.TrimEnd(), p.Apoios.Count, p.meta, p.EscreveProgresso(), p.ProgressoProjeto()));
@@ -143,13 +146,21 @@ namespace Projeto_PI
                         }
                     });
                 }
-
+                if (pagina > 1)
+                {
+                    aAnterior.Visible = true;
+                    aAnterior.Attributes["href"] = string.Format("Categoria.aspx?tipo={0}&pagina={1}", Request["tipo"].ToString(), pagina - 1);
+                }
+                if (pagina != ultimo)
+                {
+                    aProximo.Visible = true;
+                    aProximo.Attributes["href"] = string.Format("Categoria.aspx?tipo={0}&pagina={1}", Request["tipo"].ToString(), pagina + 1);
+                }
             }
             catch (Exception)
             {
                 Response.Redirect(string.Format("Categoria.aspx?tipo={0}&pagina=1", Request["tipo"].ToString()));
             }
-
         }
     }
 }

@@ -120,7 +120,7 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaOng">Repetir Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtConfirmaSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this); msgSenhaCorreta(this);" CssClass="form-control" ID="txtConfirmaSenhaOng" TextMode="Password" required="required" ValidationGroup="FormgOng" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <hr>
@@ -235,7 +235,7 @@
                 <div class="form-group">
                     <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtConfirmaSenhaDoador">Repetir Senha</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this)" CssClass="form-control" ID="txtConfirmaSenhaDoador" TextMode="Password" required="required" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
+                        <asp:TextBox runat="server" onblur="tiraEspacoExcedente(this); msgSenhaCorreta(this);" CssClass="form-control" ID="txtConfirmaSenhaDoador" TextMode="Password" required="required" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <div class="form-group">

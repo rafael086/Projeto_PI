@@ -1,4 +1,10 @@
-﻿//*********************************SCRIPTS REUTILIZAVEIS*********************************************************\\
+﻿/*
+ * Nota para outros codigos:
+ * pensar melhor a estrategia de usar apenas um arquivo .js para todo o site
+ * apesar de ter dado certo
+ */
+
+//*********************************SCRIPTS REUTILIZAVEIS*********************************************************\\
 //remove os espacos excedentes dos inputs
 function tiraEspacoExcedente(input) {
     input.value = input.value.trim();
@@ -102,8 +108,40 @@ function setEndereco(endereco) {
     }
 }
 
+//deixa a option do estado como selected
 function selecionaEstado(select,estado) {
     $(select).val(estado).prop("selected", true);
+}
+
+//compara os inputs de senha e configura a msg se eles não forem iguais
+function msgSenhaCorreta(confirmaSenha) {
+    var senha;
+    if (confirmaSenha.id === "txtConfirmaSenhaOng") {
+        senha = $("#txtSenhaOng");
+        if (senha.val() !== confirmaSenha.value) {
+            confirmaSenha.setCustomValidity("As senhas estão diferentes");
+        }
+        else {
+            confirmaSenha.setCustomValidity("");
+        }
+    }
+    else if (confirmaSenha.id === "txtConfirmaSenhaDoador") {
+        senha = $("#txtSenhaDoador");
+        if (senha.val() !== confirmaSenha.value) {
+            confirmaSenha.setCustomValidity("As senhas estão diferentes");
+        }
+        else {
+            confirmaSenha.setCustomValidity("");
+        }
+    }else if(confirmaSenha.id === "txtConfirmaSenha"){
+        senha = $("#txtSenha");
+        if (senha.val() !== confirmaSenha.value) {
+            confirmaSenha.setCustomValidity("As senhas estão diferentes");
+        }
+        else {
+            confirmaSenha.setCustomValidity("");
+        }
+    }
 }
 
 //os metodos abaixo chamam os metodos que verificam se o cpf/cnpj é valido e configura a msg que é exibida para o usuario no input 

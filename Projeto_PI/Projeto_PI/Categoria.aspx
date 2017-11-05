@@ -74,13 +74,9 @@
             </div>
             <%} %>
         </div>
-        <% if (Convert.ToInt32(Request["pagina"]) > 1)
-            {%>
-        <a href="Categoria.aspx?tipo=<%Response.Write(Request["tipo"].ToString());%>&pagina=<%Response.Write(Convert.ToInt32(Request["pagina"]) - 1);%>">anterior</a>
-        <%} %>
-        <% if (Convert.ToInt32(Request["pagina"]) != ultimo)
-            {%>
-        <a href="Categoria.aspx?tipo=<%Response.Write(Request["tipo"].ToString());%>&pagina=<%Response.Write(Convert.ToInt32(Request["pagina"]) + 1);%>">Proximo</a>
-        <%} %>
+        <ul class="pager">
+            <li class="previous"><a runat="server" id="aAnterior">Anterior</a></li>
+            <li class="next"><a runat="server" id="aProximo">Proximo</a></li>
+        </ul>
     </div>
 </asp:Content>
