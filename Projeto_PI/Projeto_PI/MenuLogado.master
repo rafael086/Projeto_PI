@@ -6,7 +6,7 @@
 <asp:Content ID="MenuDireitaLogado" ContentPlaceHolderID="MenuDireitaLogado" runat="server">
     <ul class="nav navbar-nav navbar-right">
         <li><a href="PaginaUsuario.aspx?usuario=<% Response.Write(Session["usuario"].ToString()); %>">Meu perfil</a></li>
-        <li><a href="#">Editar cadastro</a></li>
+        <li><a href="EditarCadastro.aspx">Editar cadastro</a></li>
         <li><a runat="server" id="aSair" href="#">Sair</a></li>
     </ul>
 </asp:Content>

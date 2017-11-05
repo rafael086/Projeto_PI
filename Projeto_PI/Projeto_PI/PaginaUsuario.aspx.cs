@@ -150,6 +150,11 @@ namespace Projeto_PI
                             aDesvoluntariar.ServerClick += ADesvoluntariar_ServerClick;
                         }
                     }
+                    else if (acesso == MetodosDeApoio.TipoAcesso.UsuarioVisitante && bd.Usuarios.OfType<Ongs>().AsEnumerable().Where(u => u.id == Convert.ToInt32(Session["usuario"].ToString())).SingleOrDefault() != null)//se for um usuario visitante e do tipo ong
+                    {
+                        aVoluntariar.Visible = false;
+                        aDesvoluntariar.Visible = false;
+                    }
                     else
                     {
                         aVoluntariar.Attributes["data-toggle"] = "modal";

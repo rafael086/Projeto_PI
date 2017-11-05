@@ -11,14 +11,16 @@ namespace Projeto_PI.Apoio
     /// </summary>
     public static class Verificadores
     {
+        private static bool edicao;
         /// <summary>
-        /// Verifica se os parametros passados são consistentes de acordo com as regras do sistema e chama insere via stored procedure no banco de dados
+        /// Verifica se os parametros passados são consistentes de acordo com as regras do sistema
         /// </summary>
         /// <exception cref="System.Exception">Se algum parametro for invalido</exception>
-        public static void VerificaParametrosSetOngs(string nome, string email, string senha, string razaoSocial, string cnpj, string telefone, string representante, string cargo, string cep, string numero, string bairro, string rua, string cidade, string estado)
+        public static void VerificaParametrosOngs(ref string nome, ref string email, ref string senha, ref string razaoSocial, ref string cnpj, ref string telefone, ref string representante, ref string cargo, ref string cep, ref string numero, ref string bairro, ref string rua, ref string cidade, ref string estado, bool edicao)
         {
             try
             {
+                Verificadores.edicao = edicao;
                 ValidaParametrosUsuario(nome = nome.TiraEspacoExcedente().RemoveNaoLetras(), email, senha = senha.TiraEspacoExcedente());
                 ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente(),true);
             }
@@ -45,39 +47,39 @@ namespace Projeto_PI.Apoio
 
             EntidadesProjetoPI bd = new EntidadesProjetoPI();
             var ongs = bd.Usuarios.OfType<Ongs>();
-            var tot = ongs.Count(ong => ong.razaoSocial == razaoSocial);
-            if (tot != 0)
+            string cRazaoSocial = razaoSocial;
+            var tot = ongs.Count(ong => ong.razaoSocial == cRazaoSocial);
+            if (tot != 0 && !edicao)
             {
                 throw new Exception("Razão social ja existe");
             }
-            tot = ongs.Count(ong => ong.cnpj == cnpj);
-            if (tot != 0)
+            string cCnpj = cnpj;
+            tot = ongs.Count(ong => ong.cnpj == cCnpj);
+            if (tot != 0 && !edicao)
             {
                 throw new Exception("CNPJ já cadastrado");
             }
             telefone = telefone.TiraMascara();
-            tot = ongs.Count(o => o.telefone == telefone);
-            if (tot != 0)
-            {
-                throw new Exception("Este telefone ja esta em uso");
-            }
+            string cTelefone = telefone;
+            tot = ongs.Count(o => o.telefone == cTelefone);
             if (!telefone.Telefone())
             {
                 throw new Exception("Informe um telefone valido");
             }
-
-            bd.setOngs(nome, email, senha, razaoSocial, cnpj, telefone, representante, cargo, cep, numero, bairro, rua, cidade, estado);
-
+            if (tot != 0 && !edicao)
+            {
+                throw new Exception("Este telefone ja esta em uso");
+            }
         }
 
         /// <summary>
-        /// Verifica se os parametros passados são consistentes de acordo com as regras do sistema e chama insere via stored procedure no banco de dados 
+        /// Verifica se os parametros passados são consistentes de acordo com as regras do sistema 
         /// </summary>
-        /// 
-        public static void ValidaParametrosSetDoadores(string nome, string email, string senha, string cpf, string cep, string numero, string bairro, string rua, string cidade, string estado)
+        public static void ValidaParametrosDoadores(ref string nome, ref string email, ref string senha, ref string cpf, ref string cep, ref string numero, ref string bairro, ref string rua, ref string cidade, ref string estado, bool edicao)
         {
             try
             {
+                Verificadores.edicao = edicao;
                 ValidaParametrosUsuario(nome = nome.TiraEspacoExcedente().RemoveNaoLetras(), email, senha = senha.TiraEspacoExcedente());
                 ValidaParametrosEndereco(cep = cep.TiraMascara(), numero, bairro = bairro.RemoveNaoLetras().TiraEspacoExcedente(), rua = rua.RemoveNaoLetras().TiraEspacoExcedente(), cidade = cidade.RemoveNaoLetras().TiraEspacoExcedente(), estado = estado.RemoveNaoLetras().TiraEspacoExcedente(), false);
             }
@@ -90,12 +92,12 @@ namespace Projeto_PI.Apoio
                 throw new Exception("Informe um cpf valido");
             }
             EntidadesProjetoPI banco = new EntidadesProjetoPI();
-            var tot = banco.Usuarios.OfType<Doadores>().Count(d => d.cpf == cpf);
-            if (tot != 0)
+            string cCpf = cpf;
+            var tot = banco.Usuarios.OfType<Doadores>().Count(d => d.cpf == cCpf);
+            if (tot != 0 && !edicao)
             {
                 throw new Exception("CPF ja cadastrado");
             }
-            banco.setDoadores(nome, email, senha, cpf, cep, numero, bairro, rua, cidade, estado);
         }
         /// <summary>
         /// valida os parametros passados que são da entidade Usuarios
@@ -117,7 +119,7 @@ namespace Projeto_PI.Apoio
             }
             EntidadesProjetoPI bd = new EntidadesProjetoPI();
             var query = bd.Usuarios.Count(u => u.email == email);
-            if (query != 0)
+            if (query != 0 && !edicao)
             {
                 throw new Exception("O email ja esta em uso");
             }
@@ -153,8 +155,8 @@ namespace Projeto_PI.Apoio
                 throw new Exception("informe um estado valido");
             }
             EntidadesProjetoPI banco = new EntidadesProjetoPI();
-            var tot = banco.Enderecos.Count(e => e.cep == cep && e.bairro == bairro && e.cidade == cidade && e.estado == estado && e.numero == numero && e.rua == rua);
-            if (tot != 0 && ong)
+            var ends = banco.Enderecos.Where(e => e.cep == cep && e.bairro == bairro && e.cidade == cidade && e.estado == estado && e.numero == numero && e.rua == rua).SingleOrDefault();
+            if ((ends != null && ong && !edicao) || (ends != null && ends.Usuarios.OfType<Ongs>().Count() > 0 && !edicao))
             {
                 throw new Exception("Ja existe um cadastro neste endereco");
             }

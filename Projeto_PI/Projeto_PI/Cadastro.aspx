@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Cadastro" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Cadastro.aspx.cs" Inherits="Projeto_PI.Cadastro" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ConteudoPrincipal" runat="server">
+<asp:Content ContentPlaceHolderID="ConteudoPrincipal" runat="server">
     <div role="main" class="container-fluid">
         <div class="row">
             <h2 class="page-header text-center">Faça seu cadastro</h2>
@@ -149,9 +149,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCPFDoador">CPF</asp:Label>
+                    <asp:Label runat="server" CssClass="control-label col-md-4" AssociatedControlID="txtCPF">CPF</asp:Label>
                     <div class="col-md-8">
-                        <asp:TextBox ID="txtCPFDoador" CssClass="form-control" runat="server" required="required" pattern="^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$" onblur="msgValidacaoCPF(this)" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
+                        <asp:TextBox ID="txtCPF" CssClass="form-control" runat="server" required="required" pattern="^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$" onblur="msgValidacaoCPF(this)" ValidationGroup="FormgDoador" ClientIDMode="Static"/>
                     </div>
                 </div>
                 <hr>

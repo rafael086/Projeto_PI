@@ -10,8 +10,8 @@ jQuery(function ($) {
     //inputs da pagina de cadastro
     $("#txtCNPJ").mask("99.999.999/9999-99");
     $("#txtTelefone").mask("(99)9999-9999");
-    $("#txtCEPOng, #txtCEPDoador").mask("99999-999");
-    $("#txtCPFDoador").mask("999.999.999-99");
+    $("#txtCEPOng, #txtCEPDoador, #txtCEP").mask("99999-999");
+    $("#txtCPF").mask("999.999.999-99");
 });
 
 //=================================SCRIPTS DA PAGINA DE CADASTRO=================================================\\
@@ -93,6 +93,12 @@ function setEndereco(endereco) {
         $("#txtBairroDoador").val(bairro);
         $("#txtCidadeDoador").val(cidade);
         selecionaEstado("#ddlEstadoDoador", estado);
+    }
+    if ($("#txtCEP").is(":enabled")) {
+        $("#txtEndereco").val(rua);
+        $("#txtBairro").val(bairro);
+        $("#txtCidade").val(cidade);
+        selecionaEstado("#ddlEstado", estado);
     }
 }
 
@@ -212,7 +218,7 @@ function configuraAlteracoesSobre(idAlterar,titulo,frase) {
     $("#fg1").css("display", "none");
     $("#hiddenAcao").val("AlterarSobre");
     $("#hiddenAlteracao").val(idAlterar);
-    $("#txtNome").val(titulo)
+    $("#txtNome").val(titulo);
     $("#txtFrase").val(frase);
     $("#aExcluir").css("display", "block");
 }
@@ -227,8 +233,8 @@ function configuraAlteracoesPerfil() {
 
 function configuraAlteracoesAddSobre() {
     $("#fg1").css("display", "none");
-    $("#hiddenAcao").val("AdicionarSobre")
-    $("#txtNome").val("")
+    $("#hiddenAcao").val("AdicionarSobre");
+    $("#txtNome").val("");
     $("#txtFrase").val("");
     $("#aExcluir").css("display", "none");
 }

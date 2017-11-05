@@ -91,6 +91,7 @@ namespace Projeto_PI
                 }
                 if (projeto.finalizado)//se o projeto ja estiver finalizado
                 {
+                    btnFinalizarProjeto.Visible = false;
                     h3Status.Visible = true;
                     modalApoio.Visible = false;
                     aApoiar.Visible = false;

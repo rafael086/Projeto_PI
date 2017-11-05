@@ -20,7 +20,23 @@ namespace Projeto_PI
         {
             try
             {
-                Verificadores.VerificaParametrosSetOngs(txtNomeOng.Text, txtEmailOng.Text, txtSenhaOng.Text, txtRazaoSocial.Text, txtCNPJ.Text, txtTelefone.Text, txtRepresentante.Text, txtCargo.Text, txtCEPOng.Text, txtNumeroOng.Text, txtBairroOng.Text, txtEnderecoOng.Text, txtCidadeOng.Text, ddlEstadoOng.SelectedValue);
+                string nome = txtNomeOng.Text, 
+                    email = txtEmailOng.Text, 
+                    senha = txtSenhaOng.Text, 
+                    razaoSocial = txtRazaoSocial.Text, 
+                    cnpj = txtCNPJ.Text, 
+                    telefone = txtTelefone.Text, 
+                    representante = txtRepresentante.Text, 
+                    cargo = txtCargo.Text, 
+                    cep = txtCEPOng.Text, 
+                    numero = txtNumeroOng.Text, 
+                    bairro = txtBairroOng.Text, 
+                    endereco = txtEnderecoOng.Text, 
+                    cidade = txtCidadeOng.Text, 
+                    estado = ddlEstadoOng.SelectedValue;
+                Verificadores.VerificaParametrosOngs(ref nome, ref email, ref senha, ref razaoSocial, ref cnpj, ref telefone, ref representante, ref cargo, ref cep, ref numero, ref bairro, ref endereco, ref cidade, ref estado, false);
+                EntidadesProjetoPI bd = new EntidadesProjetoPI();
+                bd.setOngs(nome, email, senha, razaoSocial, cnpj, telefone, representante, cargo, cep, numero, bairro, endereco, cidade, estado);
             }
             catch (Exception ex)
             {
@@ -33,7 +49,19 @@ namespace Projeto_PI
         {
             try
             {
-                Verificadores.ValidaParametrosSetDoadores(txtNomeDoador.Text, txtEmailDoador.Text, txtSenhaDoador.Text, txtCPFDoador.Text, txtCEPDoador.Text, txtNumeroDoador.Text, txtBairroDoador.Text, txtEnderecoDoador.Text, txtCidadeDoador.Text, ddlEstadoDoador.SelectedValue);
+                string nome = txtNomeDoador.Text,
+                    email = txtEmailDoador.Text,
+                    senha = txtSenhaDoador.Text,
+                    cpf = txtCPF.Text,
+                    cep = txtCEPDoador.Text,
+                    numero = txtNumeroDoador.Text,
+                    bairro = txtBairroDoador.Text,
+                    endereco = txtEnderecoDoador.Text,
+                    cidade = txtCidadeDoador.Text,
+                    estado = ddlEstadoDoador.SelectedValue;
+                Verificadores.ValidaParametrosDoadores(ref nome, ref email, ref senha, ref cpf, ref cep, ref numero, ref bairro, ref endereco, ref cidade, ref estado, false);
+                EntidadesProjetoPI bd = new EntidadesProjetoPI();
+                bd.setDoadores(nome, email, senha, cpf, cep, numero, bairro, endereco, cidade, estado);
             }
             catch (Exception ex)
             {
